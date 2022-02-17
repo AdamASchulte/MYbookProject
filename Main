@@ -1,0 +1,89 @@
+package main;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class main extends JFrame implements ActionListener{
+	
+	JFrame f;
+	JButton b;
+	JLabel l1,l2,selected;
+	JTextField tf;
+	JCheckBox cb1,cb2;
+	String checkedBox;
+	boolean[] checked;
+	String[] ingredients;
+	
+	main(){
+		f = new JFrame("MyBook");
+		
+		//Ingredients List
+		checked = new boolean[2];
+		ingredients = new String[] {"Avocado","Milk"};
+		cb1 = new JCheckBox("Avocado");
+		cb1.setBounds(100,100,80,50);
+		cb2 = new JCheckBox("Milk");
+		cb2.setBounds(100,200,50,50);
+		
+		//Time
+		l1 = new JLabel("Time:");
+		l2 = new JLabel();
+		selected = new JLabel();
+		l1.setBounds(375,415,500,200);
+		l2.setBounds(50,100,500,200);
+		selected.setBounds(100,200,500,200);
+		
+		tf = new JTextField();
+		tf.setBounds(420,507,50,20);
+		
+		//Search/Enter Button
+		b = new JButton(new ImageIcon("C:/Users/aiden/OneDrive/Pictures/search.png"));
+		b.setBounds(600,475,200,75);
+		b.addActionListener(this);
+		
+		f.add(b);f.add(l1);f.add(l2);f.add(tf);
+		f.add(cb1);f.add(cb2);f.add(selected);
+		
+		//Buttons Selected
+		cb1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[0] = (e.getStateChange()==1?true:false);
+			}
+		});
+		cb2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[1] = (e.getStateChange()==1?true:false);
+			}
+		});
+		
+		f.setSize(900,650);
+		f.setLayout(null);
+		f.setVisible(true);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	//clickButton.exe
+	public void actionPerformed(ActionEvent e) {
+		try {
+			String text = tf.getText();
+			int time = Integer.parseInt(text);
+			l2.setText("It worked fuck yeah. Also, here's what you entered: " + time);
+			checkedBox = "Selected Ingredients: ";
+			int firstIngredient = 0;
+			for(int i = 0; i < checked.length; i++)	{
+				if(checked[i]) {
+					if(firstIngredient > 0)
+						checkedBox += ", ";
+					else
+						firstIngredient++;
+					checkedBox += ingredients[i];
+				}
+			}
+			selected.setText(checkedBox);
+		}catch(Exception ex) {System.out.println(ex);}
+	}
+	
+	public static void main(String[] args) {
+		new main();
+	}
+}
