@@ -1,0 +1,12 @@
+package RecipeBook;
+import java.util.ArrayList;
+
+public class Appliance {
+private String applianceName;
+	
+	public String getName()
+	{
+		return applianceName;
+	}
+
+}
