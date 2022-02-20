@@ -5,13 +5,13 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class main extends JFrame implements ActionListener{
-	
 	JFrame f;
 	JButton b;
 	JLabel l1,l2,selected;
 	JTextField tf;
-	JCheckBox cb1,cb2;
+	JCheckBox microwave,cb1,cb2;
 	String checkedBox;
+	boolean[] appliances;
 	boolean[] checked;
 	String[] ingredients;
 	
@@ -35,9 +35,13 @@ public class main extends JFrame implements ActionListener{
 		l1.setBounds(375,415,500,200);
 		l2.setBounds(50,100,500,200);
 		selected.setBounds(100,200,500,200);
-		
 		tf = new JTextField();
 		tf.setBounds(420,507,50,20);
+		
+		//Appliances
+		appliances = new boolean[1];
+		microwave = new JCheckBox("Microwave");
+		microwave.setBounds(140,507,90,15);
 		
 		//Search/Enter Button
 		b = new JButton(new ImageIcon("src/images/search.png"));
@@ -46,8 +50,14 @@ public class main extends JFrame implements ActionListener{
 		
 		f.add(b);f.add(l1);f.add(l2);f.add(tf);
 		f.add(cb1);f.add(cb2);f.add(selected);
+		f.add(microwave);
 		
 		//Buttons Selected
+		microwave.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				appliances[0] = (e.getStateChange()==1?true:false);
+			}
+		});
 		cb1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[0] = (e.getStateChange()==1?true:false);
