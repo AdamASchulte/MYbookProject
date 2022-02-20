@@ -1,0 +1,22 @@
+package RecipeBook;
+import java.util.ArrayList;
+
+public class SearchSystem {
+
+	public ArrayList<Recipe> ingredientSearch() {
+		ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+		return recipeList;
+	}
+	
+	public ArrayList<Recipe> applianceSearch(){
+	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+	return recipeList;
+	}
+	public ArrayList<Recipe> timeSearch(){
+		ArrayList<Recipe> recipeListTime = new ArrayList<Recipe>();
+		return recipeListTime;
+
+	}
+	
+
+}
