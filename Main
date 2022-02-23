@@ -98,5 +98,25 @@ public class main extends JFrame implements ActionListener{
 	
 	public static void main(String[] args) {
 		new main();
+		
+		System.out.println("Enter an ingredient");                                      //This is our fake user interface for the sake of simplicity in the architecture
+        Scanner in = new Scanner(System.in);                                            
+        String ingredient = in.nextLine();                                              //testing if we can store an ingredient object based on user input
+        Ingredient firstIngredient = new Ingredient(ingredient);                        
+        System.out.println("Ingredient returned: " +firstIngredient.getName());                                             
+        
+        System.out.println("Enter an appliance");                                       //testing if we can store an appliance object based off user input
+        String appliance = in.nextLine();
+        Appliance firstAppliance = new Appliance(appliance);
+        System.out.println("appliance returned: " + firstAppliance.getName());
+        
+        System.out.println("Enter a time");                                             // testing if we can store time object based off user input
+        int time = in.nextInt();
+        Time firstTime = new Time(time);
+        System.out.println("time returned: " + firstTime.getTime());
+        
+        
+        String recipe = SearchSystem.RecipeSearch();                                // this is our mock calls to the search system based off user input
+        System.out.println(recipe);
 	}
 }
