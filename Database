@@ -1,0 +1,14 @@
+public class Database {
+                                                                                // this is a fake database for simplicity's sake for the system architecture. 
+    private ArrayList<String> recipes = new ArrayList<String>();
+    
+    public Database(String x){
+        recipes.add(x);
+    }
+    
+    public String getElement(){
+        String i = recipes.get(0);
+        return i;
+    }
+    
+}
