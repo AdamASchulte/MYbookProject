@@ -4,9 +4,14 @@ import java.util.ArrayList;
 public class Appliance {
 private String applianceName;
 	
+	 // this is our appliance class that we will search based off of in search system
+    private String applianceName;
+    public Appliance(String name){
+        applianceName = name;
+    }
+
 	public String getName()
 	{
 		return applianceName;
 	}
-
 }
