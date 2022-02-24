@@ -1,0 +1,16 @@
+
+package RecipeBook;
+    
+
+public class Time {
+                                                                    // this is the time class that will be searched based off of in the search system.
+    int theTime;
+    
+    public Time(int number){
+        theTime = number;
+    }
+    
+    public int getTime(){
+        return theTime;
+    }
+}

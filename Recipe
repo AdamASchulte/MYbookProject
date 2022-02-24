@@ -1,0 +1,20 @@
+package RecipeBook;
+import java.util.ArrayList;
+
+public class Recipe {
+	private int time;
+	private String name;
+	private ArrayList<Ingredient> ingredientList;
+	private ArrayList<Appliance> applianceList;
+	
+	public Recipe(String recipeName)
+	{
+		name = recipeName;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+
+}
