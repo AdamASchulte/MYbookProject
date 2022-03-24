@@ -1,11 +1,12 @@
 package main;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class main extends JFrame implements ActionListener{
 	JFrame f;
+	JPanel select = new JPanel(), display = new JPanel();
 	JButton b;
 	JLabel l1,l2,selected;
 	JTextField tf;
@@ -19,6 +20,12 @@ public class main extends JFrame implements ActionListener{
 		f = new JFrame("MyBook");
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/images/MyBookLogo.png");
 		f.setIconImage(icon);
+		
+		//Panels
+		select.setBounds(0,0,900,650);
+		select.setBackground(Color.gray);
+		display.setBounds(0,0,900,650);
+		display.setBackground(Color.white);
 		
 		//Ingredients List
 		checked = new boolean[2];
@@ -44,13 +51,22 @@ public class main extends JFrame implements ActionListener{
 		microwave.setBounds(140,507,90,15);
 		
 		//Search/Enter Button
-		b = new JButton(new ImageIcon("src/images/search.png"));
-		b.setBounds(600,475,200,75);
+		b = new JButton("Search");
+		b.setBounds(100,100,80,30);
+		b.setBackground(Color.green);
 		b.addActionListener(this);
 		
-		f.add(b);f.add(l1);f.add(l2);f.add(tf);
-		f.add(cb1);f.add(cb2);f.add(selected);
-		f.add(microwave);
+		//Panel Select
+		select.add(b);select.add(tf);select.add(cb1);select.add(cb2);
+		select.add(microwave);select.add(l1);select.add(tf);
+		select.setVisible(true);
+		
+		//Panel Display
+		display.add(selected);display.add(l2);
+		display.setVisible(false);
+		
+		//JFrame
+		f.add(select);f.add(display);
 		
 		//Buttons Selected
 		microwave.addItemListener(new ItemListener() {
@@ -94,6 +110,8 @@ public class main extends JFrame implements ActionListener{
 			}
 			selected.setText(checkedBox);
 		}catch(Exception ex) {System.out.println(ex);}
+		select.setVisible(false);
+		display.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
