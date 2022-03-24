@@ -1,20 +1,20 @@
-Turkey Avocado Club, 30, false, [Turkey, Avocado, Bread, Lettuce, Tomato]
-Ham Sandwich, 5, false, [Ham, Cheese, Bread]
-Grilled Cheese, 5, true, [Bread, Cheese, Butter]
-Tuna Sandwich, 10, false, [Tuna, Mayo, Bread]
-Bean and Cheese Burrito, 5, true, [Tortilla, Refried Beans, Cheese]
-Turkey Tortilla Roll up, 5, false, [Tortilla, Cream Cheese, Turkey]
-Ham Tortilla Roll up, 5, false, [Tortilla, Cream Cheese, Ham]
-Bean and Cheese Nachos, 5, true, [Tortilla Chips, Beans, Cheese]
-Ham and Egg Sandwich, 10, true, [Egg, Cheese, Ham, English Muffin]
-Bacon and Egg Sandwich, 10, true, [Egg, Cheese, Bacon, English Muffin]
-Egg Burrito, 10, true, [Egg, Hash Brown, Ham, Cheese, Tortilla]
-Breakfast Nachos, 10, true, [Egg, Beans, Avocado, Cheese, Tortilla]
-Micro Baked Potato, 5, true, [Potato, Sour Cream, Butter]
-Taco Salad, 10, true, [Lettuce, Meat, Beans, Corn, Avocado]
-Chef Salad with Turkey, 10, false, [Turkey, Cheese, Lettuce, Dressing]
-Chef Salad with Ham, 10, false, [Ham, Cheese, Lettuce, Dressing]
-Chef Salad with Egg and Turkey, 10, true, [Turkey, Cheese, Lettuce, Egg, Dressing]
-Chef Salad with Egg and Ham, 10, true, [Turkey, Cheese, Lettuce, Egg, Dressing]
-Egg Salad Sandwich, 10, true, [Egg, Mayo, Mustard, Bread]
-Homemade Lunchable, 5, false, [Turkey, Ham, Cheese, Crackers]
+Turkey Avocado Club, 30, false, Turkey, Avocado, Bread, Lettuce, Tomato
+Ham Sandwich, 5, false, Ham, Cheese, Bread
+Grilled Cheese, 5, true, Bread, Cheese, Butter
+Tuna Sandwich, 10, false, Tuna, Mayo, Bread
+Bean and Cheese Burrito, 5, true, Tortilla, Refried Beans, Cheese
+Turkey Tortilla Roll up, 5, false, Tortilla, Cream Cheese, Turkey
+Ham Tortilla Roll up, 5, false, Tortilla, Cream Cheese, Ham
+Bean and Cheese Nachos, 5, true, Tortilla Chips, Beans, Cheese
+Ham and Egg Sandwich, 10, true, Egg, Cheese, Ham, English Muffin
+Bacon and Egg Sandwich, 10, true, Egg, Cheese, Bacon, English Muffin
+Egg Burrito, 10, true, Egg, Hash Brown, Ham, Cheese, Tortilla
+Breakfast Nachos, 10, true, Egg, Beans, Avocado, Cheese, Tortilla
+Micro Baked Potato, 5, true, Potato, Sour Cream, Butter
+Taco Salad, 10, true, Lettuce, Meat, Beans, Corn, Avocado
+Chef Salad with Turkey, 10, false, Turkey, Cheese, Lettuce, Dressing
+Chef Salad with Ham, 10, false, Ham, Cheese, Lettuce, Dressing
+Chef Salad with Egg and Turkey, 10, true, Turkey, Cheese, Lettuce, Egg, Dressing
+Chef Salad with Egg and Ham, 10, true, Turkey, Cheese, Lettuce, Egg, Dressing
+Egg Salad Sandwich, 10, true, Egg, Mayo, Mustard, Bread
+Homemade Lunchable, 5, false, Turkey, Ham, Cheese, Crackers
