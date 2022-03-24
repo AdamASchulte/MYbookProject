@@ -10,7 +10,8 @@ public class main extends JFrame implements ActionListener{
 	JButton b;
 	JLabel l1,l2,selected;
 	JTextField tf;
-	JCheckBox microwave,cb1,cb2;
+	JCheckBox microwave,avocado,turkey,bread,lettuce,tomato,ham,cheese,butter,tuna,mayo,tortilla,refriedBeans,creamCheese
+	,tortillaChips,beans,egg,bacon,englishMuffin,hashBrown,potato,sourCream,meat,corn,dressing,mustard,crackers;
 	String checkedBox;
 	boolean[] appliances;
 	boolean[] checked;
@@ -28,12 +29,39 @@ public class main extends JFrame implements ActionListener{
 		display.setBackground(Color.white);
 		
 		//Ingredients List
-		checked = new boolean[2];
-		ingredients = new String[] {"Avocado","Milk"};
-		cb1 = new JCheckBox("Avocado");
-		cb1.setBounds(100,100,80,15);
-		cb2 = new JCheckBox("Milk");
-		cb2.setBounds(100,150,50,15);
+		checked = new boolean[26];
+		ingredients = new String[] {"Avocado","Turkey","Bread","Lettuce","Tomato","Ham","Cheese","Butter"
+				,"Tuna","Mayo","Tortilla","Refried Beans","Cream Cheese","Tortilla Chips","Beans","Egg"
+				,"Bacon","English Muffin","Hash Brown","Potato","Sour Cream","Meat","Corn","Dressing"
+				,"Mustard","Crackers"};
+		avocado = new JCheckBox("Avocado");
+		avocado.setBounds(100,100,80,15);
+		turkey = new JCheckBox("Turkey");
+		turkey.setBounds(100,150,50,15);
+		bread = new JCheckBox("Bread");
+		lettuce = new JCheckBox("Lettuce");
+		tomato = new JCheckBox("Tomato");
+		ham = new JCheckBox("Ham");
+		cheese = new JCheckBox("Cheese");
+		butter = new JCheckBox("Butter");
+		tuna = new JCheckBox("Tuna");
+		mayo = new JCheckBox("Mayo");
+		tortilla = new JCheckBox("Tortilla");
+		refriedBeans = new JCheckBox("Refried Beans");
+		creamCheese = new JCheckBox("Cream Cheese");
+		tortillaChips = new JCheckBox("Tortilla Chips");
+		beans = new JCheckBox("Beans");
+		egg = new JCheckBox("Eggs");
+		bacon = new JCheckBox("Bacon");
+		englishMuffin = new JCheckBox("English Muffin");
+		hashBrown = new JCheckBox("Hash Brown");
+		potato = new JCheckBox("Potato");
+		sourCream = new JCheckBox("Sour Cream");
+		meat = new JCheckBox("Meat");
+		corn = new JCheckBox("Corn");
+		dressing = new JCheckBox("Dressing");
+		mustard = new JCheckBox("Mustard");
+		crackers = new JCheckBox("Crackers");
 		
 		//Time
 		l1 = new JLabel("Time:");
@@ -57,7 +85,11 @@ public class main extends JFrame implements ActionListener{
 		b.addActionListener(this);
 		
 		//Panel Select
-		select.add(b);select.add(tf);select.add(cb1);select.add(cb2);
+		select.add(b);select.add(tf);select.add(avocado);select.add(turkey);select.add(bread);select.add(lettuce);
+		select.add(tomato);select.add(ham);select.add(cheese);select.add(butter);select.add(tuna);select.add(mayo);
+		select.add(tortilla);select.add(refriedBeans);select.add(creamCheese);select.add(tortillaChips);select.add(beans);
+		select.add(egg);select.add(bacon);select.add(englishMuffin);select.add(hashBrown);select.add(potato);select.add(sourCream);
+		select.add(meat);select.add(corn);select.add(dressing);select.add(mustard);select.add(crackers);
 		select.add(microwave);select.add(l1);select.add(tf);
 		select.setVisible(true);
 		
@@ -74,16 +106,141 @@ public class main extends JFrame implements ActionListener{
 				appliances[0] = (e.getStateChange()==1?true:false);
 			}
 		});
-		cb1.addItemListener(new ItemListener() {
+		avocado.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[0] = (e.getStateChange()==1?true:false);
 			}
 		});
-		cb2.addItemListener(new ItemListener() {
+		turkey.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[1] = (e.getStateChange()==1?true:false);
 			}
 		});
+		bread.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[2] = (e.getStateChange()==1?true:false);
+			}
+		});
+		lettuce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[3] = (e.getStateChange()==1?true:false);
+			}
+		});
+		tomato.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[4] = (e.getStateChange()==1?true:false);
+			}
+		});
+		ham.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[5] = (e.getStateChange()==1?true:false);
+			}
+		});
+		cheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[6] = (e.getStateChange()==1?true:false);
+			}
+		});
+		butter.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[7] = (e.getStateChange()==1?true:false);
+			}
+		});
+		tuna.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[8] = (e.getStateChange()==1?true:false);
+			}
+		});
+		mayo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[9] = (e.getStateChange()==1?true:false);
+			}
+		});
+		tortilla.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[10] = (e.getStateChange()==1?true:false);
+			}
+		});
+		refriedBeans.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[11] = (e.getStateChange()==1?true:false);
+			}
+		});
+		creamCheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[12] = (e.getStateChange()==1?true:false);
+			}
+		});
+		tortillaChips.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[13] = (e.getStateChange()==1?true:false);
+			}
+		});
+		beans.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[14] = (e.getStateChange()==1?true:false);
+			}
+		});
+		egg.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[15] = (e.getStateChange()==1?true:false);
+			}
+		});
+		bacon.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[16] = (e.getStateChange()==1?true:false);
+			}
+		});
+		englishMuffin.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[17] = (e.getStateChange()==1?true:false);
+			}
+		});
+		hashBrown.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[18] = (e.getStateChange()==1?true:false);
+			}
+		});
+		potato.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[19] = (e.getStateChange()==1?true:false);
+			}
+		});
+		sourCream.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[20] = (e.getStateChange()==1?true:false);
+			}
+		});
+		meat.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[21] = (e.getStateChange()==1?true:false);
+			}
+		});
+		corn.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[22] = (e.getStateChange()==1?true:false);
+			}
+		});
+		dressing.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[23] = (e.getStateChange()==1?true:false);
+			}
+		});
+		mustard.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[24] = (e.getStateChange()==1?true:false);
+			}
+		});
+		crackers.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[25] = (e.getStateChange()==1?true:false);
+			}
+		});
+		
+		/*"Avocado","Turkey","Bread","Lettuce","Tomato","Ham","Cheese","Butter"
+		,"Tuna","Mayo","Tortilla","Refried Beans","Cream Cheese","Tortilla Chips","Beans","Egg"
+		,"Bacon","English Muffin","Hash Brown","Potato","Sour Cream","Meat","Corn","Dressing"
+		,"Mustard","Crackers"*/
 		
 		f.setSize(900,650);
 		f.setLayout(null);
@@ -119,20 +276,13 @@ public class main extends JFrame implements ActionListener{
 		
 		System.out.println("Enter an ingredient");                                      //This is our fake user interface for the sake of simplicity in the architecture
         Scanner in = new Scanner(System.in);                                            
-        String ingredient = in.nextLine();                                              //testing if we can store an ingredient object based on user input
-        Ingredient firstIngredient = new Ingredient(ingredient);                        
-        System.out.println("Ingredient returned: " +firstIngredient.getName());                                             
+        String ingredient = in.nextLine();                                           
         
         System.out.println("Enter an appliance");                                       //testing if we can store an appliance object based off user input
         String appliance = in.nextLine();
-        Appliance firstAppliance = new Appliance(appliance);
-        System.out.println("appliance returned: " + firstAppliance.getName());
         
         System.out.println("Enter a time");                                             // testing if we can store time object based off user input
         int time = in.nextInt();
-        Time firstTime = new Time(time);
-        System.out.println("time returned: " + firstTime.getTime());
-        
         
         String recipe = SearchSystem.RecipeSearch();                                // this is our mock calls to the search system based off user input
         System.out.println(recipe);
