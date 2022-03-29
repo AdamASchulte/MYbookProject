@@ -1,327 +1,376 @@
 package main;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.Scanner;
 
-public class main extends JFrame implements ActionListener{
+public class main extends JFrame implements ActionListener {
 	JFrame f;
-	JPanel select, display;
+	JMenu options;
+	JMenuItem main, favorites;
+	JPanel selectP, displayP, favoritesP;
 	JButton b;
-	JLabel l1,l2,selected;
+	JLabel l1, l2, selected;
 	JTextField tf;
-	JCheckBox microwave,avocado,turkey,bread,lettuce,tomato,ham,cheese,butter,tuna,mayo,tortilla,refriedBeans,creamCheese
-	,tortillaChips,beans,egg,bacon,englishMuffin,hashBrown,potato,sourCream,meat,corn,dressing,mustard,crackers;
+	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
+			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
+			meat, corn, dressing, mustard, crackers;
 	String checkedBox;
 	boolean[] appliances;
 	boolean[] checked;
 	String[] ingredients;
-	
-	main(){
+
+	main() {
 		f = new JFrame("MyBook");
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/images/MyBookLogo.png");
 		f.setIconImage(icon);
-		
-		//Panels
-		select = new JPanel();
-		select.setBounds(0,0,900,650);
-		select.setBackground(Color.gray);
-		select.setLayout(null);
-		display = new JPanel();
-		display.setBounds(0,0,900,650);
-		display.setBackground(Color.white);
-		display.setLayout(null);
-		
-		//Ingredients List
+
+		// Menu Bar
+		JMenuBar mb = new JMenuBar();
+		options = new JMenu("Options");
+		main = new JMenuItem("Search");
+		favorites = new JMenuItem("Favorites");
+		mb.add(options);
+		options.add(main);
+		options.add(favorites);
+		f.setJMenuBar(mb);
+		main.addActionListener(this);
+		favorites.addActionListener(this);
+
+		// Panels
+		selectP = new JPanel();
+		selectP.setBounds(0, 0, 900, 650);
+		selectP.setBackground(Color.gray);
+		selectP.setLayout(null);
+		displayP = new JPanel();
+		displayP.setBounds(0, 0, 900, 650);
+		displayP.setBackground(Color.white);
+		displayP.setLayout(null);
+		favoritesP = new JPanel();
+		favoritesP.setBounds(0, 0, 900, 650);
+		favoritesP.setBackground(Color.green);
+		favoritesP.setLayout(null);
+
+		// Ingredients List
 		checked = new boolean[26];
-		ingredients = new String[] {"Avocado","Turkey","Bread","Lettuce","Tomato","Ham","Cheese","Butter"
-				,"Tuna","Mayo","Tortilla","Refried Beans","Cream Cheese","Tortilla Chips","Beans","Egg"
-				,"Bacon","English Muffin","Hash Brown","Potato","Sour Cream","Meat","Corn","Dressing"
-				,"Mustard","Crackers"};
+		ingredients = new String[] { "Avocado", "Turkey", "Bread", "Lettuce", "Tomato", "Ham", "Cheese", "Butter",
+				"Tuna", "Mayo", "Tortilla", "Refried Beans", "Cream Cheese", "Tortilla Chips", "Beans", "Egg", "Bacon",
+				"English Muffin", "Hash Brown", "Potato", "Sour Cream", "Meat", "Corn", "Dressing", "Mustard",
+				"Crackers" };
 		avocado = new JCheckBox("Avocado");
-		avocado.setBounds(100,100,80,15);
+		avocado.setBounds(100, 100, 112, 15);
 		turkey = new JCheckBox("Turkey");
-		turkey.setBounds(100,140,80,15);
+		turkey.setBounds(100, 140, 112, 15);
 		bread = new JCheckBox("Bread");
-		bread.setBounds(100,180,80,15);
+		bread.setBounds(100, 180, 112, 15);
 		lettuce = new JCheckBox("Lettuce");
-		lettuce.setBounds(100,220,80,15);
+		lettuce.setBounds(100, 220, 112, 15);
 		tomato = new JCheckBox("Tomato");
-		tomato.setBounds(100,260,80,15);
+		tomato.setBounds(100, 260, 112, 15);
 		ham = new JCheckBox("Ham");
-		ham.setBounds(100,300,80,15);
+		ham.setBounds(100, 300, 112, 15);
 		cheese = new JCheckBox("Cheese");
-		cheese.setBounds(275,100,80,15);
+		cheese.setBounds(275, 100, 112, 15);
 		butter = new JCheckBox("Butter");
-		butter.setBounds(275,140,80,15);
+		butter.setBounds(275, 140, 112, 15);
 		tuna = new JCheckBox("Tuna");
-		tuna.setBounds(275,180,80,15);
+		tuna.setBounds(275, 180, 112, 15);
 		mayo = new JCheckBox("Mayo");
-		mayo.setBounds(275,220,80,15);
+		mayo.setBounds(275, 220, 112, 15);
 		tortilla = new JCheckBox("Tortilla");
-		tortilla.setBounds(275,260,80,15);
+		tortilla.setBounds(275, 260, 112, 15);
 		refriedBeans = new JCheckBox("Refried Beans");
-		refriedBeans.setBounds(275,300,80,15);
+		refriedBeans.setBounds(275, 300, 112, 15);
 		creamCheese = new JCheckBox("Cream Cheese");
-		creamCheese.setBounds(450,100,80,15);
+		creamCheese.setBounds(450, 100, 112, 15);
 		tortillaChips = new JCheckBox("Tortilla Chips");
-		tortillaChips.setBounds(450,140,80,15);
+		tortillaChips.setBounds(450, 140, 112, 15);
 		beans = new JCheckBox("Beans");
-		beans.setBounds(450,180,80,15);
+		beans.setBounds(450, 180, 112, 15);
 		egg = new JCheckBox("Eggs");
-		egg.setBounds(450,220,80,15);
+		egg.setBounds(450, 220, 112, 15);
 		bacon = new JCheckBox("Bacon");
-		bacon.setBounds(450,260,80,15);
+		bacon.setBounds(450, 260, 112, 15);
 		englishMuffin = new JCheckBox("English Muffin");
-		englishMuffin.setBounds(450,300,80,15);
+		englishMuffin.setBounds(450, 300, 112, 15);
 		hashBrown = new JCheckBox("Hash Brown");
-		hashBrown.setBounds(625,100,80,15);
+		hashBrown.setBounds(625, 100, 112, 15);
 		potato = new JCheckBox("Potato");
-		potato.setBounds(625,140,80,15);
+		potato.setBounds(625, 140, 112, 15);
 		sourCream = new JCheckBox("Sour Cream");
-		sourCream.setBounds(625,180,80,15);
+		sourCream.setBounds(625, 180, 112, 15);
 		meat = new JCheckBox("Meat");
-		meat.setBounds(625,220,80,15);
+		meat.setBounds(625, 220, 112, 15);
 		corn = new JCheckBox("Corn");
-		corn.setBounds(625,260,80,15);
+		corn.setBounds(625, 260, 112, 15);
 		dressing = new JCheckBox("Dressing");
-		dressing.setBounds(625,300,80,15);
+		dressing.setBounds(625, 300, 112, 15);
 		mustard = new JCheckBox("Mustard");
-		mustard.setBounds(100,340,80,15);
+		mustard.setBounds(100, 340, 112, 15);
 		crackers = new JCheckBox("Crackers");
-		crackers.setBounds(275,340,80,15);
-		
-		//Time
+		crackers.setBounds(275, 340, 112, 15);
+
+		// Time
 		l1 = new JLabel("Time:");
-		l2 = new JLabel(); //Results of time input
-		selected = new JLabel(); //Results of selected ingredients
-		l1.setBounds(375,415,500,200);
-		l2.setBounds(50,100,500,200);
-		selected.setBounds(100,200,500,200);
+		l2 = new JLabel(); // Results of time input
+		selected = new JLabel(); // Results of selected ingredients
+		l1.setBounds(375, 415, 500, 200);
+		l2.setBounds(50, 100, 500, 200);
+		selected.setBounds(100, 200, 500, 200);
 		tf = new JTextField();
-		tf.setBounds(420,507,50,20);
-		
-		//Appliances
+		tf.setBounds(420, 507, 50, 20);
+
+		// Appliances
 		appliances = new boolean[1];
 		microwave = new JCheckBox("Microwave");
-		microwave.setBounds(140,507,90,15);
-		
-		//Search/Enter Button
+		microwave.setBounds(140, 507, 90, 15);
+
+		// Search/Enter Button
 		b = new JButton("Search");
-		b.setBounds(600,500,80,30);
+		b.setBounds(600, 500, 80, 30);
 		b.setBackground(Color.green);
 		b.addActionListener(this);
-		
-		//Panel Select
-		select.add(b);select.add(tf);select.add(avocado);select.add(turkey);select.add(bread);select.add(lettuce);
-		select.add(tomato);select.add(ham);select.add(cheese);select.add(butter);select.add(tuna);select.add(mayo);
-		select.add(tortilla);select.add(refriedBeans);select.add(creamCheese);select.add(tortillaChips);select.add(beans);
-		select.add(egg);select.add(bacon);select.add(englishMuffin);select.add(hashBrown);select.add(potato);select.add(sourCream);
-		select.add(meat);select.add(corn);select.add(dressing);select.add(mustard);select.add(crackers);
-		select.add(microwave);select.add(l1);select.add(tf);
-		select.setVisible(true);
-		
-		//Panel Display
-		display.add(selected);display.add(l2);
-		display.setVisible(false);
-		
-		//JFrame
-		f.add(select);f.add(display);
-		
-		//Buttons Selected
+
+		// Panel Select
+		selectP.add(b);
+		selectP.add(tf);
+		selectP.add(avocado);
+		selectP.add(turkey);
+		selectP.add(bread);
+		selectP.add(lettuce);
+		selectP.add(tomato);
+		selectP.add(ham);
+		selectP.add(cheese);
+		selectP.add(butter);
+		selectP.add(tuna);
+		selectP.add(mayo);
+		selectP.add(tortilla);
+		selectP.add(refriedBeans);
+		selectP.add(creamCheese);
+		selectP.add(tortillaChips);
+		selectP.add(beans);
+		selectP.add(egg);
+		selectP.add(bacon);
+		selectP.add(englishMuffin);
+		selectP.add(hashBrown);
+		selectP.add(potato);
+		selectP.add(sourCream);
+		selectP.add(meat);
+		selectP.add(corn);
+		selectP.add(dressing);
+		selectP.add(mustard);
+		selectP.add(crackers);
+		selectP.add(microwave);
+		selectP.add(l1);
+		selectP.add(tf);
+		selectP.setVisible(true);
+
+		// Panel Display
+		displayP.add(selected);
+		displayP.add(l2);
+		displayP.setVisible(false);
+
+		// Panel Favorites
+		favoritesP.setVisible(false);
+
+		// JFrame
+		f.add(selectP);
+		f.add(displayP);
+		f.add(favoritesP);
+
+		// Buttons Selected
 		microwave.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				appliances[0] = (e.getStateChange()==1?true:false);
+				appliances[0] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		avocado.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[0] = (e.getStateChange()==1?true:false);
+				checked[0] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		turkey.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[1] = (e.getStateChange()==1?true:false);
+				checked[1] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		bread.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[2] = (e.getStateChange()==1?true:false);
+				checked[2] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		lettuce.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[3] = (e.getStateChange()==1?true:false);
+				checked[3] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		tomato.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[4] = (e.getStateChange()==1?true:false);
+				checked[4] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		ham.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[5] = (e.getStateChange()==1?true:false);
+				checked[5] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		cheese.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[6] = (e.getStateChange()==1?true:false);
+				checked[6] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		butter.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[7] = (e.getStateChange()==1?true:false);
+				checked[7] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		tuna.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[8] = (e.getStateChange()==1?true:false);
+				checked[8] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		mayo.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[9] = (e.getStateChange()==1?true:false);
+				checked[9] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		tortilla.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[10] = (e.getStateChange()==1?true:false);
+				checked[10] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		refriedBeans.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[11] = (e.getStateChange()==1?true:false);
+				checked[11] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		creamCheese.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[12] = (e.getStateChange()==1?true:false);
+				checked[12] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		tortillaChips.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[13] = (e.getStateChange()==1?true:false);
+				checked[13] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		beans.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[14] = (e.getStateChange()==1?true:false);
+				checked[14] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		egg.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[15] = (e.getStateChange()==1?true:false);
+				checked[15] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		bacon.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[16] = (e.getStateChange()==1?true:false);
+				checked[16] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		englishMuffin.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[17] = (e.getStateChange()==1?true:false);
+				checked[17] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		hashBrown.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[18] = (e.getStateChange()==1?true:false);
+				checked[18] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		potato.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[19] = (e.getStateChange()==1?true:false);
+				checked[19] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		sourCream.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[20] = (e.getStateChange()==1?true:false);
+				checked[20] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		meat.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[21] = (e.getStateChange()==1?true:false);
+				checked[21] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		corn.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[22] = (e.getStateChange()==1?true:false);
+				checked[22] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		dressing.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[23] = (e.getStateChange()==1?true:false);
+				checked[23] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		mustard.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[24] = (e.getStateChange()==1?true:false);
+				checked[24] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		crackers.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				checked[25] = (e.getStateChange()==1?true:false);
+				checked[25] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		
-		/*"Avocado","Turkey","Bread","Lettuce","Tomato","Ham","Cheese","Butter"
-		,"Tuna","Mayo","Tortilla","Refried Beans","Cream Cheese","Tortilla Chips","Beans","Egg"
-		,"Bacon","English Muffin","Hash Brown","Potato","Sour Cream","Meat","Corn","Dressing"
-		,"Mustard","Crackers"*/
-		
-		f.setSize(900,650);
+
+		f.setSize(900, 650);
 		f.setLayout(null);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	//clickButton.exe
+
+	// clickButton.exe
 	public void actionPerformed(ActionEvent e) {
-		//Display Time Entered
-		try {
-			String text = tf.getText();
-			if(text.equals(""))
-				l2.setText("No time was entered; displaying all recipes.");
-			else {
-				int time = Integer.parseInt(text);
-				l2.setText("It worked fuck yeah. Also, here's what you entered: " + time);
-			}
-		}catch(Exception ex) {System.out.println(ex);}
-		
-		//Display Selected Ingredients
-		checkedBox = "Selected Ingredients: ";
-		int firstIngredient = 0;
-		for(int i = 0; i < checked.length; i++)	{
-			if(checked[i]) {
-				if(firstIngredient > 0)
-					checkedBox += ", ";
-				else
-					firstIngredient++;
-				checkedBox += ingredients[i];
-			}
+		// Menu Selections
+		if (e.getSource() == main) {
+			selectP.setVisible(true);
+			displayP.setVisible(false);
+			favoritesP.setVisible(false);
 		}
-		selected.setText(checkedBox);
-		
-		//Switch Panes
-		select.setVisible(false);
-		display.setVisible(true);
+		if (e.getSource() == favorites) {
+			favoritesP.setVisible(true);
+			selectP.setVisible(false);
+			displayP.setVisible(false);
+		}
+		if (e.getSource() == b) {
+			// Display Time Entered
+			try {
+				String text = tf.getText();
+				if (text.equals(""))
+					l2.setText("No time was entered; displaying all recipes.");
+				else {
+					int time = Integer.parseInt(text);
+					l2.setText("Displaying recipes that can be made in " + time + " minutes or less.");
+				}
+			} catch (Exception ex) {
+				System.out.println(ex);
+			}
+
+			// Display Selected Ingredients
+			checkedBox = "Selected Ingredients: ";
+			int firstIngredient = 0;
+			for (int i = 0; i < checked.length; i++) {
+				if (checked[i]) {
+					if (firstIngredient > 0)
+						checkedBox += ", ";
+					else
+						firstIngredient++;
+					checkedBox += ingredients[i];
+				}
+			}
+			selected.setText(checkedBox);
+
+			// Switch Panes
+			selectP.setVisible(false);
+			favoritesP.setVisible(false);
+			displayP.setVisible(true);
+		}
 	}
-	
+
 	public static void main(String[] args) {
 		new main();
-		
-		System.out.println("Enter an ingredient");                                      //This is our fake user interface for the sake of simplicity in the architecture
-        Scanner in = new Scanner(System.in);                                            
-        String ingredient = in.nextLine();                                           
-        
-        System.out.println("Enter an appliance");                                       //testing if we can store an appliance object based off user input
-        String appliance = in.nextLine();
-        
-        System.out.println("Enter a time");                                             // testing if we can store time object based off user input
-        int time = in.nextInt();
-        
-        String recipe = SearchSystem.RecipeSearch();                                // this is our mock calls to the search system based off user input
-        System.out.println(recipe);
 	}
 }
