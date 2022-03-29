@@ -1,14 +1,44 @@
 public class Database {
-                                                                                // this is a fake database for simplicity's sake for the system architecture. 
-    private ArrayList<String> recipes = new ArrayList<String>();
-    
-    public Database(String x){
-        recipes.add(x);
-    }
-    
-    public String getElement(){
-        String i = recipes.get(0);
-        return i;
-    }
-    
+   private ArrayList<Recipe> recipeList = new ArrayList<>();
+	
+	public Database() {
+		
+	}
+	
+	public void fillDatabase()
+	{
+		
+		try {
+			File recipeFile = new File("RecipeDatabase.txt");
+			Scanner reader = new Scanner(recipeFile);
+			while(reader.hasNextLine())
+			{
+				int i = 1;
+				String[] bruh = reader.nextLine().split(",");
+				System.out.println(bruh);
+				Recipe newRecipe = new Recipe(bruh);
+				recipeList.set(i, newRecipe);
+				i++;
+			}
+			reader.close();
+		}
+		catch(FileNotFoundException e){
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+		
+		/*try {
+			BufferedReader br = new BufferedReader (new FileReader("RecipeDatabase.txt"));
+			for(int i = 0; i < 20; i++)
+			{
+				String[] bruh = br.readLine().split(",");
+				Recipe newRecipe = new Recipe(bruh);
+				System.out.print(bruh);
+				recipeList.set(i, newRecipe);
+			}
+		}
+		catch (Exception e){
+			System.out.print("did not work");
+		}*/
+	}
 }
