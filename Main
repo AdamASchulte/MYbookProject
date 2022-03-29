@@ -18,14 +18,15 @@ public class main extends JFrame implements ActionListener {
 	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
 			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
 			meat, corn, dressing, mustard, crackers;
-	String checkedBox;
 	boolean[] appliances;
 	boolean[] checked;
 	boolean mbDisplay = false;
 	boolean validLogin = false;
+	String checkedBox;
 	String[] ingredients;
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
+	ArrayList<String> userIngredients = new ArrayList<String>();
 
 	main() {
 		f = new JFrame("MyBook");
@@ -438,6 +439,7 @@ public class main extends JFrame implements ActionListener {
 					else
 						firstIngredient++;
 					checkedBox += ingredients[i];
+					userIngredients.add(ingredients[i]);
 				}
 			}
 			selected.setText(checkedBox);
