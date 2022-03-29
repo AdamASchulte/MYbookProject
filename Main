@@ -3,23 +3,28 @@ package main;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class main extends JFrame implements ActionListener {
 	JFrame f;
 	JMenu options;
-	JMenuItem main, favorites;
-	JPanel selectP, displayP, favoritesP;
-	JButton b;
-	JLabel l1, l2, selected;
-	JTextField tf;
+	JMenuItem main, favorites, logout;
+	JPanel loginP, signupP, selectP, displayP, favoritesP;
+	JButton b, login, signup, createAccount;
+	JLabel l1, l2, selected, user, pass;
+	JTextField tf, username;
+	JPasswordField password;
 	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
 			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
 			meat, corn, dressing, mustard, crackers;
 	String checkedBox;
 	boolean[] appliances;
 	boolean[] checked;
+	boolean mbDisplay = false;
 	String[] ingredients;
+	ArrayList<String> userLog = new ArrayList<String>();
+	ArrayList<String> passLog = new ArrayList<String>();
 
 	main() {
 		f = new JFrame("MyBook");
@@ -31,14 +36,26 @@ public class main extends JFrame implements ActionListener {
 		options = new JMenu("Options");
 		main = new JMenuItem("Search");
 		favorites = new JMenuItem("Favorites");
+		logout = new JMenuItem("Logout");
 		mb.add(options);
 		options.add(main);
 		options.add(favorites);
+		options.add(logout);
+		mb.setVisible(true);
 		f.setJMenuBar(mb);
 		main.addActionListener(this);
 		favorites.addActionListener(this);
+		logout.addActionListener(this);
 
 		// Panels
+		loginP = new JPanel();
+		loginP.setBounds(0, 0, 900, 650);
+		loginP.setBackground(Color.orange);
+		loginP.setLayout(null);
+		signupP = new JPanel();
+		signupP.setBounds(0, 0, 900, 650);
+		signupP.setBackground(Color.orange);
+		signupP.setLayout(null);
 		selectP = new JPanel();
 		selectP.setBounds(0, 0, 900, 650);
 		selectP.setBackground(Color.gray);
@@ -132,6 +149,51 @@ public class main extends JFrame implements ActionListener {
 		b.setBackground(Color.green);
 		b.addActionListener(this);
 
+		// Panel Login
+		login = new JButton("Login");
+		login.setBounds(410, 400, 80, 30);
+		login.setBackground(Color.white);
+		login.addActionListener(this);
+		loginP.add(login);
+		signup = new JButton("Sign Up");
+		signup.setBounds(410, 450, 80, 30);
+		signup.setBackground(Color.white);
+		signup.addActionListener(this);
+		loginP.add(signup);
+		username = new JTextField("");
+		username.setBounds(350, 250, 200, 30);
+		user = new JLabel("Username:");
+		user.setBounds(350, 220, 80, 30);
+		loginP.add(username);
+		loginP.add(user);
+		password = new JPasswordField();
+		password.setBounds(350, 330, 200, 30);
+		pass = new JLabel("Password:");
+		pass.setBounds(350, 300, 80, 30);
+		loginP.add(password);
+		loginP.add(pass);
+		loginP.setVisible(true);
+
+		// Panel Signup
+		createAccount = new JButton("Create Account");
+		createAccount.setBounds(375, 400, 150, 30);
+		createAccount.setBackground(Color.white);
+		createAccount.addActionListener(this);
+		signupP.add(createAccount);
+		username = new JTextField("");
+		username.setBounds(350, 250, 200, 30);
+		user = new JLabel("Username:");
+		user.setBounds(350, 220, 80, 30);
+		signupP.add(username);
+		signupP.add(user);
+		password = new JPasswordField();
+		password.setBounds(350, 330, 200, 30);
+		pass = new JLabel("Password:");
+		pass.setBounds(350, 300, 80, 30);
+		signupP.add(password);
+		signupP.add(pass);
+		signupP.setVisible(false);
+
 		// Panel Select
 		selectP.add(b);
 		selectP.add(tf);
@@ -164,7 +226,7 @@ public class main extends JFrame implements ActionListener {
 		selectP.add(microwave);
 		selectP.add(l1);
 		selectP.add(tf);
-		selectP.setVisible(true);
+		selectP.setVisible(false);
 
 		// Panel Display
 		displayP.add(selected);
@@ -175,6 +237,8 @@ public class main extends JFrame implements ActionListener {
 		favoritesP.setVisible(false);
 
 		// JFrame
+		f.add(loginP);
+		f.add(signupP);
 		f.add(selectP);
 		f.add(displayP);
 		f.add(favoritesP);
@@ -326,14 +390,26 @@ public class main extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// Menu Selections
 		if (e.getSource() == main) {
-			selectP.setVisible(true);
-			displayP.setVisible(false);
-			favoritesP.setVisible(false);
+			if (mbDisplay) {
+				selectP.setVisible(true);
+				displayP.setVisible(false);
+				favoritesP.setVisible(false);
+			}
 		}
 		if (e.getSource() == favorites) {
-			favoritesP.setVisible(true);
-			selectP.setVisible(false);
-			displayP.setVisible(false);
+			if (mbDisplay) {
+				favoritesP.setVisible(true);
+				selectP.setVisible(false);
+				displayP.setVisible(false);
+			}
+		}
+		if (e.getSource() == logout) {
+			if (mbDisplay) {
+				favoritesP.setVisible(false);
+				selectP.setVisible(false);
+				displayP.setVisible(false);
+				loginP.setVisible(true);
+			}
 		}
 		if (e.getSource() == b) {
 			// Display Time Entered
@@ -367,6 +443,36 @@ public class main extends JFrame implements ActionListener {
 			selectP.setVisible(false);
 			favoritesP.setVisible(false);
 			displayP.setVisible(true);
+		}
+		if (e.getSource() == login) {
+			String userStr = username.getText();
+			String passStr = new String(password.getPassword());
+			if (userLog.contains(userStr)) {
+				if (passLog.contains(passStr)) {
+					selectP.setVisible(true);
+					loginP.setVisible(false);
+					mbDisplay = true;
+				}
+			} else {
+				JOptionPane.showMessageDialog(f,"Username or Password does not exist");
+			}
+		}
+		if (e.getSource() == signup) {
+			loginP.setVisible(false);
+			signupP.setVisible(true);
+		}
+		if (e.getSource() == createAccount) {
+			String userStr = username.getText();
+			String passStr = new String(password.getPassword());
+			if (userStr.equals("") || passStr.equals("")) {
+				JOptionPane.showMessageDialog(f, "Username and Password must not be blank.");
+			} else {
+				userLog.add(userStr);
+				passLog.add(passStr);
+				signupP.setVisible(false);
+				loginP.setVisible(true);
+				JOptionPane.showMessageDialog(f, "Account has been created.");
+			}
 		}
 	}
 
