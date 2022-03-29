@@ -13,8 +13,8 @@ public class main extends JFrame implements ActionListener {
 	JPanel loginP, signupP, selectP, displayP, favoritesP;
 	JButton b, login, signup, createAccount;
 	JLabel l1, l2, selected, user, pass;
-	JTextField tf, username;
-	JPasswordField password;
+	JTextField tf, username, usernameSignUp;
+	JPasswordField password, passwordSignUp;
 	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
 			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
 			meat, corn, dressing, mustard, crackers;
@@ -22,6 +22,7 @@ public class main extends JFrame implements ActionListener {
 	boolean[] appliances;
 	boolean[] checked;
 	boolean mbDisplay = false;
+	boolean validLogin = false;
 	String[] ingredients;
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
@@ -180,17 +181,17 @@ public class main extends JFrame implements ActionListener {
 		createAccount.setBackground(Color.white);
 		createAccount.addActionListener(this);
 		signupP.add(createAccount);
-		username = new JTextField("");
-		username.setBounds(350, 250, 200, 30);
+		usernameSignUp = new JTextField("");
+		usernameSignUp.setBounds(350, 250, 200, 30);
 		user = new JLabel("Username:");
 		user.setBounds(350, 220, 80, 30);
-		signupP.add(username);
+		signupP.add(usernameSignUp);
 		signupP.add(user);
-		password = new JPasswordField();
-		password.setBounds(350, 330, 200, 30);
+		passwordSignUp = new JPasswordField();
+		passwordSignUp.setBounds(350, 330, 200, 30);
 		pass = new JLabel("Password:");
 		pass.setBounds(350, 300, 80, 30);
-		signupP.add(password);
+		signupP.add(passwordSignUp);
 		signupP.add(pass);
 		signupP.setVisible(false);
 
@@ -409,6 +410,8 @@ public class main extends JFrame implements ActionListener {
 				selectP.setVisible(false);
 				displayP.setVisible(false);
 				loginP.setVisible(true);
+				username.setText("");
+				password.setText("");
 			}
 		}
 		if (e.getSource() == b) {
@@ -447,23 +450,33 @@ public class main extends JFrame implements ActionListener {
 		if (e.getSource() == login) {
 			String userStr = username.getText();
 			String passStr = new String(password.getPassword());
-			if (userLog.contains(userStr)) {
-				if (passLog.contains(passStr)) {
-					selectP.setVisible(true);
-					loginP.setVisible(false);
-					mbDisplay = true;
+			for (int i = 0; i < userLog.size(); i++) {
+				if (userStr.equals(userLog.get(i))) {
+					if(passStr.equals(passLog.get(i))) {
+						validLogin = true;
+					}
+					else {
+						i = userLog.size();
+					}
 				}
+			}
+			if (validLogin) {
+				selectP.setVisible(true);
+				loginP.setVisible(false);
+				mbDisplay = true;
 			} else {
-				JOptionPane.showMessageDialog(f,"Username or Password does not exist");
+				JOptionPane.showMessageDialog(f, "Username or password is incorrect.");
 			}
 		}
 		if (e.getSource() == signup) {
 			loginP.setVisible(false);
 			signupP.setVisible(true);
+			usernameSignUp.setText("");
+			passwordSignUp.setText("");
 		}
 		if (e.getSource() == createAccount) {
-			String userStr = username.getText();
-			String passStr = new String(password.getPassword());
+			String userStr = usernameSignUp.getText();
+			String passStr = new String(passwordSignUp.getPassword());
 			if (userStr.equals("") || passStr.equals("")) {
 				JOptionPane.showMessageDialog(f, "Username and Password must not be blank.");
 			} else {
