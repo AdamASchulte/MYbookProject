@@ -1,13 +1,13 @@
-package Files;
+package main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class fakeDatabase {
+public class Database {
 	
-	private ArrayList<fakeRecipe> recipeList = new ArrayList<fakeRecipe>();
+	private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
 	
 	public fakeDatabase()
 	{
@@ -16,7 +16,7 @@ public class fakeDatabase {
 	
 	public void fillDatabase()
 	{
-		fakeRecipe myFakeRecipe = new fakeRecipe();
+		fakeRecipe myRecipe = new Recipe();
 		try {
 		File bruh = new File("RecipeDatabase.txt");
 		Scanner reader = new Scanner(bruh);
@@ -29,8 +29,8 @@ public class fakeDatabase {
 			{
 				recipes[k] = recipes[k].trim();
 			}
-			myFakeRecipe = new fakeRecipe(recipes);
-			recipeList.add(myFakeRecipe);
+			myRecipe = new Recipe(recipes);
+			recipeList.add(myRecipe);
 			i++;
 		}
 		
@@ -47,7 +47,7 @@ public class fakeDatabase {
 	{
 		for(int i = 0; i < 20; i++)
 		{
-			fakeRecipe temp = new fakeRecipe();
+			Recipe temp = new Recipe();
 			temp = recipeList.get(i);
 			System.out.println(temp.getName());
 			System.out.println(temp.getTime());
@@ -63,7 +63,7 @@ public class fakeDatabase {
 		
 	}
 	
-	public ArrayList<fakeRecipe> getFakeRecipes()
+	public ArrayList<Recipe> getRecipes()
 	{
 		return recipeList;
 	}
