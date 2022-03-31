@@ -15,6 +15,6 @@ Taco Salad, 10, true, Lettuce, Meat, Beans, Corn, Avocado
 Chef Salad with Turkey, 10, false, Turkey, Cheese, Lettuce, Dressing
 Chef Salad with Ham, 10, false, Ham, Cheese, Lettuce, Dressing
 Chef Salad with Eggs and Turkey, 10, true, Turkey, Cheese, Lettuce, Eggs, Dressing
-Chef Salad with Eggs and Ham, 10, true, Turkey, Cheese, Lettuce, Eggs, Dressing
+Chef Salad with Eggs and Ham, 10, true, Ham, Cheese, Lettuce, Eggs, Dressing
 Egg Salad Sandwich, 10, true, Eggs, Mayo, Mustard, Bread
 Homemade Lunchable, 5, false, Turkey, Ham, Cheese, Crackers
