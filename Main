@@ -493,5 +493,165 @@ public class main extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		new main();
+		fakeDatabase holder = new fakeDatabase();
+		holder.fillDatabase();
+
+		ArrayList<String> putInMethod = new ArrayList<String>();
+		putInMethod.add("avocado");
+		putInMethod.add("egg");
+		putInMethod.add("ham");
+		putInMethod.add("turkey");
+		putInMethod.add("tortilla");
+		putInMethod.add("cheese");
+		putInMethod.add("butter");
+		putInMethod.add("lettuce");
+		putInMethod.add("dressing");
+		putInMethod.add("tomato");
+		putInMethod.add("bread");
+		putInMethod.add("cream cheese");
+
+		ArrayList<fakeRecipe> validRecipes = new ArrayList<fakeRecipe>();
+		validRecipes = searchRecipe(10, "true", putInMethod, holder.getFakeRecipes());
+		for (int i = 0; i < validRecipes.size(); i++) {
+			System.out.println(validRecipes.get(i).getName());
+			System.out.println(validRecipes.get(i).getTime());
+			System.out.println(validRecipes.get(i).getLink());
+			System.out.println(validRecipes.get(i).getIngredientList());
+			System.out.println("");
+		}
+	}
+
+	static ArrayList<fakeRecipe> searchRecipe( int time, String microwaveable, ArrayList<String> userInput,ArrayList<fakeRecipe> database) {
+
+		ArrayList<fakeRecipe> sendToMain = new ArrayList<fakeRecipe>();
+		boolean validRecipe = true;
+		for(int i = 0; i < database.size(); i++)
+		{
+			if( (userInput.contains("turkey") && !(database.get(i).getIngredientList().contains("turkey"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("ham") && !(database.get(i).getIngredientList().contains("ham"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("avocado") && !(database.get(i).getIngredientList().contains("avocado"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("bread") && !(database.get(i).getIngredientList().contains("bread"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("butter") && !(database.get(i).getIngredientList().contains("butter"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("eggs") && !(database.get(i).getIngredientList().contains("eggs"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("cheese") && !(database.get(i).getIngredientList().contains("cheese"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("lettuce") && !(database.get(i).getIngredientList().contains("lettuce"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("tomato") && !(database.get(i).getIngredientList().contains("tomato"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("tortilla") && !(database.get(i).getIngredientList().contains("tortilla"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("cream cheese") && !(database.get(i).getIngredientList().contains("cream cheese"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("beans") && !(database.get(i).getIngredientList().contains("beans"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("potato") && !(database.get(i).getIngredientList().contains("potato"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("dressing") && !(database.get(i).getIngredientList().contains("dressing"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("mustard") && !(database.get(i).getIngredientList().contains("mustard"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("crackers") && !(database.get(i).getIngredientList().contains("crackers"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("corn") && !(database.get(i).getIngredientList().contains("corn"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("sour cream") && !(database.get(i).getIngredientList().contains("sour cream"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("english muffin") && !(database.get(i).getIngredientList().contains("english muffin"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("bacon") && !(database.get(i).getIngredientList().contains("bacon"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("refried beans") && !(database.get(i).getIngredientList().contains("refried beans"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("tuna") && !(database.get(i).getIngredientList().contains("tuna"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("hash brown") && !(database.get(i).getIngredientList().contains("hash brown"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("meat") && !(database.get(i).getIngredientList().contains("meat"))))
+			{
+				validRecipe = false;
+			}
+			if( (userInput.contains("tortilla chips") && !(database.get(i).getIngredientList().contains("tortilla chips"))))
+			{
+				validRecipe = false;
+			}
+			if((userInput.contains("mayo") && !(database.get(i).getIngredientList().contains("mayo"))))
+			{
+				validRecipe = false;
+			}
+			if(validRecipe = true)
+			{
+				sendToMain.add(database.get(i));
+			}
+			for(int j = 0; j < sendToMain.size(); j++)
+			{
+				if(sendToMain.get(j).getTime() > time)
+				{
+					sendToMain.remove(j);
+				}
+			}
+			for(int k = 0; k < sendToMain.size(); k++)
+			{
+				if(!(sendToMain.get(k).getMicrowaveable().equals(microwaveable)) && sendToMain.get(k).getMicrowaveable().equals("true"))
+				{
+					sendToMain.remove(k);
+				}
+			}
+		}
+		
+		return sendToMain;
+	}
 	}
 }
