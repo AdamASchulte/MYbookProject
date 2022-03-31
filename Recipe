@@ -1,41 +1,49 @@
-package RecipeBook;
-import java.util.ArrayList;
+package main;
 
+import java.util.ArrayList;
 public class Recipe {
-	protected int time;
-	protected String name;
-	protected String[] ingredientList;
-	protected String microwaveable;
+	private String name;
+	private String time;
+	private String microwaveable;
+	private String link;
+	private ArrayList<String> ingredientList = new ArrayList<String>();
 	
-	protected Recipe(String[] info)
+	public Recipe()
 	{
-		name = info[1];
-		time = Integer.parseInt(info[2]);;
-		microwaveable = info[3];
-		for(int i = 0; i < info.length - 3; i++)
-		{
-			ingredientList = new String[info.length - 3];
-			ingredientList[i] = info[i+3];
-		}
 		
 	}
+	public Recipe(String[] info)
+	{
+		name = info[0].trim();
+		link = info[1].trim();
+		time = info[2].trim();
+		microwaveable = info[3].trim();
+		for(int i = 4; i < info.length; i++)
+		{
+			ingredientList.add(info[i].trim().toLowerCase());
+		}
+	}
+	
+	
+	
 	public String getName()
 	{
 		return name;
 	}
-	
 	public int getTime()
 	{
-		return time;
+		return Integer.parseInt(time);
 	}
-	
 	public String getMicrowaveable()
 	{
 		return microwaveable;
 	}
-	
-	public String[] getIngredientList()
+	public ArrayList<String> getIngredientList()
 	{
 		return ingredientList;
+	}
+	public String getLink()
+	{
+		return link;
 	}
 }
