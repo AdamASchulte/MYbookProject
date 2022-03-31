@@ -493,25 +493,11 @@ public class main extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		new main();
-		fakeDatabase holder = new fakeDatabase();
+		Database holder = new Database();
 		holder.fillDatabase();
-
-		ArrayList<String> putInMethod = new ArrayList<String>();
-		putInMethod.add("avocado");
-		putInMethod.add("egg");
-		putInMethod.add("ham");
-		putInMethod.add("turkey");
-		putInMethod.add("tortilla");
-		putInMethod.add("cheese");
-		putInMethod.add("butter");
-		putInMethod.add("lettuce");
-		putInMethod.add("dressing");
-		putInMethod.add("tomato");
-		putInMethod.add("bread");
-		putInMethod.add("cream cheese");
-
-		ArrayList<fakeRecipe> validRecipes = new ArrayList<fakeRecipe>();
-		validRecipes = searchRecipe(10, "true", putInMethod, holder.getFakeRecipes());
+	
+		ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
+		validRecipes = searchRecipe(10, "true", putInMethod, holder.getRecipes());
 		for (int i = 0; i < validRecipes.size(); i++) {
 			System.out.println(validRecipes.get(i).getName());
 			System.out.println(validRecipes.get(i).getTime());
@@ -521,9 +507,9 @@ public class main extends JFrame implements ActionListener {
 		}
 	}
 
-	static ArrayList<fakeRecipe> searchRecipe( int time, String microwaveable, ArrayList<String> userInput,ArrayList<fakeRecipe> database) {
+	static ArrayList<Recipe> searchRecipe( int time, String microwaveable, ArrayList<String> userInput,ArrayList<Recipe> database) {
 
-		ArrayList<fakeRecipe> sendToMain = new ArrayList<fakeRecipe>();
+		ArrayList<Recipe> sendToMain = new ArrayList<Recipe>();
 		boolean validRecipe = true;
 		for(int i = 0; i < database.size(); i++)
 		{
