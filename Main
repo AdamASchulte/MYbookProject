@@ -4,52 +4,158 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class main extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
+
 	JFrame f;
-	JMenu options;
-	JMenuItem main, favorites, logout;
-	JPanel loginP, signupP, selectP, displayP, favoritesP;
-	JButton b, login, signup, createAccount;
-	JLabel l1, l2, selected, user, pass;
-	JTextField tf, username, usernameSignUp;
-	JPasswordField password, passwordSignUp;
+	JMenu main, profile, options;
+	JMenuItem home, search, favorites, customize, changePassword, logout;
+	JPanel homeP, loginP, signupP, selectP, displayP, favoritesP, customizeP, changePasswordP, selectProfileP,
+			displayProfileP, recipeTitleP, recipeDescriptionP;
+	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
+			nextRecipe, previousRecipe;
+	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9;
+	JLabel l1, l2, selected, user, pass, profilePic, displayName, welcome, mbhelp, homeButtons, currPassword,
+			newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
+			microwaveRequired;
+	JTextField tf, username, usernameSignUp, displayNameTF;
+	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF;
 	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
 			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
-			meat, corn, dressing, mustard, crackers;
-	boolean[] appliances;
+			meat, corn, dressing, mustard, crackers, searchAllRecipes;
+	String appliance;
 	boolean[] checked;
 	boolean mbDisplay = false;
 	boolean validLogin = false;
+	boolean searchAllRecipesB = false;
 	String checkedBox;
 	String[] ingredients;
+	int currUser, currRecipe;
+	ArrayList<String> displayNameLog = new ArrayList<String>();
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
-	ArrayList<String> userIngredients = new ArrayList<String>();
+	ArrayList<String> profilePicLog = new ArrayList<String>();
+	static ArrayList<String> userIngredients = new ArrayList<String>();
+	ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
 
 	main() {
 		f = new JFrame("MyBook");
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/images/MyBookLogo.png");
 		f.setIconImage(icon);
 
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("profiles.txt"));
+			String contentLine = br.readLine();
+			while (contentLine != null) {
+				displayNameLog.add(contentLine);
+				userLog.add(br.readLine());
+				passLog.add(br.readLine());
+				profilePicLog.add(br.readLine());
+				contentLine = br.readLine();
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Create Radio Buttons for Profile Picture Choices
+		p0 = new JRadioButton("User");
+		p0.setActionCommand("0");
+		p0.setSelected(true);
+		p1 = new JRadioButton("User 1");
+		p1.setActionCommand("1");
+		p2 = new JRadioButton("User 2");
+		p2.setActionCommand("2");
+		p3 = new JRadioButton("User 3");
+		p3.setActionCommand("3");
+		p4 = new JRadioButton("User 4");
+		p4.setActionCommand("4");
+		p5 = new JRadioButton("User 5");
+		p5.setActionCommand("5");
+		p6 = new JRadioButton("User 6");
+		p6.setActionCommand("6");
+		p7 = new JRadioButton("User 7");
+		p7.setActionCommand("7");
+		p8 = new JRadioButton("User 8");
+		p8.setActionCommand("8");
+		p9 = new JRadioButton("User 9");
+		p9.setActionCommand("9");
+
+		// Create ButtonGroup for Radio Buttons
+		ButtonGroup profiles = new ButtonGroup();
+		profiles.add(p0);
+		profiles.add(p1);
+		profiles.add(p2);
+		profiles.add(p3);
+		profiles.add(p4);
+		profiles.add(p5);
+		profiles.add(p6);
+		profiles.add(p7);
+		profiles.add(p8);
+		profiles.add(p9);
+		p0.addActionListener(this);
+		p1.addActionListener(this);
+		p2.addActionListener(this);
+		p3.addActionListener(this);
+		p4.addActionListener(this);
+		p5.addActionListener(this);
+		p6.addActionListener(this);
+		p7.addActionListener(this);
+		p8.addActionListener(this);
+		p9.addActionListener(this);
+
+		// Displaying Current Profile Picture
+		profilePic = new JLabel();
+		profilePic.setHorizontalAlignment(JLabel.CENTER);
+		profilePic.setVerticalAlignment(JLabel.CENTER);
+		profilePic.setVerticalTextPosition(JLabel.CENTER);
+		profilePic.setHorizontalTextPosition(JLabel.CENTER);
+		profilePic.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		profilePic.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0),
+				profilePic.getBorder()));
+		profilePic.setIcon(new ImageIcon("src/images/Profile0.png"));
+		profilePic.setText("");
+
 		// Menu Bar
 		JMenuBar mb = new JMenuBar();
+		main = new JMenu("Main");
+		profile = new JMenu("Profile");
 		options = new JMenu("Options");
-		main = new JMenuItem("Search");
+		home = new JMenuItem("Home");
+		search = new JMenuItem("Search");
 		favorites = new JMenuItem("Favorites");
+		customize = new JMenuItem("Customize");
+		changePassword = new JMenuItem("Change Password");
 		logout = new JMenuItem("Logout");
+		mb.add(main);
+		mb.add(profile);
 		mb.add(options);
-		options.add(main);
-		options.add(favorites);
+		main.add(home);
+		main.add(search);
+		main.add(favorites);
+		profile.add(customize);
+		profile.add(changePassword);
 		options.add(logout);
 		mb.setVisible(true);
 		f.setJMenuBar(mb);
-		main.addActionListener(this);
+		home.addActionListener(this);
+		search.addActionListener(this);
 		favorites.addActionListener(this);
+		customize.addActionListener(this);
+		changePassword.addActionListener(this);
 		logout.addActionListener(this);
 
 		// Panels
+		homeP = new JPanel();
+		homeP.setBounds(0, 0, 900, 650);
+		homeP.setBackground(Color.orange);
+		homeP.setLayout(null);
 		loginP = new JPanel();
 		loginP.setBounds(0, 0, 900, 650);
 		loginP.setBackground(Color.orange);
@@ -60,16 +166,28 @@ public class main extends JFrame implements ActionListener {
 		signupP.setLayout(null);
 		selectP = new JPanel();
 		selectP.setBounds(0, 0, 900, 650);
-		selectP.setBackground(Color.gray);
+		selectP.setBackground(Color.orange);
 		selectP.setLayout(null);
 		displayP = new JPanel();
 		displayP.setBounds(0, 0, 900, 650);
-		displayP.setBackground(Color.white);
+		displayP.setBackground(Color.orange);
 		displayP.setLayout(null);
+		recipeTitleP = new JPanel();
+		recipeDescriptionP = new JPanel();
 		favoritesP = new JPanel();
 		favoritesP.setBounds(0, 0, 900, 650);
-		favoritesP.setBackground(Color.green);
+		favoritesP.setBackground(Color.orange);
 		favoritesP.setLayout(null);
+		customizeP = new JPanel();
+		customizeP.setBounds(0, 0, 900, 650);
+		customizeP.setBackground(Color.orange);
+		customizeP.setLayout(null);
+		changePasswordP = new JPanel();
+		changePasswordP.setBounds(0, 0, 900, 650);
+		changePasswordP.setBackground(Color.orange);
+		changePasswordP.setLayout(null);
+		selectProfileP = new JPanel();
+		displayProfileP = new JPanel();
 
 		// Ingredients List
 		checked = new boolean[26];
@@ -107,7 +225,7 @@ public class main extends JFrame implements ActionListener {
 		tortillaChips.setBounds(450, 140, 112, 15);
 		beans = new JCheckBox("Beans");
 		beans.setBounds(450, 180, 112, 15);
-		egg = new JCheckBox("Eggs");
+		egg = new JCheckBox("Egg");
 		egg.setBounds(450, 220, 112, 15);
 		bacon = new JCheckBox("Bacon");
 		bacon.setBounds(450, 260, 112, 15);
@@ -130,18 +248,20 @@ public class main extends JFrame implements ActionListener {
 		crackers = new JCheckBox("Crackers");
 		crackers.setBounds(275, 340, 112, 15);
 
+		// Search All Recipes
+		searchAllRecipes = new JCheckBox("Include Recipes w/o All My Ingredients");
+		searchAllRecipes.setBounds(320, 407, 255, 15);
+
 		// Time
 		l1 = new JLabel("Time:");
 		l2 = new JLabel(); // Results of time input
 		selected = new JLabel(); // Results of selected ingredients
 		l1.setBounds(375, 415, 500, 200);
-		l2.setBounds(50, 100, 500, 200);
-		selected.setBounds(100, 200, 500, 200);
 		tf = new JTextField();
 		tf.setBounds(420, 507, 50, 20);
 
 		// Appliances
-		appliances = new boolean[1];
+		appliance = "false";
 		microwave = new JCheckBox("Microwave");
 		microwave.setBounds(140, 507, 90, 15);
 
@@ -181,6 +301,11 @@ public class main extends JFrame implements ActionListener {
 		createAccount.setBounds(375, 400, 150, 30);
 		createAccount.setBackground(Color.white);
 		createAccount.addActionListener(this);
+		back = new JButton("Back");
+		back.setBounds(375, 450, 150, 30);
+		back.setBackground(Color.white);
+		back.addActionListener(this);
+		signupP.add(back);
 		signupP.add(createAccount);
 		usernameSignUp = new JTextField("");
 		usernameSignUp.setBounds(350, 250, 200, 30);
@@ -192,9 +317,36 @@ public class main extends JFrame implements ActionListener {
 		passwordSignUp.setBounds(350, 330, 200, 30);
 		pass = new JLabel("Password:");
 		pass.setBounds(350, 300, 80, 30);
+		displayName = new JLabel("Display Name:");
+		displayName.setBounds(350, 140, 120, 30);
+		displayNameTF = new JTextField("");
+		displayNameTF.setBounds(350, 170, 200, 30);
+		signupP.add(displayName);
+		signupP.add(displayNameTF);
 		signupP.add(passwordSignUp);
 		signupP.add(pass);
 		signupP.setVisible(false);
+
+		// Panel Home
+		mbhelp = new JLabel("Press any of these buttons up here to navigate between tabs!");
+		mbhelp.setBounds(10, 10, 400, 30);
+		homeButtons = new JLabel("Or press a button down here to get started!");
+		homeButtons.setBounds(325, 200, 300, 30);
+		homeSearch = new JButton("Search Recipes");
+		homeSearch.setBounds(100, 300, 200, 60);
+		homeSearch.addActionListener(this);
+		homeFavorites = new JButton("Favorite Recipes");
+		homeFavorites.setBounds(350, 300, 200, 60);
+		homeFavorites.addActionListener(this);
+		homeCustomize = new JButton("Customize Profile");
+		homeCustomize.setBounds(600, 300, 200, 60);
+		homeCustomize.addActionListener(this);
+		homeP.add(homeSearch);
+		homeP.add(homeFavorites);
+		homeP.add(homeCustomize);
+		homeP.add(mbhelp);
+		homeP.add(homeButtons);
+		homeP.setVisible(false);
 
 		// Panel Select
 		selectP.add(b);
@@ -228,27 +380,118 @@ public class main extends JFrame implements ActionListener {
 		selectP.add(microwave);
 		selectP.add(l1);
 		selectP.add(tf);
+		selectP.add(searchAllRecipes);
 		selectP.setVisible(false);
 
 		// Panel Display
-		displayP.add(selected);
-		displayP.add(l2);
+		recipeTitleP.setBounds(115, 10, 650, 150);
+		recipeTitleP.setLayout(null);
+		recipeDescriptionP.setBounds(115, 200, 650, 400);
+		recipeDescriptionP.setLayout(null);
+		recipeTitle = new JLabel();
+		recipeTitle.setBounds(20, 20, 450, 30);
+		recipeTime = new JLabel();
+		recipeTime.setBounds(20, 100, 200, 30);
+		recipeLink = new JLabel();
+		recipeLink.setBounds(20, 180, 900, 30);
+		recipeIngredientList = new JLabel();
+		recipeIngredientList.setBounds(20, 260, 900, 30);
+		microwaveRequired = new JLabel();
+		nextRecipe = new JButton(">");
+		nextRecipe.setBounds(795, 300, 80, 80);
+		nextRecipe.setBackground(Color.gray);
+		nextRecipe.addActionListener(this);
+		previousRecipe = new JButton("<");
+		previousRecipe.setBounds(10, 300, 80, 80);
+		previousRecipe.setBackground(Color.gray);
+		previousRecipe.addActionListener(this);
+		displayP.add(nextRecipe);
+		displayP.add(previousRecipe);
+		l2.setBounds(10, 60, 900, 30);
+		selected.setBounds(10, 20, 900, 30);
+		microwaveRequired.setBounds(10, 100, 200, 30);
+		displayP.add(recipeTitleP);
+		displayP.add(recipeDescriptionP);
+		recipeTitleP.add(selected);
+		recipeTitleP.add(l2);
+		recipeTitleP.add(microwaveRequired);
+		recipeDescriptionP.add(recipeTitle);
+		recipeDescriptionP.add(recipeTime);
+		recipeDescriptionP.add(recipeLink);
+		recipeDescriptionP.add(recipeIngredientList);
 		displayP.setVisible(false);
 
 		// Panel Favorites
 		favoritesP.setVisible(false);
 
+		// Panel Customize
+		customizeP.setVisible(false);
+		customizeP.setLayout(new BoxLayout(customizeP, BoxLayout.PAGE_AXIS));
+		customizeP.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		selectProfileP.setLayout(new BoxLayout(selectProfileP, BoxLayout.PAGE_AXIS));
+		selectProfileP.setAlignmentX(Component.CENTER_ALIGNMENT);
+		selectProfileP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Select User"),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		displayProfileP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Current User"),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		displayProfileP.add(profilePic);
+		selectProfileP.add(p0);
+		selectProfileP.add(p1);
+		selectProfileP.add(p2);
+		selectProfileP.add(p3);
+		selectProfileP.add(p4);
+		selectProfileP.add(p5);
+		selectProfileP.add(p6);
+		selectProfileP.add(p7);
+		selectProfileP.add(p8);
+		customizeP.add(selectProfileP);
+		customizeP.add(displayProfileP);
+
+		// Panel Change Password
+		currPassword = new JLabel("Current Password:");
+		currPassword.setBounds(350, 140, 200, 30);
+		newPassword = new JLabel("New Password:");
+		newPassword.setBounds(350, 220, 200, 30);
+		confirmNewPassword = new JLabel("Confirm New Password:");
+		confirmNewPassword.setBounds(350, 300, 200, 30);
+		currPasswordPF = new JPasswordField();
+		currPasswordPF.setBounds(350, 170, 200, 30);
+		newPasswordPF = new JPasswordField();
+		newPasswordPF.setBounds(350, 250, 200, 30);
+		confirmNewPasswordPF = new JPasswordField();
+		confirmNewPasswordPF.setBounds(350, 330, 200, 30);
+		changePasswordB = new JButton("Change Password");
+		changePasswordB.setBounds(375, 400, 150, 30);
+		changePasswordB.setBackground(Color.white);
+		changePasswordB.addActionListener(this);
+		changePasswordP.add(currPassword);
+		changePasswordP.add(newPassword);
+		changePasswordP.add(confirmNewPassword);
+		changePasswordP.add(currPasswordPF);
+		changePasswordP.add(newPasswordPF);
+		changePasswordP.add(confirmNewPasswordPF);
+		changePasswordP.add(changePasswordB);
+		changePasswordP.setVisible(false);
+
 		// JFrame
 		f.add(loginP);
 		f.add(signupP);
+		f.add(homeP);
 		f.add(selectP);
 		f.add(displayP);
 		f.add(favoritesP);
+		f.add(customizeP);
+		f.add(changePasswordP);
 
 		// Buttons Selected
 		microwave.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				appliances[0] = (e.getStateChange() == 1 ? true : false);
+				appliance = (e.getStateChange() == 1 ? "true" : "false");
+			}
+		});
+		searchAllRecipes.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				searchAllRecipesB = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 		avocado.addItemListener(new ItemListener() {
@@ -390,59 +633,206 @@ public class main extends JFrame implements ActionListener {
 
 	// clickButton.exe
 	public void actionPerformed(ActionEvent e) {
+		// Load Selected Profile Picture
+		if (e.getSource() == p0 || e.getSource() == p1 || e.getSource() == p2 || e.getSource() == p3
+				|| e.getSource() == p4 || e.getSource() == p5 || e.getSource() == p6 || e.getSource() == p7
+				|| e.getSource() == p8 || e.getSource() == p9) {
+			profilePic.setIcon(new ImageIcon("src/images/Profile" + e.getActionCommand() + ".png"));
+			profilePicLog.set(currUser, e.getActionCommand());
+			try {
+				BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+				for (int i = 0; i < userLog.size(); i++) {
+					bw.write("" + displayNameLog.get(i));
+					bw.newLine();
+					bw.write("" + userLog.get(i));
+					bw.newLine();
+					bw.write("" + passLog.get(i));
+					bw.newLine();
+					bw.write("" + profilePicLog.get(i));
+					bw.newLine();
+				}
+				bw.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		// Next Recipe
+		if (e.getSource() == nextRecipe && validRecipes.size() > currRecipe + 1) {
+			currRecipe++;
+			recipeTitle.setText(validRecipes.get(currRecipe).getName());
+			recipeTime.setText("Time to Make: " + validRecipes.get(currRecipe).getTime() + " minutes");
+			recipeLink.setText(validRecipes.get(currRecipe).getLink());
+			recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
+			previousRecipe.setBackground(Color.green);
+			if(validRecipes.size() <= currRecipe + 1) {
+				nextRecipe.setBackground(Color.gray);
+			}
+		}
+
+		// Previous Recipe
+		if (e.getSource() == previousRecipe && currRecipe > 0) {
+			currRecipe--;
+			recipeTitle.setText(validRecipes.get(currRecipe).getName());
+			recipeTime.setText("Time to Make: " + validRecipes.get(currRecipe).getTime() + " minutes");
+			recipeLink.setText(validRecipes.get(currRecipe).getLink());
+			recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
+			nextRecipe.setBackground(Color.green);
+			if(currRecipe <= 0) {
+				previousRecipe.setBackground(Color.gray);
+			}
+		}
+
 		// Menu Selections
-		if (e.getSource() == main) {
+		if (e.getSource() == home) {
 			if (mbDisplay) {
+				homeP.setVisible(true);
+				selectP.setVisible(false);
+				displayP.setVisible(false);
+				favoritesP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+			}
+		}
+		if (e.getSource() == search) {
+			if (mbDisplay) {
+				homeP.setVisible(false);
 				selectP.setVisible(true);
 				displayP.setVisible(false);
 				favoritesP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
 			}
 		}
 		if (e.getSource() == favorites) {
 			if (mbDisplay) {
+				homeP.setVisible(false);
 				favoritesP.setVisible(true);
 				selectP.setVisible(false);
 				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+			}
+		}
+		if (e.getSource() == customize) {
+			if (mbDisplay) {
+				homeP.setVisible(false);
+				selectP.setVisible(false);
+				favoritesP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(true);
+				changePasswordP.setVisible(false);
+			}
+		}
+		if (e.getSource() == changePassword) {
+			if (mbDisplay) {
+				homeP.setVisible(false);
+				selectP.setVisible(false);
+				favoritesP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(true);
 			}
 		}
 		if (e.getSource() == logout) {
 			if (mbDisplay) {
+				homeP.setVisible(false);
 				favoritesP.setVisible(false);
 				selectP.setVisible(false);
 				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
 				loginP.setVisible(true);
 				username.setText("");
 				password.setText("");
+				mbDisplay = false;
 			}
+		}
+		if (e.getSource() == homeSearch) {
+			homeP.setVisible(false);
+			selectP.setVisible(true);
+		}
+		if (e.getSource() == homeFavorites) {
+			homeP.setVisible(false);
+			favoritesP.setVisible(true);
+		}
+		if (e.getSource() == homeCustomize) {
+			homeP.setVisible(false);
+			customizeP.setVisible(true);
 		}
 		if (e.getSource() == b) {
 			// Display Time Entered
+			int time = 60;
 			try {
 				String text = tf.getText();
 				if (text.equals(""))
 					l2.setText("No time was entered; displaying all recipes.");
 				else {
-					int time = Integer.parseInt(text);
+					time = Integer.parseInt(text);
 					l2.setText("Displaying recipes that can be made in " + time + " minutes or less.");
 				}
 			} catch (Exception ex) {
 				System.out.println(ex);
 			}
 
+			// Display Microwave Required
+			if (appliance.equals("true")) {
+				microwaveRequired.setText("Microwave Selected? Yes");
+			} else {
+				microwaveRequired.setText("Microwave Selected? No");
+			}
+
 			// Display Selected Ingredients
 			checkedBox = "Selected Ingredients: ";
+			for (int i = userIngredients.size(); i > 0; i--) {
+				userIngredients.remove(i - 1);
+			}
 			int firstIngredient = 0;
 			for (int i = 0; i < checked.length; i++) {
 				if (checked[i]) {
-					if (firstIngredient > 0)
+					if (firstIngredient > 0 && checkedBox.length() < 90)
 						checkedBox += ", ";
 					else
 						firstIngredient++;
-					checkedBox += ingredients[i];
+					if (checkedBox.length() < 90) {
+						checkedBox += ingredients[i];
+					}
 					userIngredients.add(ingredients[i]);
 				}
 			}
+			if (checkedBox.length() >= 90) {
+				checkedBox += ",...";
+			}
 			selected.setText(checkedBox);
+
+			Database holder = new Database();
+			holder.fillDatabase();
+			currRecipe = 0;
+			previousRecipe.setBackground(Color.gray);
+			for (int i = validRecipes.size(); i > 0; i--) {
+				validRecipes.remove(i - 1);
+			}
+			if (searchAllRecipesB) {
+				validRecipes = searchAllRecipe(time, appliance, userIngredients, holder.getRecipes());
+			} else {
+				validRecipes = searchRecipe(time, appliance, userIngredients, holder.getRecipes());
+			}
+			if (validRecipes.size() >= 1) {
+				recipeTitle.setText(validRecipes.get(currRecipe).getName());
+				recipeTime.setText("Time to Make: " + validRecipes.get(currRecipe).getTime() + " minutes");
+				recipeLink.setText(validRecipes.get(currRecipe).getLink());
+				recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
+			}
+			if (validRecipes.size() > 1) {
+				nextRecipe.setBackground(Color.green);
+			}
+			if (validRecipes.size() == 0) {
+				recipeTitle.setText("No Recipes Found");
+				recipeTime.setText("");
+				recipeLink.setText("");
+				recipeIngredientList.setText("");
+			}
 
 			// Switch Panes
 			selectP.setVisible(false);
@@ -454,18 +844,58 @@ public class main extends JFrame implements ActionListener {
 			String passStr = new String(password.getPassword());
 			for (int i = 0; i < userLog.size(); i++) {
 				if (userStr.equals(userLog.get(i))) {
-					if(passStr.equals(passLog.get(i))) {
+					if (passStr.equals(passLog.get(i))) {
 						validLogin = true;
-					}
-					else {
+						currUser = i;
+					} else {
 						i = userLog.size();
 					}
 				}
 			}
 			if (validLogin) {
-				selectP.setVisible(true);
+				homeP.setVisible(true);
 				loginP.setVisible(false);
 				mbDisplay = true;
+				welcome = new JLabel("Welcome, " + displayNameLog.get(currUser) + "!");
+				welcome.setBounds(400, 150, 120, 30);
+				homeP.add(welcome);
+				profilePic.setIcon(new ImageIcon("src/images/Profile" + profilePicLog.get(currUser) + ".png"));
+				switch (profilePicLog.get(currUser)) {
+				case "0":
+					p0.setSelected(true);
+					break;
+				case "1":
+					p1.setSelected(true);
+					break;
+				case "2":
+					p2.setSelected(true);
+					break;
+				case "3":
+					p3.setSelected(true);
+					break;
+				case "4":
+					p4.setSelected(true);
+					break;
+				case "5":
+					p5.setSelected(true);
+					break;
+				case "6":
+					p6.setSelected(true);
+					break;
+				case "7":
+					p7.setSelected(true);
+					break;
+				case "8":
+					p8.setSelected(true);
+					break;
+				case "9":
+					p9.setSelected(true);
+					break;
+				}
+				recipeTitle.setText("");
+				recipeTime.setText("");
+				recipeLink.setText("");
+				recipeIngredientList.setText("");
 			} else {
 				JOptionPane.showMessageDialog(f, "Username or password is incorrect.");
 			}
@@ -475,23 +905,263 @@ public class main extends JFrame implements ActionListener {
 			signupP.setVisible(true);
 			usernameSignUp.setText("");
 			passwordSignUp.setText("");
+			displayNameTF.setText("");
 		}
 		if (e.getSource() == createAccount) {
+			String displayNameStr = displayNameTF.getText();
 			String userStr = usernameSignUp.getText();
 			String passStr = new String(passwordSignUp.getPassword());
-			if (userStr.equals("") || passStr.equals("")) {
-				JOptionPane.showMessageDialog(f, "Username and Password must not be blank.");
+			if (displayNameStr.equals("")) {
+				JOptionPane.showMessageDialog(f, "Display Name must not be blank.");
+			} else if (userStr.equals("")) {
+				JOptionPane.showMessageDialog(f, "Username must not be blank.");
+			} else if (passStr.equals("")) {
+				JOptionPane.showMessageDialog(f, "Password must not be blank.");
+			} else if (userLog.contains(userStr)) {
+				JOptionPane.showMessageDialog(f, "Username already exists");
 			} else {
+				displayNameLog.add(displayNameStr);
 				userLog.add(userStr);
 				passLog.add(passStr);
+				profilePicLog.add("0");
 				signupP.setVisible(false);
 				loginP.setVisible(true);
 				JOptionPane.showMessageDialog(f, "Account has been created.");
+
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+					for (int i = 0; i < userLog.size(); i++) {
+						bw.write("" + displayNameLog.get(i));
+						bw.newLine();
+						bw.write("" + userLog.get(i));
+						bw.newLine();
+						bw.write("" + passLog.get(i));
+						bw.newLine();
+						bw.write("" + profilePicLog.get(i));
+						bw.newLine();
+					}
+					bw.close();
+				} catch (Exception exxx) {
+					exxx.printStackTrace();
+				}
+			}
+		}
+		if (e.getSource() == back) {
+			signupP.setVisible(false);
+			loginP.setVisible(true);
+		}
+
+		if (e.getSource() == changePasswordB) {
+			String currPassStr = new String(currPasswordPF.getPassword());
+			String newPassStr = new String(newPasswordPF.getPassword());
+			String confirmNewPassStr = new String(confirmNewPasswordPF.getPassword());
+			if (!currPassStr.equals(passLog.get(currUser))) {
+				JOptionPane.showMessageDialog(f, "Incorrect password for this account.");
+			} else if (newPassStr.equals(passLog.get(currUser))) {
+				JOptionPane.showMessageDialog(f, "New password cannot be the same as old password.");
+			} else if (!newPassStr.equals(confirmNewPassStr)) {
+				JOptionPane.showMessageDialog(f, "Please confirm your new password.");
+			} else {
+				passLog.set(currUser, confirmNewPassStr);
+				currPasswordPF.setText("");
+				newPasswordPF.setText("");
+				confirmNewPasswordPF.setText("");
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+					for (int i = 0; i < userLog.size(); i++) {
+						bw.write("" + displayNameLog.get(i));
+						bw.newLine();
+						bw.write("" + userLog.get(i));
+						bw.newLine();
+						bw.write("" + passLog.get(i));
+						bw.newLine();
+						bw.write("" + profilePicLog.get(i));
+						bw.newLine();
+					}
+					bw.close();
+				} catch (Exception exx) {
+					exx.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(f, "Password has been changed.");
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		new main();
+	}
+
+	static ArrayList<Recipe> searchRecipe(int time, String microwaveable, ArrayList<String> userInput,
+			ArrayList<Recipe> database) {
+
+		ArrayList<Recipe> sendToMain = new ArrayList<Recipe>();
+		for (int k = 0; k < userInput.size(); k++) {
+			userInput.set(k, userInput.get(k).toLowerCase());
+		}
+		for (int i = 0; i < database.size(); i++) {
+			boolean validRecipe = true;
+			if (!userInput.contains("turkey") && database.get(i).getIngredientList().contains("turkey")) {
+				validRecipe = false;
+			} else if (!userInput.contains("ham") && database.get(i).getIngredientList().contains("ham")) {
+				validRecipe = false;
+			} else if (!userInput.contains("avocado") && database.get(i).getIngredientList().contains("avocado")) {
+				validRecipe = false;
+			} else if (!userInput.contains("bread") && database.get(i).getIngredientList().contains("bread")) {
+				validRecipe = false;
+			} else if (!userInput.contains("butter") && database.get(i).getIngredientList().contains("butter")) {
+				validRecipe = false;
+			} else if (!userInput.contains("eggs") && database.get(i).getIngredientList().contains("eggs")) {
+				validRecipe = false;
+			} else if (!userInput.contains("cheese") && database.get(i).getIngredientList().contains("cheese")) {
+				validRecipe = false;
+			} else if (!userInput.contains("lettuce") && database.get(i).getIngredientList().contains("lettuce")) {
+				validRecipe = false;
+			} else if (!userInput.contains("tomato") && database.get(i).getIngredientList().contains("tomato")) {
+				validRecipe = false;
+			} else if (!userInput.contains("tortilla") && database.get(i).getIngredientList().contains("tortilla")) {
+				validRecipe = false;
+			} else if (!userInput.contains("cream cheese")
+					&& database.get(i).getIngredientList().contains("cream cheese")) {
+				validRecipe = false;
+			} else if (!userInput.contains("beans") && database.get(i).getIngredientList().contains("beans")) {
+				validRecipe = false;
+			} else if (!userInput.contains("potato") && database.get(i).getIngredientList().contains("potato")) {
+				validRecipe = false;
+			} else if (!userInput.contains("dressing") && database.get(i).getIngredientList().contains("dressing")) {
+				validRecipe = false;
+			} else if (!userInput.contains("mustard") && database.get(i).getIngredientList().contains("mustard")) {
+				validRecipe = false;
+			} else if (!userInput.contains("crackers") && database.get(i).getIngredientList().contains("crackers")) {
+				validRecipe = false;
+			} else if (!userInput.contains("corn") && database.get(i).getIngredientList().contains("corn")) {
+				validRecipe = false;
+			} else if (!userInput.contains("sour cream")
+					&& database.get(i).getIngredientList().contains("sour cream")) {
+				validRecipe = false;
+			} else if (!userInput.contains("english muffin")
+					&& database.get(i).getIngredientList().contains("english muffin")) {
+				validRecipe = false;
+			} else if (!userInput.contains("bacon") && database.get(i).getIngredientList().contains("bacon")) {
+				validRecipe = false;
+			} else if (!userInput.contains("refried beans")
+					&& database.get(i).getIngredientList().contains("refried beans")) {
+				validRecipe = false;
+			} else if (!userInput.contains("tuna") && database.get(i).getIngredientList().contains("tuna")) {
+				validRecipe = false;
+			} else if (!userInput.contains("hash brown")
+					&& database.get(i).getIngredientList().contains("hash brown")) {
+				validRecipe = false;
+			} else if (!userInput.contains("meat") && database.get(i).getIngredientList().contains("meat")) {
+				validRecipe = false;
+			} else if (!userInput.contains("tortilla chips")
+					&& database.get(i).getIngredientList().contains("tortilla chips")) {
+				validRecipe = false;
+			} else if (!userInput.contains("mayo") && database.get(i).getIngredientList().contains("mayo")) {
+				validRecipe = false;
+			}
+			if (validRecipe) {
+				sendToMain.add(database.get(i));
+			}
+		}
+
+		for (int j = 0; j < sendToMain.size(); j++) {
+			if (sendToMain.get(j).getTime() > time) {
+				sendToMain.remove(j);
+			}
+		}
+		for (int k = 0; k < sendToMain.size(); k++) {
+			if (microwaveable.equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+				sendToMain.remove(k);
+			}
+		}
+
+		return sendToMain;
+	}
+
+	static ArrayList<Recipe> searchAllRecipe(int time, String microwaveable, ArrayList<String> userInput,
+			ArrayList<Recipe> database) {
+
+		ArrayList<Recipe> sendToMain = new ArrayList<Recipe>();
+		for (int k = 0; k < userInput.size(); k++) {
+			userInput.set(k, userInput.get(k).toLowerCase());
+		}
+		for (int i = 0; i < database.size(); i++) {
+			boolean validRecipe = false;
+			if (userInput.contains("turkey") && database.get(i).getIngredientList().contains("turkey")) {
+				validRecipe = true;
+			} else if (userInput.contains("ham") && database.get(i).getIngredientList().contains("ham")) {
+				validRecipe = true;
+			} else if (userInput.contains("avocado") && database.get(i).getIngredientList().contains("avocado")) {
+				validRecipe = true;
+			} else if (userInput.contains("bread") && database.get(i).getIngredientList().contains("bread")) {
+				validRecipe = true;
+			} else if (userInput.contains("butter") && database.get(i).getIngredientList().contains("butter")) {
+				validRecipe = true;
+			} else if (userInput.contains("eggs") && database.get(i).getIngredientList().contains("eggs")) {
+				validRecipe = true;
+			} else if (userInput.contains("cheese") && database.get(i).getIngredientList().contains("cheese")) {
+				validRecipe = true;
+			} else if (userInput.contains("lettuce") && database.get(i).getIngredientList().contains("lettuce")) {
+				validRecipe = true;
+			} else if (userInput.contains("tomato") && database.get(i).getIngredientList().contains("tomato")) {
+				validRecipe = true;
+			} else if (userInput.contains("tortilla") && database.get(i).getIngredientList().contains("tortilla")) {
+				validRecipe = true;
+			} else if (userInput.contains("cream cheese")
+					&& database.get(i).getIngredientList().contains("cream cheese")) {
+				validRecipe = true;
+			} else if (userInput.contains("beans") && database.get(i).getIngredientList().contains("beans")) {
+				validRecipe = true;
+			} else if (userInput.contains("potato") && database.get(i).getIngredientList().contains("potato")) {
+				validRecipe = true;
+			} else if (userInput.contains("dressing") && database.get(i).getIngredientList().contains("dressing")) {
+				validRecipe = true;
+			} else if (userInput.contains("mustard") && database.get(i).getIngredientList().contains("mustard")) {
+				validRecipe = true;
+			} else if (userInput.contains("crackers") && database.get(i).getIngredientList().contains("crackers")) {
+				validRecipe = true;
+			} else if (userInput.contains("corn") && database.get(i).getIngredientList().contains("corn")) {
+				validRecipe = true;
+			} else if (userInput.contains("sour cream") && database.get(i).getIngredientList().contains("sour cream")) {
+				validRecipe = true;
+			} else if (userInput.contains("english muffin")
+					&& database.get(i).getIngredientList().contains("english muffin")) {
+				validRecipe = true;
+			} else if (userInput.contains("bacon") && database.get(i).getIngredientList().contains("bacon")) {
+				validRecipe = true;
+			} else if (userInput.contains("refried beans")
+					&& database.get(i).getIngredientList().contains("refried beans")) {
+				validRecipe = true;
+			} else if (userInput.contains("tuna") && database.get(i).getIngredientList().contains("tuna")) {
+				validRecipe = true;
+			} else if (userInput.contains("hash brown") && database.get(i).getIngredientList().contains("hash brown")) {
+				validRecipe = true;
+			} else if (userInput.contains("meat") && database.get(i).getIngredientList().contains("meat")) {
+				validRecipe = true;
+			} else if (userInput.contains("tortilla chips")
+					&& database.get(i).getIngredientList().contains("tortilla chips")) {
+				validRecipe = true;
+			} else if (userInput.contains("mayo") && database.get(i).getIngredientList().contains("mayo")) {
+				validRecipe = true;
+			}
+			if (validRecipe) {
+				sendToMain.add(database.get(i));
+			}
+		}
+
+		for (int j = 0; j < sendToMain.size(); j++) {
+			if (sendToMain.get(j).getTime() > time) {
+				sendToMain.remove(j);
+			}
+		}
+		for (int k = 0; k < sendToMain.size(); k++) {
+			if (microwaveable.equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+				sendToMain.remove(k);
+			}
+		}
+
+		return sendToMain;
 	}
 }
