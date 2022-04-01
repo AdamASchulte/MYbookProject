@@ -1,44 +1,60 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Database {
-   private ArrayList<Recipe> recipeList = new ArrayList<>();
-	
+
+	private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+
 	public Database() {
-		
+
 	}
-	
-	public void fillDatabase()
-	{
-		
+
+	public void fillDatabase() {
+		Recipe myRecipe = new Recipe();
 		try {
-			File recipeFile = new File("RecipeDatabase.txt");
-			Scanner reader = new Scanner(recipeFile);
-			while(reader.hasNextLine())
-			{
-				int i = 1;
-				String[] bruh = reader.nextLine().split(",");
-				System.out.println(bruh);
-				Recipe newRecipe = new Recipe(bruh);
-				recipeList.set(i, newRecipe);
+			File bruh = new File("RecipeDatabase.txt");
+			Scanner reader = new Scanner(bruh);
+
+			while (reader.hasNextLine()) {
+				int i = 0;
+				String[] recipes = reader.nextLine().split(",");
+				for (int k = 0; k < recipes.length; k++) {
+					recipes[k] = recipes[k].trim();
+				}
+				myRecipe = new Recipe(recipes);
+				recipeList.add(myRecipe);
 				i++;
 			}
-			reader.close();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("did not work");
+
 		}
-		catch(FileNotFoundException e){
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-		
-		/*try {
-			BufferedReader br = new BufferedReader (new FileReader("RecipeDatabase.txt"));
-			for(int i = 0; i < 20; i++)
-			{
-				String[] bruh = br.readLine().split(",");
-				Recipe newRecipe = new Recipe(bruh);
-				System.out.print(bruh);
-				recipeList.set(i, newRecipe);
+		return;
+	}
+
+	public void printInfo() {
+		for (int i = 0; i < 20; i++) {
+			Recipe temp = new Recipe();
+			temp = recipeList.get(i);
+			System.out.println(temp.getName());
+			System.out.println(temp.getTime());
+			System.out.println(temp.getMicrowaveable());
+			ArrayList<String> bruh;
+			bruh = temp.getIngredientList();
+			int x = bruh.size();
+			for (int j = 0; j < x; j++) {
+				System.out.println(bruh.get(j));
 			}
 		}
-		catch (Exception e){
-			System.out.print("did not work");
-		}*/
+
+	}
+
+	public ArrayList<Recipe> getRecipes() {
+		return recipeList;
 	}
 }
