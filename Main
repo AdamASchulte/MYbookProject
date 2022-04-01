@@ -14,12 +14,12 @@ public class main extends JFrame implements ActionListener {
 
 	JFrame f;
 	JMenu main, profile, options;
-	JMenuItem home, search, favorites, customize, changePassword, logout;
-	JPanel homeP, loginP, signupP, selectP, displayP, favoritesP, customizeP, changePasswordP, selectProfileP,
-			displayProfileP, recipeTitleP, recipeDescriptionP;
+	JMenuItem home, search, favorites, customize, changePassword, changeDisplayColor, logout;
+	JPanel homeP, loginP, signupP, selectP, displayP, favoritesP, customizeP, changeDisplayP, selectDisplayP,
+			changePasswordP, selectProfileP, displayProfileP, recipeTitleP, recipeDescriptionP;
 	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
 			nextRecipe, previousRecipe;
-	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9;
+	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9;
 	JLabel l1, l2, selected, user, pass, profilePic, displayName, welcome, mbhelp, homeButtons, currPassword,
 			newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
 			microwaveRequired;
@@ -40,6 +40,7 @@ public class main extends JFrame implements ActionListener {
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
 	ArrayList<String> profilePicLog = new ArrayList<String>();
+	ArrayList<String> displayColorLog = new ArrayList<String>();
 	static ArrayList<String> userIngredients = new ArrayList<String>();
 	ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
 
@@ -56,6 +57,7 @@ public class main extends JFrame implements ActionListener {
 				userLog.add(br.readLine());
 				passLog.add(br.readLine());
 				profilePicLog.add(br.readLine());
+				displayColorLog.add(br.readLine());
 				contentLine = br.readLine();
 			}
 			br.close();
@@ -86,7 +88,30 @@ public class main extends JFrame implements ActionListener {
 		p9 = new JRadioButton("User 9");
 		p9.setActionCommand("9");
 
-		// Create ButtonGroup for Radio Buttons
+		// Create Radio Buttons for Display Choices
+		d0 = new JRadioButton("Orange");
+		d0.setActionCommand("0");
+		d0.setSelected(true);
+		d1 = new JRadioButton("Red");
+		d1.setActionCommand("1");
+		d2 = new JRadioButton("Blue");
+		d2.setActionCommand("2");
+		d3 = new JRadioButton("Yellow");
+		d3.setActionCommand("3");
+		d4 = new JRadioButton("Green");
+		d4.setActionCommand("4");
+		d5 = new JRadioButton("Purple");
+		d5.setActionCommand("5");
+		d6 = new JRadioButton("Pink");
+		d6.setActionCommand("6");
+		d7 = new JRadioButton("Gray");
+		d7.setActionCommand("7");
+		d8 = new JRadioButton("White");
+		d8.setActionCommand("8");
+		d9 = new JRadioButton("Black");
+		d9.setActionCommand("9");
+
+		// Create ButtonGroup for Profile Radio Buttons
 		ButtonGroup profiles = new ButtonGroup();
 		profiles.add(p0);
 		profiles.add(p1);
@@ -108,6 +133,29 @@ public class main extends JFrame implements ActionListener {
 		p7.addActionListener(this);
 		p8.addActionListener(this);
 		p9.addActionListener(this);
+
+		// Create ButtonGroup for Display Radio Buttons
+		ButtonGroup displays = new ButtonGroup();
+		displays.add(d0);
+		displays.add(d1);
+		displays.add(d2);
+		displays.add(d3);
+		displays.add(d4);
+		displays.add(d5);
+		displays.add(d6);
+		displays.add(d7);
+		displays.add(d8);
+		displays.add(d9);
+		d0.addActionListener(this);
+		d1.addActionListener(this);
+		d2.addActionListener(this);
+		d3.addActionListener(this);
+		d4.addActionListener(this);
+		d5.addActionListener(this);
+		d6.addActionListener(this);
+		d7.addActionListener(this);
+		d8.addActionListener(this);
+		d9.addActionListener(this);
 
 		// Displaying Current Profile Picture
 		profilePic = new JLabel();
@@ -132,6 +180,7 @@ public class main extends JFrame implements ActionListener {
 		favorites = new JMenuItem("Favorites");
 		customize = new JMenuItem("Customize");
 		changePassword = new JMenuItem("Change Password");
+		changeDisplayColor = new JMenuItem("Change Display");
 		logout = new JMenuItem("Logout");
 		mb.add(main);
 		mb.add(profile);
@@ -141,6 +190,7 @@ public class main extends JFrame implements ActionListener {
 		main.add(favorites);
 		profile.add(customize);
 		profile.add(changePassword);
+		profile.add(changeDisplayColor);
 		options.add(logout);
 		mb.setVisible(true);
 		f.setJMenuBar(mb);
@@ -149,6 +199,7 @@ public class main extends JFrame implements ActionListener {
 		favorites.addActionListener(this);
 		customize.addActionListener(this);
 		changePassword.addActionListener(this);
+		changeDisplayColor.addActionListener(this);
 		logout.addActionListener(this);
 
 		// Panels
@@ -182,6 +233,11 @@ public class main extends JFrame implements ActionListener {
 		customizeP.setBounds(0, 0, 900, 650);
 		customizeP.setBackground(Color.orange);
 		customizeP.setLayout(null);
+		changeDisplayP = new JPanel();
+		changeDisplayP.setBounds(0, 0, 900, 650);
+		changeDisplayP.setBackground(Color.orange);
+		changeDisplayP.setLayout(null);
+		selectDisplayP = new JPanel();
 		changePasswordP = new JPanel();
 		changePasswordP.setBounds(0, 0, 900, 650);
 		changePasswordP.setBackground(Color.orange);
@@ -444,8 +500,29 @@ public class main extends JFrame implements ActionListener {
 		selectProfileP.add(p6);
 		selectProfileP.add(p7);
 		selectProfileP.add(p8);
+		selectProfileP.add(p9);
 		customizeP.add(selectProfileP);
 		customizeP.add(displayProfileP);
+
+		// Panel Change Display
+		changeDisplayP.setVisible(false);
+		changeDisplayP.setLayout(new BoxLayout(changeDisplayP, BoxLayout.PAGE_AXIS));
+		changeDisplayP.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		selectDisplayP.setLayout(new BoxLayout(selectDisplayP, BoxLayout.PAGE_AXIS));
+		selectDisplayP.setAlignmentX(Component.CENTER_ALIGNMENT);
+		selectDisplayP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Select Display"),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		selectDisplayP.add(d0);
+		selectDisplayP.add(d1);
+		selectDisplayP.add(d2);
+		selectDisplayP.add(d3);
+		selectDisplayP.add(d4);
+		selectDisplayP.add(d5);
+		selectDisplayP.add(d6);
+		selectDisplayP.add(d7);
+		selectDisplayP.add(d8);
+		selectDisplayP.add(d9);
+		changeDisplayP.add(selectDisplayP);
 
 		// Panel Change Password
 		currPassword = new JLabel("Current Password:");
@@ -481,6 +558,7 @@ public class main extends JFrame implements ActionListener {
 		f.add(displayP);
 		f.add(favoritesP);
 		f.add(customizeP);
+		f.add(changeDisplayP);
 		f.add(changePasswordP);
 
 		// Buttons Selected
@@ -651,6 +729,126 @@ public class main extends JFrame implements ActionListener {
 					bw.newLine();
 					bw.write("" + profilePicLog.get(i));
 					bw.newLine();
+					bw.write("" + displayColorLog.get(i));
+					bw.newLine();
+				}
+				bw.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		// Load Selected Display Color
+		if (e.getSource() == d0 || e.getSource() == d1 || e.getSource() == d2 || e.getSource() == d3
+				|| e.getSource() == d4 || e.getSource() == d5 || e.getSource() == d6 || e.getSource() == d7
+				|| e.getSource() == d8 || e.getSource() == d9) {
+			switch (e.getActionCommand()) {
+			case "0":
+				homeP.setBackground(Color.orange);
+				selectP.setBackground(Color.orange);
+				displayP.setBackground(Color.orange);
+				favoritesP.setBackground(Color.orange);
+				customizeP.setBackground(Color.orange);
+				changePasswordP.setBackground(Color.orange);
+				changeDisplayP.setBackground(Color.orange);
+				break;
+			case "1":
+				homeP.setBackground(Color.red);
+				selectP.setBackground(Color.red);
+				displayP.setBackground(Color.red);
+				favoritesP.setBackground(Color.red);
+				customizeP.setBackground(Color.red);
+				changePasswordP.setBackground(Color.red);
+				changeDisplayP.setBackground(Color.red);
+				break;
+			case "2":
+				homeP.setBackground(Color.blue);
+				selectP.setBackground(Color.blue);
+				displayP.setBackground(Color.blue);
+				favoritesP.setBackground(Color.blue);
+				customizeP.setBackground(Color.blue);
+				changePasswordP.setBackground(Color.blue);
+				changeDisplayP.setBackground(Color.blue);
+				break;
+			case "3":
+				homeP.setBackground(Color.yellow);
+				selectP.setBackground(Color.yellow);
+				displayP.setBackground(Color.yellow);
+				favoritesP.setBackground(Color.yellow);
+				customizeP.setBackground(Color.yellow);
+				changePasswordP.setBackground(Color.yellow);
+				changeDisplayP.setBackground(Color.yellow);
+				break;
+			case "4":
+				homeP.setBackground(Color.green);
+				selectP.setBackground(Color.green);
+				displayP.setBackground(Color.green);
+				favoritesP.setBackground(Color.green);
+				customizeP.setBackground(Color.green);
+				changePasswordP.setBackground(Color.green);
+				changeDisplayP.setBackground(Color.green);
+				break;
+			case "5":
+				homeP.setBackground(Color.magenta);
+				selectP.setBackground(Color.magenta);
+				displayP.setBackground(Color.magenta);
+				favoritesP.setBackground(Color.magenta);
+				customizeP.setBackground(Color.magenta);
+				changePasswordP.setBackground(Color.magenta);
+				changeDisplayP.setBackground(Color.magenta);
+				break;
+			case "6":
+				homeP.setBackground(Color.pink);
+				selectP.setBackground(Color.pink);
+				displayP.setBackground(Color.pink);
+				favoritesP.setBackground(Color.pink);
+				customizeP.setBackground(Color.pink);
+				changePasswordP.setBackground(Color.pink);
+				changeDisplayP.setBackground(Color.pink);
+				break;
+			case "7":
+				homeP.setBackground(Color.gray);
+				selectP.setBackground(Color.gray);
+				displayP.setBackground(Color.gray);
+				favoritesP.setBackground(Color.gray);
+				customizeP.setBackground(Color.gray);
+				changePasswordP.setBackground(Color.gray);
+				changeDisplayP.setBackground(Color.gray);
+				break;
+			case "8":
+				homeP.setBackground(Color.white);
+				selectP.setBackground(Color.white);
+				displayP.setBackground(Color.white);
+				favoritesP.setBackground(Color.white);
+				customizeP.setBackground(Color.white);
+				changePasswordP.setBackground(Color.white);
+				changeDisplayP.setBackground(Color.white);
+				break;
+			case "9":
+				homeP.setBackground(Color.black);
+				selectP.setBackground(Color.black);
+				displayP.setBackground(Color.black);
+				favoritesP.setBackground(Color.black);
+				customizeP.setBackground(Color.black);
+				changePasswordP.setBackground(Color.black);
+				changeDisplayP.setBackground(Color.black);
+				break;
+			}
+			displayColorLog.set(currUser, e.getActionCommand());
+			try {
+				BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+				for (int i = 0; i < userLog.size(); i++) {
+					bw.write("" + displayNameLog.get(i));
+					bw.newLine();
+					bw.write("" + userLog.get(i));
+					bw.newLine();
+					bw.write("" + passLog.get(i));
+					bw.newLine();
+					bw.write("" + profilePicLog.get(i));
+					bw.newLine();
+					bw.write("" + displayColorLog.get(i));
+					bw.newLine();
 				}
 				bw.close();
 			} catch (Exception ex) {
@@ -666,7 +864,7 @@ public class main extends JFrame implements ActionListener {
 			recipeLink.setText(validRecipes.get(currRecipe).getLink());
 			recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
 			previousRecipe.setBackground(Color.green);
-			if(validRecipes.size() <= currRecipe + 1) {
+			if (validRecipes.size() <= currRecipe + 1) {
 				nextRecipe.setBackground(Color.gray);
 			}
 		}
@@ -679,7 +877,7 @@ public class main extends JFrame implements ActionListener {
 			recipeLink.setText(validRecipes.get(currRecipe).getLink());
 			recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
 			nextRecipe.setBackground(Color.green);
-			if(currRecipe <= 0) {
+			if (currRecipe <= 0) {
 				previousRecipe.setBackground(Color.gray);
 			}
 		}
@@ -693,6 +891,7 @@ public class main extends JFrame implements ActionListener {
 				favoritesP.setVisible(false);
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
 			}
 		}
 		if (e.getSource() == search) {
@@ -703,6 +902,7 @@ public class main extends JFrame implements ActionListener {
 				favoritesP.setVisible(false);
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
 			}
 		}
 		if (e.getSource() == favorites) {
@@ -713,6 +913,7 @@ public class main extends JFrame implements ActionListener {
 				displayP.setVisible(false);
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
 			}
 		}
 		if (e.getSource() == customize) {
@@ -723,6 +924,7 @@ public class main extends JFrame implements ActionListener {
 				displayP.setVisible(false);
 				customizeP.setVisible(true);
 				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
 			}
 		}
 		if (e.getSource() == changePassword) {
@@ -733,6 +935,18 @@ public class main extends JFrame implements ActionListener {
 				displayP.setVisible(false);
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(true);
+				changeDisplayP.setVisible(false);
+			}
+		}
+		if (e.getSource() == changeDisplayColor) {
+			if(mbDisplay) {
+				homeP.setVisible(false);
+				selectP.setVisible(false);
+				favoritesP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(true);
 			}
 		}
 		if (e.getSource() == logout) {
@@ -743,10 +957,12 @@ public class main extends JFrame implements ActionListener {
 				displayP.setVisible(false);
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
 				loginP.setVisible(true);
 				username.setText("");
 				password.setText("");
 				mbDisplay = false;
+				welcome.setText("");
 			}
 		}
 		if (e.getSource() == homeSearch) {
@@ -856,7 +1072,8 @@ public class main extends JFrame implements ActionListener {
 				homeP.setVisible(true);
 				loginP.setVisible(false);
 				mbDisplay = true;
-				welcome = new JLabel("Welcome, " + displayNameLog.get(currUser) + "!");
+				welcome = new JLabel();
+				welcome.setText("Welcome, " + displayNameLog.get(currUser) + "!");
 				welcome.setBounds(400, 150, 120, 30);
 				homeP.add(welcome);
 				profilePic.setIcon(new ImageIcon("src/images/Profile" + profilePicLog.get(currUser) + ".png"));
@@ -892,6 +1109,130 @@ public class main extends JFrame implements ActionListener {
 					p9.setSelected(true);
 					break;
 				}
+				switch (displayColorLog.get(currUser)) {
+				case "0":
+					d0.setSelected(true);
+					break;
+				case "1":
+					d1.setSelected(true);
+					break;
+				case "2":
+					d2.setSelected(true);
+					break;
+				case "3":
+					d3.setSelected(true);
+					break;
+				case "4":
+					d4.setSelected(true);
+					break;
+				case "5":
+					d5.setSelected(true);
+					break;
+				case "6":
+					d6.setSelected(true);
+					break;
+				case "7":
+					d7.setSelected(true);
+					break;
+				case "8":
+					d8.setSelected(true);
+					break;
+				case "9":
+					d9.setSelected(true);
+					break;
+				}
+				switch (displayColorLog.get(currUser)) {
+				case "0":
+					homeP.setBackground(Color.orange);
+					selectP.setBackground(Color.orange);
+					displayP.setBackground(Color.orange);
+					favoritesP.setBackground(Color.orange);
+					customizeP.setBackground(Color.orange);
+					changePasswordP.setBackground(Color.orange);
+					changeDisplayP.setBackground(Color.orange);
+					break;
+				case "1":
+					homeP.setBackground(Color.red);
+					selectP.setBackground(Color.red);
+					displayP.setBackground(Color.red);
+					favoritesP.setBackground(Color.red);
+					customizeP.setBackground(Color.red);
+					changePasswordP.setBackground(Color.red);
+					changeDisplayP.setBackground(Color.red);
+					break;
+				case "2":
+					homeP.setBackground(Color.blue);
+					selectP.setBackground(Color.blue);
+					displayP.setBackground(Color.blue);
+					favoritesP.setBackground(Color.blue);
+					customizeP.setBackground(Color.blue);
+					changePasswordP.setBackground(Color.blue);
+					changeDisplayP.setBackground(Color.blue);
+					break;
+				case "3":
+					homeP.setBackground(Color.yellow);
+					selectP.setBackground(Color.yellow);
+					displayP.setBackground(Color.yellow);
+					favoritesP.setBackground(Color.yellow);
+					customizeP.setBackground(Color.yellow);
+					changePasswordP.setBackground(Color.yellow);
+					changeDisplayP.setBackground(Color.yellow);
+					break;
+				case "4":
+					homeP.setBackground(Color.green);
+					selectP.setBackground(Color.green);
+					displayP.setBackground(Color.green);
+					favoritesP.setBackground(Color.green);
+					customizeP.setBackground(Color.green);
+					changePasswordP.setBackground(Color.green);
+					changeDisplayP.setBackground(Color.green);
+					break;
+				case "5":
+					homeP.setBackground(Color.magenta);
+					selectP.setBackground(Color.magenta);
+					displayP.setBackground(Color.magenta);
+					favoritesP.setBackground(Color.magenta);
+					customizeP.setBackground(Color.magenta);
+					changePasswordP.setBackground(Color.magenta);
+					changeDisplayP.setBackground(Color.magenta);
+					break;
+				case "6":
+					homeP.setBackground(Color.pink);
+					selectP.setBackground(Color.pink);
+					displayP.setBackground(Color.pink);
+					favoritesP.setBackground(Color.pink);
+					customizeP.setBackground(Color.pink);
+					changePasswordP.setBackground(Color.pink);
+					changeDisplayP.setBackground(Color.pink);
+					break;
+				case "7":
+					homeP.setBackground(Color.gray);
+					selectP.setBackground(Color.gray);
+					displayP.setBackground(Color.gray);
+					favoritesP.setBackground(Color.gray);
+					customizeP.setBackground(Color.gray);
+					changePasswordP.setBackground(Color.gray);
+					changeDisplayP.setBackground(Color.gray);
+					break;
+				case "8":
+					homeP.setBackground(Color.white);
+					selectP.setBackground(Color.white);
+					displayP.setBackground(Color.white);
+					favoritesP.setBackground(Color.white);
+					customizeP.setBackground(Color.white);
+					changePasswordP.setBackground(Color.white);
+					changeDisplayP.setBackground(Color.white);
+					break;
+				case "9":
+					homeP.setBackground(Color.black);
+					selectP.setBackground(Color.black);
+					displayP.setBackground(Color.black);
+					favoritesP.setBackground(Color.black);
+					customizeP.setBackground(Color.black);
+					changePasswordP.setBackground(Color.black);
+					changeDisplayP.setBackground(Color.black);
+					break;
+				}
 				recipeTitle.setText("");
 				recipeTime.setText("");
 				recipeLink.setText("");
@@ -924,6 +1265,7 @@ public class main extends JFrame implements ActionListener {
 				userLog.add(userStr);
 				passLog.add(passStr);
 				profilePicLog.add("0");
+				displayColorLog.add("0");
 				signupP.setVisible(false);
 				loginP.setVisible(true);
 				JOptionPane.showMessageDialog(f, "Account has been created.");
@@ -940,10 +1282,12 @@ public class main extends JFrame implements ActionListener {
 						bw.newLine();
 						bw.write("" + profilePicLog.get(i));
 						bw.newLine();
+						bw.write("" + displayColorLog.get(i));
+						bw.newLine();
 					}
 					bw.close();
-				} catch (Exception exxx) {
-					exxx.printStackTrace();
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 			}
 		}
@@ -979,10 +1323,12 @@ public class main extends JFrame implements ActionListener {
 						bw.newLine();
 						bw.write("" + profilePicLog.get(i));
 						bw.newLine();
+						bw.write("" + displayColorLog.get(i));
+						bw.newLine();
 					}
 					bw.close();
-				} catch (Exception exx) {
-					exx.printStackTrace();
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 				JOptionPane.showMessageDialog(f, "Password has been changed.");
 			}
