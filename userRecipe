@@ -1,0 +1,22 @@
+package main;
+
+import java.util.ArrayList;
+public class userRecipe {
+	private ArrayList<Recipe> userRecipeList;
+
+	public userRecipe()
+	{
+		
+	}
+	
+	public void addRecipeInfo(String info[])
+	{
+		Recipe newRecipe = new Recipe(info);
+		userRecipeList.add(newRecipe);
+	}
+	
+	public ArrayList<Recipe> getUserRecipe()
+	{
+		return userRecipeList;
+	}
+}
