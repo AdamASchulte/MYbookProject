@@ -1,6 +1,8 @@
 package main;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,32 +17,51 @@ public class main extends JFrame implements ActionListener {
 	JFrame f;
 	JMenu main, profile, options;
 	JMenuItem home, search, favorites, customize, changePassword, changeDisplayColor, logout;
-	JPanel homeP, loginP, signupP, selectP, displayP, favoritesP, customizeP, changeDisplayP, selectDisplayP,
-			changePasswordP, selectProfileP, displayProfileP, recipeTitleP, recipeDescriptionP;
+	JPanel homeP, homeDisplayP, loginP, loginButtonsP, signupP, signupButtonsP, selectP, displayP, favoritesP,
+			customizeP, changeDisplayP, selectDisplayP, changePasswordP, selectProfileP, displayProfileP, recipeTitleP,
+			recipeDescriptionP, securityP, securityQuestionsP, forgotPasswordP, forgotPasswordQuestionsP,
+			forgotPasswordUsernameP, forgotPasswordPasswordP;
 	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
-			nextRecipe, previousRecipe;
+			nextRecipe, previousRecipe, submitAnswers, forgotPassword, submitUser, answerQuestions, fChangePasswordB;
 	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9;
-	JLabel l1, l2, selected, user, pass, profilePic, displayName, welcome, mbhelp, homeButtons, currPassword,
-			newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
-			microwaveRequired;
-	JTextField tf, username, usernameSignUp, displayNameTF;
-	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF;
+	JLabel l1, l2, selected, user, pass, profilePic, logo, logoName, displayName, welcome, mbhelp, homeButtons,
+			currPassword, newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
+			microwaveRequired, fquestion1, fquestion2, fquestion3, fUser, fCurrPassword, fNewPassword,
+			fConfirmNewPassword;
+	JTextField tf, username, usernameSignUp, displayNameTF, question1TF, question2TF, question3TF, fquestion1TF,
+			fquestion2TF, fquestion3TF, fUsername;
+	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF, fCurrPasswordPF,
+			fNewPasswordPF, fConfirmNewPasswordPF;
 	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
 			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
 			meat, corn, dressing, mustard, crackers, searchAllRecipes;
+	JComboBox<String> q1, q2, q3;
+	Font logoFont = new Font("Comic Sans MS", Font.PLAIN, 48);
 	String appliance;
 	boolean[] checked;
 	boolean mbDisplay = false;
 	boolean validLogin = false;
 	boolean searchAllRecipesB = false;
 	String checkedBox;
+	String question1[] = { "What is your favorite book?", "What is your favorite movie?",
+			"What is your favorite TV show?" };
+	String question2[] = { "What is your favorite drink?", "What city were you born in?",
+			"What is your favorite food?" };
+	String question3[] = { "What is your mother's maiden name?", "What is your favorite color?",
+			"What was your first pet's name?" };
 	String[] ingredients;
-	int currUser, currRecipe;
+	int currUser, currRecipe, fCurrUser;
 	ArrayList<String> displayNameLog = new ArrayList<String>();
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
 	ArrayList<String> profilePicLog = new ArrayList<String>();
 	ArrayList<String> displayColorLog = new ArrayList<String>();
+	ArrayList<String> question1Log = new ArrayList<String>();
+	ArrayList<String> question2Log = new ArrayList<String>();
+	ArrayList<String> question3Log = new ArrayList<String>();
+	ArrayList<String> answer1Log = new ArrayList<String>();
+	ArrayList<String> answer2Log = new ArrayList<String>();
+	ArrayList<String> answer3Log = new ArrayList<String>();
 	static ArrayList<String> userIngredients = new ArrayList<String>();
 	ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
 
@@ -58,6 +79,12 @@ public class main extends JFrame implements ActionListener {
 				passLog.add(br.readLine());
 				profilePicLog.add(br.readLine());
 				displayColorLog.add(br.readLine());
+				question1Log.add(br.readLine());
+				question2Log.add(br.readLine());
+				question3Log.add(br.readLine());
+				answer1Log.add(br.readLine());
+				answer2Log.add(br.readLine());
+				answer3Log.add(br.readLine());
 				contentLine = br.readLine();
 			}
 			br.close();
@@ -170,6 +197,17 @@ public class main extends JFrame implements ActionListener {
 		profilePic.setIcon(new ImageIcon("src/images/Profile0.png"));
 		profilePic.setText("");
 
+		// Displaying Logo
+		logo = new JLabel();
+		logo.setHorizontalAlignment(JLabel.CENTER);
+		logo.setVerticalAlignment(JLabel.CENTER);
+		logo.setHorizontalTextPosition(JLabel.CENTER);
+		logo.setVerticalTextPosition(JLabel.CENTER);
+		logo.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		logo.setIcon(new ImageIcon("src/images/MyBookLogo.png"));
+		logo.setText("");
+
 		// Menu Bar
 		JMenuBar mb = new JMenuBar();
 		main = new JMenu("Main");
@@ -207,14 +245,31 @@ public class main extends JFrame implements ActionListener {
 		homeP.setBounds(0, 0, 900, 650);
 		homeP.setBackground(Color.orange);
 		homeP.setLayout(null);
+		homeDisplayP = new JPanel();
+		homeDisplayP.setBackground(Color.white);
+		homeDisplayP.setLayout(null);
 		loginP = new JPanel();
 		loginP.setBounds(0, 0, 900, 650);
 		loginP.setBackground(Color.orange);
 		loginP.setLayout(null);
+		loginButtonsP = new JPanel();
 		signupP = new JPanel();
 		signupP.setBounds(0, 0, 900, 650);
 		signupP.setBackground(Color.orange);
 		signupP.setLayout(null);
+		signupButtonsP = new JPanel();
+		securityP = new JPanel();
+		securityP.setBounds(0, 0, 900, 650);
+		securityP.setBackground(Color.orange);
+		securityP.setLayout(null);
+		securityQuestionsP = new JPanel();
+		forgotPasswordP = new JPanel();
+		forgotPasswordP.setBounds(0, 0, 900, 650);
+		forgotPasswordP.setBackground(Color.orange);
+		forgotPasswordP.setLayout(null);
+		forgotPasswordQuestionsP = new JPanel();
+		forgotPasswordUsernameP = new JPanel();
+		forgotPasswordPasswordP = new JPanel();
 		selectP = new JPanel();
 		selectP.setBounds(0, 0, 900, 650);
 		selectP.setBackground(Color.orange);
@@ -329,79 +384,198 @@ public class main extends JFrame implements ActionListener {
 
 		// Panel Login
 		login = new JButton("Login");
-		login.setBounds(410, 400, 80, 30);
+		login.setBounds(135, 280, 140, 30);
 		login.setBackground(Color.white);
 		login.addActionListener(this);
-		loginP.add(login);
+		loginButtonsP.add(login);
 		signup = new JButton("Sign Up");
-		signup.setBounds(410, 450, 80, 30);
+		signup.setBounds(135, 320, 140, 30);
 		signup.setBackground(Color.white);
 		signup.addActionListener(this);
-		loginP.add(signup);
+		loginButtonsP.add(signup);
+		forgotPassword = new JButton("Forgot Password");
+		forgotPassword.setBounds(135, 360, 140, 30);
+		forgotPassword.setBackground(Color.white);
+		forgotPassword.addActionListener(this);
+		loginButtonsP.add(forgotPassword);
 		username = new JTextField("");
-		username.setBounds(350, 250, 200, 30);
+		username.setBounds(105, 130, 200, 30);
 		user = new JLabel("Username:");
-		user.setBounds(350, 220, 80, 30);
-		loginP.add(username);
-		loginP.add(user);
+		user.setBounds(105, 100, 80, 30);
+		loginButtonsP.add(username);
+		loginButtonsP.add(user);
 		password = new JPasswordField();
-		password.setBounds(350, 330, 200, 30);
+		password.setBounds(105, 210, 200, 30);
 		pass = new JLabel("Password:");
-		pass.setBounds(350, 300, 80, 30);
-		loginP.add(password);
-		loginP.add(pass);
+		pass.setBounds(105, 180, 80, 30);
+		loginButtonsP.add(password);
+		loginButtonsP.add(pass);
+		loginButtonsP.setBounds(250, 100, 400, 400);
+		loginButtonsP.setLayout(null);
+		logo.setBounds(300, 20, 50, 50);
+		logoName = new JLabel("MyBook");
+		logoName.setFont(logoFont);
+		logoName.setBounds(370, 10, 450, 70);
+		loginP.add(logoName);
+		loginP.add(logo);
+		loginP.add(loginButtonsP);
 		loginP.setVisible(true);
 
 		// Panel Signup
 		createAccount = new JButton("Create Account");
-		createAccount.setBounds(375, 400, 150, 30);
+		createAccount.setBounds(130, 280, 150, 30);
 		createAccount.setBackground(Color.white);
 		createAccount.addActionListener(this);
 		back = new JButton("Back");
-		back.setBounds(375, 450, 150, 30);
+		back.setBounds(165, 330, 80, 30);
 		back.setBackground(Color.white);
 		back.addActionListener(this);
-		signupP.add(back);
-		signupP.add(createAccount);
+		signupButtonsP.add(back);
+		signupButtonsP.add(createAccount);
 		usernameSignUp = new JTextField("");
-		usernameSignUp.setBounds(350, 250, 200, 30);
+		usernameSignUp.setBounds(105, 130, 200, 30);
 		user = new JLabel("Username:");
-		user.setBounds(350, 220, 80, 30);
-		signupP.add(usernameSignUp);
-		signupP.add(user);
+		user.setBounds(105, 100, 80, 30);
+		signupButtonsP.add(usernameSignUp);
+		signupButtonsP.add(user);
 		passwordSignUp = new JPasswordField();
-		passwordSignUp.setBounds(350, 330, 200, 30);
+		passwordSignUp.setBounds(105, 210, 200, 30);
 		pass = new JLabel("Password:");
-		pass.setBounds(350, 300, 80, 30);
+		pass.setBounds(105, 180, 80, 30);
 		displayName = new JLabel("Display Name:");
-		displayName.setBounds(350, 140, 120, 30);
+		displayName.setBounds(105, 20, 120, 30);
 		displayNameTF = new JTextField("");
-		displayNameTF.setBounds(350, 170, 200, 30);
-		signupP.add(displayName);
-		signupP.add(displayNameTF);
-		signupP.add(passwordSignUp);
-		signupP.add(pass);
+		displayNameTF.setBounds(105, 50, 200, 30);
+		signupButtonsP.add(displayName);
+		signupButtonsP.add(displayNameTF);
+		signupButtonsP.add(passwordSignUp);
+		signupButtonsP.add(pass);
+		signupButtonsP.setBounds(250, 100, 400, 400);
+		signupButtonsP.setLayout(null);
+		signupP.add(signupButtonsP);
 		signupP.setVisible(false);
+
+		// Panel Security Questions
+		question1TF = new JTextField("");
+		question1TF.setBounds(105, 85, 200, 30);
+		q1 = new JComboBox(question1);
+		q1.setBounds(105, 50, 200, 30);
+		question2TF = new JTextField("");
+		question2TF.setBounds(105, 165, 200, 30);
+		q2 = new JComboBox(question2);
+		q2.setBounds(105, 130, 200, 30);
+		question3TF = new JTextField("");
+		question3TF.setBounds(105, 245, 200, 30);
+		q3 = new JComboBox(question3);
+		q3.setBounds(105, 210, 200, 30);
+		submitAnswers = new JButton("Submit Answers");
+		submitAnswers.setBounds(130, 300, 150, 30);
+		submitAnswers.setBackground(Color.white);
+		submitAnswers.addActionListener(this);
+		securityQuestionsP.add(question1TF);
+		securityQuestionsP.add(question2TF);
+		securityQuestionsP.add(question3TF);
+		securityQuestionsP.add(q1);
+		securityQuestionsP.add(q2);
+		securityQuestionsP.add(q3);
+		securityQuestionsP.add(submitAnswers);
+		securityQuestionsP.setLayout(null);
+		securityQuestionsP.setBounds(250, 100, 400, 400);
+		securityP.add(securityQuestionsP);
+		securityP.setVisible(false);
+
+		// Panel Forgot Password
+		fquestion1TF = new JTextField("");
+		fquestion1TF.setBounds(105, 85, 200, 30);
+		fquestion2TF = new JTextField("");
+		fquestion2TF.setBounds(105, 165, 200, 30);
+		fquestion3TF = new JTextField("");
+		fquestion3TF.setBounds(105, 245, 200, 30);
+		fquestion1 = new JLabel();
+		fquestion1.setBounds(105, 55, 400, 30);
+		fquestion2 = new JLabel();
+		fquestion2.setBounds(105, 135, 400, 30);
+		fquestion3 = new JLabel();
+		fquestion3.setBounds(105, 215, 400, 30);
+		fUsername = new JTextField("");
+		fUsername.setBounds(105, 180, 200, 30);
+		fUser = new JLabel("Username:");
+		fUser.setBounds(105, 150, 80, 30);
+		submitUser = new JButton("Confirm Username");
+		submitUser.setBounds(125, 250, 160, 30);
+		submitUser.setBackground(Color.white);
+		submitUser.addActionListener(this);
+		answerQuestions = new JButton("Submit");
+		answerQuestions.setBounds(165, 320, 80, 30);
+		answerQuestions.setBackground(Color.white);
+		answerQuestions.addActionListener(this);
+		fCurrPassword = new JLabel("Current Password:");
+		fCurrPassword.setBounds(105, 55, 200, 30);
+		fNewPassword = new JLabel("New Password:");
+		fNewPassword.setBounds(105, 135, 200, 30);
+		fConfirmNewPassword = new JLabel("Confirm New Password:");
+		fConfirmNewPassword.setBounds(105, 215, 200, 30);
+		fCurrPasswordPF = new JPasswordField();
+		fCurrPasswordPF.setBounds(105, 85, 200, 30);
+		fNewPasswordPF = new JPasswordField();
+		fNewPasswordPF.setBounds(105, 165, 200, 30);
+		fConfirmNewPasswordPF = new JPasswordField();
+		fConfirmNewPasswordPF.setBounds(105, 245, 200, 30);
+		fChangePasswordB = new JButton("Change Password");
+		fChangePasswordB.setBounds(135, 300, 150, 30);
+		fChangePasswordB.setBackground(Color.white);
+		fChangePasswordB.addActionListener(this);
+		forgotPasswordPasswordP.add(fCurrPassword);
+		forgotPasswordPasswordP.add(fNewPassword);
+		forgotPasswordPasswordP.add(fConfirmNewPassword);
+		forgotPasswordPasswordP.add(fCurrPasswordPF);
+		forgotPasswordPasswordP.add(fNewPasswordPF);
+		forgotPasswordPasswordP.add(fConfirmNewPasswordPF);
+		forgotPasswordPasswordP.add(fChangePasswordB);
+		forgotPasswordPasswordP.setLayout(null);
+		forgotPasswordPasswordP.setBounds(250, 100, 400, 400);
+		forgotPasswordPasswordP.setVisible(false);
+		forgotPasswordP.add(forgotPasswordPasswordP);
+		forgotPasswordQuestionsP.add(answerQuestions);
+		forgotPasswordUsernameP.add(submitUser);
+		forgotPasswordUsernameP.add(fUsername);
+		forgotPasswordUsernameP.add(fUser);
+		forgotPasswordUsernameP.setLayout(null);
+		forgotPasswordUsernameP.setBounds(250, 100, 400, 400);
+		forgotPasswordP.add(forgotPasswordUsernameP);
+		forgotPasswordQuestionsP.add(fquestion1TF);
+		forgotPasswordQuestionsP.add(fquestion2TF);
+		forgotPasswordQuestionsP.add(fquestion3TF);
+		forgotPasswordQuestionsP.add(fquestion1);
+		forgotPasswordQuestionsP.add(fquestion2);
+		forgotPasswordQuestionsP.add(fquestion3);
+		forgotPasswordQuestionsP.setLayout(null);
+		forgotPasswordQuestionsP.setBounds(250, 100, 400, 400);
+		forgotPasswordQuestionsP.setVisible(false);
+		forgotPasswordP.add(forgotPasswordQuestionsP);
+		forgotPasswordP.setVisible(false);
 
 		// Panel Home
 		mbhelp = new JLabel("Press any of these buttons up here to navigate between tabs!");
 		mbhelp.setBounds(10, 10, 400, 30);
 		homeButtons = new JLabel("Or press a button down here to get started!");
-		homeButtons.setBounds(325, 200, 300, 30);
+		homeButtons.setBounds(220, 200, 300, 30);
 		homeSearch = new JButton("Search Recipes");
-		homeSearch.setBounds(100, 300, 200, 60);
+		homeSearch.setBounds(10, 300, 200, 60);
 		homeSearch.addActionListener(this);
 		homeFavorites = new JButton("Favorite Recipes");
-		homeFavorites.setBounds(350, 300, 200, 60);
+		homeFavorites.setBounds(240, 300, 200, 60);
 		homeFavorites.addActionListener(this);
 		homeCustomize = new JButton("Customize Profile");
-		homeCustomize.setBounds(600, 300, 200, 60);
+		homeCustomize.setBounds(460, 300, 200, 60);
 		homeCustomize.addActionListener(this);
-		homeP.add(homeSearch);
-		homeP.add(homeFavorites);
-		homeP.add(homeCustomize);
+		homeDisplayP.add(homeSearch);
+		homeDisplayP.add(homeFavorites);
+		homeDisplayP.add(homeCustomize);
 		homeP.add(mbhelp);
-		homeP.add(homeButtons);
+		homeDisplayP.add(homeButtons);
+		homeDisplayP.setBounds(100, 100, 675, 400);
+		homeP.add(homeDisplayP);
 		homeP.setVisible(false);
 
 		// Panel Select
@@ -560,6 +734,8 @@ public class main extends JFrame implements ActionListener {
 		f.add(customizeP);
 		f.add(changeDisplayP);
 		f.add(changePasswordP);
+		f.add(securityP);
+		f.add(forgotPasswordP);
 
 		// Buttons Selected
 		microwave.addItemListener(new ItemListener() {
@@ -707,6 +883,7 @@ public class main extends JFrame implements ActionListener {
 		f.setLayout(null);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setResizable(false);
 	}
 
 	// clickButton.exe
@@ -731,10 +908,177 @@ public class main extends JFrame implements ActionListener {
 					bw.newLine();
 					bw.write("" + displayColorLog.get(i));
 					bw.newLine();
+					bw.write("" + question1Log.get(i));
+					bw.newLine();
+					bw.write("" + question2Log.get(i));
+					bw.newLine();
+					bw.write("" + question3Log.get(i));
+					bw.newLine();
+					bw.write("" + answer1Log.get(i));
+					bw.newLine();
+					bw.write("" + answer2Log.get(i));
+					bw.newLine();
+					bw.write("" + answer3Log.get(i));
+					bw.newLine();
 				}
 				bw.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
+			}
+		}
+
+		// Forgot Password
+		if (e.getSource() == forgotPassword) {
+			if (userLog.size() > 0) {
+				fUsername.setText("");
+				loginP.setVisible(false);
+				forgotPasswordP.setVisible(true);
+			} else
+				JOptionPane.showMessageDialog(f, "There are no accounts available to change the password for.");
+		}
+
+		// Submit Username
+		if (e.getSource() == submitUser) {
+			if (userLog.contains(fUsername.getText())) {
+				for (int i = 0; i < userLog.size(); i++) {
+					if (userLog.get(i) == fUsername.getText()) {
+						fCurrUser = i;
+					}
+				}
+				fquestion1.setText("" + question1Log.get(fCurrUser));
+				fquestion2.setText("" + question2Log.get(fCurrUser));
+				fquestion3.setText("" + question3Log.get(fCurrUser));
+				fquestion1TF.setText("");
+				fquestion2TF.setText("");
+				fquestion3TF.setText("");
+				forgotPasswordUsernameP.setVisible(false);
+				forgotPasswordQuestionsP.setVisible(true);
+			} else
+				JOptionPane.showMessageDialog(f, "Username does not exist.");
+		}
+
+		// Answer Security Questions
+		if (e.getSource() == answerQuestions) {
+			if (fquestion1TF.getText().equals(answer1Log.get(fCurrUser))) {
+				if (fquestion2TF.getText().equals(answer2Log.get(fCurrUser))) {
+					if (fquestion3TF.getText().equals(answer3Log.get(fCurrUser))) {
+						forgotPasswordQuestionsP.setVisible(false);
+						forgotPasswordPasswordP.setVisible(true);
+					} else
+						JOptionPane.showMessageDialog(f, "One of your answers is incorrect.");
+				} else
+					JOptionPane.showMessageDialog(f, "One of your answers is incorrect.");
+			} else
+				JOptionPane.showMessageDialog(f, "One of your answers is incorrect.");
+		}
+
+		if (e.getSource() == fChangePasswordB) {
+			String currPassStr = new String(fCurrPasswordPF.getPassword());
+			String newPassStr = new String(fNewPasswordPF.getPassword());
+			String confirmNewPassStr = new String(fConfirmNewPasswordPF.getPassword());
+			if (!currPassStr.equals(passLog.get(fCurrUser))) {
+				JOptionPane.showMessageDialog(f, "Incorrect password for this account.");
+			} else if (newPassStr.equals(passLog.get(fCurrUser))) {
+				JOptionPane.showMessageDialog(f, "New password cannot be the same as old password.");
+			} else if (!newPassStr.equals(confirmNewPassStr)) {
+				JOptionPane.showMessageDialog(f, "Please confirm your new password.");
+			} else {
+				passLog.set(fCurrUser, confirmNewPassStr);
+				fCurrPasswordPF.setText("");
+				fNewPasswordPF.setText("");
+				fConfirmNewPasswordPF.setText("");
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+					for (int i = 0; i < userLog.size(); i++) {
+						bw.write("" + displayNameLog.get(i));
+						bw.newLine();
+						bw.write("" + userLog.get(i));
+						bw.newLine();
+						bw.write("" + passLog.get(i));
+						bw.newLine();
+						bw.write("" + profilePicLog.get(i));
+						bw.newLine();
+						bw.write("" + displayColorLog.get(i));
+						bw.newLine();
+						bw.write("" + question1Log.get(i));
+						bw.newLine();
+						bw.write("" + question2Log.get(i));
+						bw.newLine();
+						bw.write("" + question3Log.get(i));
+						bw.newLine();
+						bw.write("" + answer1Log.get(i));
+						bw.newLine();
+						bw.write("" + answer2Log.get(i));
+						bw.newLine();
+						bw.write("" + answer3Log.get(i));
+						bw.newLine();
+					}
+					bw.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(f, "Password has been changed.");
+				forgotPasswordP.setVisible(false);
+				forgotPasswordPasswordP.setVisible(false);
+				forgotPasswordUsernameP.setVisible(true);
+				loginP.setVisible(true);
+			}
+		}
+
+		// Security Question Answers
+		if (e.getSource() == submitAnswers) {
+			if (question1TF.getText() != "") {
+				if (question2TF.getText() != "") {
+					if (question3TF.getText() != "") {
+						answer1Log.add(question1TF.getText());
+						answer2Log.add(question2TF.getText());
+						answer3Log.add(question3TF.getText());
+						question1Log.add(q1.getItemAt(q1.getSelectedIndex()));
+						question2Log.add(q2.getItemAt(q2.getSelectedIndex()));
+						question3Log.add(q3.getItemAt(q3.getSelectedIndex()));
+						securityP.setVisible(false);
+						loginP.setVisible(true);
+						JOptionPane.showMessageDialog(f, "Account has been created.");
+						try {
+							BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+
+							for (int i = 0; i < userLog.size(); i++) {
+								bw.write("" + displayNameLog.get(i));
+								bw.newLine();
+								bw.write("" + userLog.get(i));
+								bw.newLine();
+								bw.write("" + passLog.get(i));
+								bw.newLine();
+								bw.write("" + profilePicLog.get(i));
+								bw.newLine();
+								bw.write("" + displayColorLog.get(i));
+								bw.newLine();
+								bw.write("" + question1Log.get(i));
+								bw.newLine();
+								bw.write("" + question2Log.get(i));
+								bw.newLine();
+								bw.write("" + question3Log.get(i));
+								bw.newLine();
+								bw.write("" + answer1Log.get(i));
+								bw.newLine();
+								bw.write("" + answer2Log.get(i));
+								bw.newLine();
+								bw.write("" + answer3Log.get(i));
+								bw.newLine();
+							}
+							bw.close();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(f, "Please answer question 3.");
+					}
+				} else {
+					JOptionPane.showMessageDialog(f, "Please answer question 2.");
+				}
+			} else {
+				JOptionPane.showMessageDialog(f, "Please answer question 1.");
 			}
 		}
 
@@ -849,6 +1193,18 @@ public class main extends JFrame implements ActionListener {
 					bw.newLine();
 					bw.write("" + displayColorLog.get(i));
 					bw.newLine();
+					bw.write("" + question1Log.get(i));
+					bw.newLine();
+					bw.write("" + question2Log.get(i));
+					bw.newLine();
+					bw.write("" + question3Log.get(i));
+					bw.newLine();
+					bw.write("" + answer1Log.get(i));
+					bw.newLine();
+					bw.write("" + answer2Log.get(i));
+					bw.newLine();
+					bw.write("" + answer3Log.get(i));
+					bw.newLine();
 				}
 				bw.close();
 			} catch (Exception ex) {
@@ -939,7 +1295,7 @@ public class main extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource() == changeDisplayColor) {
-			if(mbDisplay) {
+			if (mbDisplay) {
 				homeP.setVisible(false);
 				selectP.setVisible(false);
 				favoritesP.setVisible(false);
@@ -1073,9 +1429,10 @@ public class main extends JFrame implements ActionListener {
 				loginP.setVisible(false);
 				mbDisplay = true;
 				welcome = new JLabel();
+				welcome.setFont(logoFont);
 				welcome.setText("Welcome, " + displayNameLog.get(currUser) + "!");
-				welcome.setBounds(400, 150, 120, 30);
-				homeP.add(welcome);
+				welcome.setBounds(150, 100, 900, 80);
+				homeDisplayP.add(welcome);
 				profilePic.setIcon(new ImageIcon("src/images/Profile" + profilePicLog.get(currUser) + ".png"));
 				switch (profilePicLog.get(currUser)) {
 				case "0":
@@ -1267,28 +1624,10 @@ public class main extends JFrame implements ActionListener {
 				profilePicLog.add("0");
 				displayColorLog.add("0");
 				signupP.setVisible(false);
-				loginP.setVisible(true);
-				JOptionPane.showMessageDialog(f, "Account has been created.");
-
-				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
-
-					for (int i = 0; i < userLog.size(); i++) {
-						bw.write("" + displayNameLog.get(i));
-						bw.newLine();
-						bw.write("" + userLog.get(i));
-						bw.newLine();
-						bw.write("" + passLog.get(i));
-						bw.newLine();
-						bw.write("" + profilePicLog.get(i));
-						bw.newLine();
-						bw.write("" + displayColorLog.get(i));
-						bw.newLine();
-					}
-					bw.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				securityP.setVisible(true);
+				question1TF.setText("");
+				question2TF.setText("");
+				question3TF.setText("");
 			}
 		}
 		if (e.getSource() == back) {
@@ -1300,38 +1639,53 @@ public class main extends JFrame implements ActionListener {
 			String currPassStr = new String(currPasswordPF.getPassword());
 			String newPassStr = new String(newPasswordPF.getPassword());
 			String confirmNewPassStr = new String(confirmNewPasswordPF.getPassword());
-			if (!currPassStr.equals(passLog.get(currUser))) {
-				JOptionPane.showMessageDialog(f, "Incorrect password for this account.");
-			} else if (newPassStr.equals(passLog.get(currUser))) {
-				JOptionPane.showMessageDialog(f, "New password cannot be the same as old password.");
-			} else if (!newPassStr.equals(confirmNewPassStr)) {
-				JOptionPane.showMessageDialog(f, "Please confirm your new password.");
-			} else {
-				passLog.set(currUser, confirmNewPassStr);
-				currPasswordPF.setText("");
-				newPasswordPF.setText("");
-				confirmNewPasswordPF.setText("");
-				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
+			if (!currPassStr.equals("") && !newPassStr.equals("") && !confirmNewPassStr.equals("")) {
+				if (!currPassStr.equals(passLog.get(currUser))) {
+					JOptionPane.showMessageDialog(f, "Incorrect password for this account.");
+				} else if (newPassStr.equals(passLog.get(currUser))) {
+					JOptionPane.showMessageDialog(f, "New password cannot be the same as old password.");
+				} else if (!newPassStr.equals(confirmNewPassStr)) {
+					JOptionPane.showMessageDialog(f, "Please confirm your new password.");
+				} else {
+					passLog.set(currUser, confirmNewPassStr);
+					currPasswordPF.setText("");
+					newPasswordPF.setText("");
+					confirmNewPasswordPF.setText("");
+					try {
+						BufferedWriter bw = new BufferedWriter(new FileWriter("profiles.txt"));
 
-					for (int i = 0; i < userLog.size(); i++) {
-						bw.write("" + displayNameLog.get(i));
-						bw.newLine();
-						bw.write("" + userLog.get(i));
-						bw.newLine();
-						bw.write("" + passLog.get(i));
-						bw.newLine();
-						bw.write("" + profilePicLog.get(i));
-						bw.newLine();
-						bw.write("" + displayColorLog.get(i));
-						bw.newLine();
+						for (int i = 0; i < userLog.size(); i++) {
+							bw.write("" + displayNameLog.get(i));
+							bw.newLine();
+							bw.write("" + userLog.get(i));
+							bw.newLine();
+							bw.write("" + passLog.get(i));
+							bw.newLine();
+							bw.write("" + profilePicLog.get(i));
+							bw.newLine();
+							bw.write("" + displayColorLog.get(i));
+							bw.newLine();
+							bw.write("" + question1Log.get(i));
+							bw.newLine();
+							bw.write("" + question2Log.get(i));
+							bw.newLine();
+							bw.write("" + question3Log.get(i));
+							bw.newLine();
+							bw.write("" + answer1Log.get(i));
+							bw.newLine();
+							bw.write("" + answer2Log.get(i));
+							bw.newLine();
+							bw.write("" + answer3Log.get(i));
+							bw.newLine();
+						}
+						bw.close();
+					} catch (Exception ex) {
+						ex.printStackTrace();
 					}
-					bw.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
+					JOptionPane.showMessageDialog(f, "Password has been changed.");
 				}
-				JOptionPane.showMessageDialog(f, "Password has been changed.");
-			}
+			} else
+				JOptionPane.showMessageDialog(f, "Password fields cannot be blank.");
 		}
 	}
 
