@@ -49,23 +49,23 @@ Chicken Kiev, https://www.tasteofhome.com/recipes/microwaved-chicken-kiev/, 30, 
 Chicken Cordon Bleu, https://www.tasteofhome.com/recipes/italian-chicken-cordon-bleu/, 30, true, false, false, Chicken, Butter, Green Pepper, Mushrooms, Tomato Sauce, Sugar, Italian Seasoning, Salt, Garlic, Lemon Pepper, Ham, Swiss, Rice
 Chicken and Rice Soup, https://www.tasteofhome.com/recipes/chicken-and-rice-soup-mix/, 10, true, false, false, Chicken, Rice, Chicken Stock, Onion, Pepper
 Mushroom Risotto, https://www.foodnetwork.com/recipes/food-network-kitchen/microwave-mushroom-risotto-3363140, 40, true, false, false, Mushrooms, Chicken Stock, Garlic, Butter, Salt, Rice, Parmesan, Italian Seasoning
-Pesto Penne with Sausage, https://www.allrecipes.com/recipe/237843/creamy-pesto-penne-with-sausage/, 25, true, false, false, Penne, Ground Sausage, Pesto Sauce Mix, Milk, Olive Oil
-Parmesan Polenta, https://www.allrecipes.com/recipe/242008/creamy-parmesan-polenta/, 15, true, false, false, Polenta, Chicken Stock, Parmesan, Pepper, Paprika
-Tomato Basil Salmon, https://www.allrecipes.com/recipe/166624/tomato-basil-salmon/, 30, true, false, false, Salmon, Tomato, Olive Oil, Parmesan, Basil
-Kielbasa with Peppers and Potatoes, https://www.allrecipes.com/recipe/85127/kielbasa-with-peppers-and-potatoes/, 40, true, false, false, Vegetable Oil, Kielbasa, Potatoes, Red Pepper, Yellow Pepper
-Tater Tot Casserole, https://www.allrecipes.com/recipe/222037/tater-tots-r-casserole/, 40, true, false, false, Ground Beef, Salt, Pepper, Cream of Mushroom, Cheese, Tater Tots
-Polish Sausage and Cabbage, https://www.allrecipes.com/recipe/231155/polish-link-sausage-and-cabbage/, 35, true, false, false, Butter, Cabbage, Kielbasa, Pepper
-English Muffin Pizza, https://www.allrecipes.com/recipe/237838/quick-and-easy-mini-salsa-pizzas/, 15, true, false, false, English Muffin, Marinara, Bacon, Pepperoni, Mozzarella
-Beef and Rice, https://www.allrecipes.com/recipe/232570/beef-and-rice/, 45, true, false, false, Ground Beef, Rice, Onion
-Meatball Sub Casserole, https://www.allrecipes.com/recipe/230994/meatball-sub-casserole/, 60, true, false, false, Garlic Bread, Spaghetti Sauce, Frozen Meatballs, Mozzarella, Parmesan
+Pesto Penne with Sausage, https://www.allrecipes.com/recipe/237843/creamy-pesto-penne-with-sausage/, 25, true, false, true, Penne, Ground Sausage, Pesto Sauce Mix, Milk, Olive Oil
+Parmesan Polenta, https://www.allrecipes.com/recipe/242008/creamy-parmesan-polenta/, 15, true, false, true, Polenta, Chicken Stock, Parmesan, Pepper, Paprika
+Tomato Basil Salmon, https://www.allrecipes.com/recipe/166624/tomato-basil-salmon/, 30, true, true, false, Salmon, Tomato, Olive Oil, Parmesan, Basil
+Kielbasa with Peppers and Potatoes, https://www.allrecipes.com/recipe/85127/kielbasa-with-peppers-and-potatoes/, 40, true, false, true, Vegetable Oil, Kielbasa, Potatoes, Red Pepper, Yellow Pepper
+Tater Tot Casserole, https://www.allrecipes.com/recipe/222037/tater-tots-r-casserole/, 40, true, true, false, Ground Beef, Salt, Pepper, Cream of Mushroom, Cheese, Tater Tots
+Polish Sausage and Cabbage, https://www.allrecipes.com/recipe/231155/polish-link-sausage-and-cabbage/, 35, true, false, true, Butter, Cabbage, Kielbasa, Pepper
+English Muffin Pizza, https://www.allrecipes.com/recipe/237838/quick-and-easy-mini-salsa-pizzas/, 15, true, true, false, English Muffin, Marinara, Bacon, Pepperoni, Mozzarella
+Beef and Rice, https://www.allrecipes.com/recipe/232570/beef-and-rice/, 45, true, false, true, Ground Beef, Rice, Onion
+Meatball Sub Casserole, https://www.allrecipes.com/recipe/230994/meatball-sub-casserole/, 60, true, true, false, Garlic Bread, Spaghetti Sauce, Frozen Meatballs, Mozzarella, Parmesan
 Breaded Fish Fillet, https://www.allrecipes.com/recipe/71378/simple-ranchy-breaded-fish-fillets/, 25, true, false, false, Bread Crumbs, Italian Seasoning, Vegetable Oil, Fish Fillets, Butter, Ranch Dressing Mix
-Pork Chops, https://www.allrecipes.com/recipe/74698/yummy-pork-chops/, 35, true, false, false, Italian Dressing, Soy Sauce, Pepper, Pork Chops
-Beef Stroganoff, https://www.allrecipes.com/recipe/16311/simple-beef-stroganoff/, 30, true, false, false, Egg Noodles, Ground Beef, Cream of Mushroom, Garlic, Salt, Pepper, Sour Cream
-Spaghetti Carbonara, https://www.allrecipes.com/recipe/11791/spaghetti-carbonara-i/, 20, true, false, false, Spaghetti, Bacon, Eggs, Parmesan, Olive Oil
-Baked Chicken Wings, https://www.allrecipes.com/recipe/187822/baked-chicken-wings/, 70, true, false, false, Olive Oil, Garlic, Chili Powder, Pepper, Chicken Wings
-Chicken and Broccoli Casserole, https://www.allrecipes.com/recipe/25490/broccoli-rice-cheese-and-chicken-casserole/, 45, true, false, false, Rice, Chicken, Cream of Mushroom, Cream of Chicken, Butter, Milk, Frozen Broccoli, Onion, Cheese
-Garlic Parmesan Chicken, https://www.allrecipes.com/recipe/55860/baked-garlic-parmesan-chicken/, 45, true, false, false, Olive Oil, Garlic, Bread Crumbs, Parmesan, Italian Seasoning, Black Pepper, Chicken
-Butter Noodles, https://www.allrecipes.com/recipe/244458/buttered-noodles/, 15, true, false, false, Spaghetti, Butter, Parmesan, Salt, Pepper
-Chilli Mac, https://www.allrecipes.com/recipe/139471/dorm-room-chili-mac/, 15, true, false, false, Mac n Cheese, Chilli, Cheese
-Sheperd's Pie, https://www.thewholesomedish.com/the-best-classic-shepherds-pie/, 50, true, false, false, Olive Oil, Onion, Ground Beef, Italian Seasoning, Salt, Pepper, Garlic, Flour, Beef Stock, Frozen Vegetables, Potatoes, Butter, Milk
-Chicken Provolone, https://www.tasteofhome.com/recipes/chicken-provolone/, 25, true, false, false, Chicken, Pepper, Butter, Basil, Ham, Provolone
+Pork Chops, https://www.allrecipes.com/recipe/74698/yummy-pork-chops/, 35, true, false, true, Italian Dressing, Soy Sauce, Pepper, Pork Chops
+Beef Stroganoff, https://www.allrecipes.com/recipe/16311/simple-beef-stroganoff/, 30, true, false, true, Egg Noodles, Ground Beef, Cream of Mushroom, Garlic, Salt, Pepper, Sour Cream
+Spaghetti Carbonara, https://www.allrecipes.com/recipe/11791/spaghetti-carbonara-i/, 20, true, false, true, Spaghetti, Bacon, Eggs, Parmesan, Olive Oil
+Baked Chicken Wings, https://www.allrecipes.com/recipe/187822/baked-chicken-wings/, 70, true, true, false, Olive Oil, Garlic, Chili Powder, Pepper, Chicken Wings
+Chicken and Broccoli Casserole, https://www.allrecipes.com/recipe/25490/broccoli-rice-cheese-and-chicken-casserole/, 45, true, true, false, Rice, Chicken, Cream of Mushroom, Cream of Chicken, Butter, Milk, Frozen Broccoli, Onion, Cheese
+Garlic Parmesan Chicken, https://www.allrecipes.com/recipe/55860/baked-garlic-parmesan-chicken/, 45, true, true, false, Olive Oil, Garlic, Bread Crumbs, Parmesan, Italian Seasoning, Black Pepper, Chicken
+Butter Noodles, https://www.allrecipes.com/recipe/244458/buttered-noodles/, 15, true, false, true, Spaghetti, Butter, Parmesan, Salt, Pepper
+Chilli Mac, https://www.allrecipes.com/recipe/139471/dorm-room-chili-mac/, 15, true, false, true, Mac n Cheese, Chilli, Cheese
+Sheperd's Pie, https://www.thewholesomedish.com/the-best-classic-shepherds-pie/, 50, true, true, false, Olive Oil, Onion, Ground Beef, Italian Seasoning, Salt, Pepper, Garlic, Flour, Beef Stock, Frozen Vegetables, Potatoes, Butter, Milk
+Chicken Provolone, https://www.tasteofhome.com/recipes/chicken-provolone/, 25, true, true, false, Chicken, Pepper, Butter, Basil, Ham, Provolone
