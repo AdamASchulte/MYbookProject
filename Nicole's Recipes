@@ -1,31 +1,31 @@
-Bagel Breakfast ~ 5-10mins ~ Non-Microwave ~ Bagel, Avocado, Ham/Turkey
-Baked Chicken Dinner ~ 1hr ~ Oven ~ Chicken leg quarters, Potatoes, Carrots, (seasonings)
-Chili Dogs ~ 10mins ~ Stove ~ Hot Dogs, Chili, Hot Dog Buns, …etc
-Sloppy Joe’s ~ 10-15mins ~ Stove ~ Beef, Chili Sauce, Hamburger Buns
-Chicken Parmigiana ~ 45mins ~ Stove ~ Chicken Breasts, Egg, Panko Crumbs, Pasta, Marinara Sauce
-Bacon & Cheese Mug ~ 5mins ~ Microwave ~ Bread, egg, milk, cheese, bacon
-Veggie & Cheese Mug ~ 5mins ~ Microwave ~ Bread, egg, milk, cheese, spinach, red pepper, tomato
-Banana Chocolate Mug ~ 5mins ~ Microwave ~ Bread, egg milk, chocolate chips, banana
-Blueberry French Toast Mug ~ 5mins ~ Microwave ~ Bread, egg , milk, blueberry, cinnamon
-Broccoli Edamame Quinoa Bowl ~ 20mins ~ Microwave ~ Broccoli, quinoa, cilantro, edamame, sesame vinaigrette, olive oil
-Sausage & Tomato Sauce Pasta ~ 20mins ~ Microwave ~ Pasta, pre-cooked sausage, tomato sauce, cheese
-Southwestern Rice & Beans ~ 15mins ~ Microwave ~ Rice, black beans, avocado, cilantro, salsa
-Baked Apple Oatmeal ~ 10mins ~ Microwave ~ Oats, apple, milk/water, cinnamon, peanut butter
-Pesto Mozzarella Quesadillas ~ 5-10mins ~ Microwave ~ Tortillas, spinach, tomato, pesto, mozzarella
-Spinach Ricotta Lasagna Mug ~ 15mins ~ Microwave ~ Lasagna sheet, spinach, ricotta cheese, pasta sauce
-Brown Rice Edamame Pineapple Mug ~ 15mins ~ Microwave ~ instant brown rice, water, edamame, canned pineapple, teriyaki sauce
-Cheesy Broccoli Rice Casserole ~ 5mins ~ Microwave ~ instant Jasmine rice, cheese, broccoli
-Microwavable Enchiladas ~ 10mins ~ Microwave ~ enchilada sauce, cooked chicken, cheese, corn tortillas
-Egg Fried Rice Mug ~ 10mins ~ Microwave ~ instant jasmine rice, peas, purple cabbage, egg, sesame oil, soy sauce
-Egg Fried Rice ~ 20mins ~ Stove ~ eggs, olive oil, onion, mixed vegetables, jasmine rice, soy sauce
-Sausage & Cheese Spaghetti ~ 15-20mins ~ Microwave ~ spaghetti pasta, water, half & half, cheese, italian sausage, butter
-Blueberry Pancake Mug ~ 5mins ~ Microwave ~ Pancake mix, water, frozen blueberries
-Sweet Potato Chips ~ 10mins ~ Microwave ~ Sweet Potato, olive oil, salt & pepper
-Rice Krispies Treats ~ 5mins ~ Microwave ~ Butter, Rice Krispies, Marshmallows
-Matcha Chia Pudding ~ 5mins ~ Non-Microwave ~ chia seeds, non-dairy milk/ water, matcha green tea powder, maple syrup
-Tuna Salad Jar ~ 5-10mins ~ Non-Microwave ~ white beans, black olives, red onions, celery, tuna
-Buffalo Chicken Jar Salad ~ 15mins ~ Non-Microwave ~ Blue cheese salad dressing, celery, corn, red onion, cooked shredded chicken, buffalo sauce, lettuce
-Sriracha Nooch Popcorn ~ 10mins ~ Stove ~ cooking oil, popcorn kernels, butter, sriracha
-Microwave Shakshuka ~ 5-10mins ~ Microwave ~ cooking spray, marinara sauce, cooked chickpeas, red pepper flakes, egg
-Loaded Baked Potato Soup ~ 10mins ~ Microwave ~ Potato, water, cheese, bacon, cornflour, chicken stock, milk
+Bagel Breakfast, xd, 10, false, Bagel, Avocado, Ham
+Baked Chicken Dinner, xd, 60, false, Chicken Leg Quarters, Potato, Carrot (oven)
+Chili Dogs, xd, 10, false, Hot Dogs, Chili, Hot Dog Buns (stove)
+Sloppy Joe, xd, 15, Beef, Chili Sauce, Hamburger Buns (stove)
+Chicken Parmigiana, xd, 45, Chicken Breasts, Egg, Panko Crumbs, Pasta, Marinara (stove)
+Bacon & Cheese Mug, xd, 5, true, Bread, egg, milk, cheese, bacon
+Veggie & Cheese Mug, xd, 5, true, Bread, egg, milk, cheese, spinach, red pepper, tomato
+Banana Chocolate Mug, xd, 5, true, Bread, egg milk, chocolate chips, banana
+Blueberry French Toast Mug, xd, 5, true, Bread, egg , milk, blueberry, cinnamon
+Broccoli Edamame Quinoa Bowl, xd, 20, true, Broccoli, quinoa, cilantro, edamame, sesame vinaigrette, olive oil
+Sausage & Tomato Sauce Pasta, xd, 20, true, Pasta, pre-cooked sausage, tomato sauce, cheese
+Southwestern Rice & Beans, xd, 15, true, Rice, black beans, avocado, cilantro, salsa
+Baked Apple Oatmeal, xd, 10, true, Oats, apple, milk, cinnamon, peanut butter
+Pesto Mozzarella Quesadillas, xd, 10, true, Tortillas, spinach, tomato, pesto, mozzarella
+Spinach Ricotta Lasagna Mug, xd, 15, true, Lasagna sheet, spinach, ricotta cheese, pasta sauce
+Brown Rice Edamame Pineapple Mug, xd, 15, true, instant brown rice, water, edamame, canned pineapple, teriyaki sauce
+Cheesy Broccoli Rice Casserole, xd, 5, true, instant Jasmine rice, cheese, broccoli
+Microwavable Enchiladas, xd, 10, true, enchilada sauce, cooked chicken, cheese, corn tortillas
+Egg Fried Rice Mug, xd, 10, true, instant jasmine rice, peas, purple cabbage, egg, sesame oil, soy sauce
+Egg Fried Rice, xd, 20, false, eggs, olive oil, onion, mixed vegetables, jasmine rice, soy sauce (stove)
+Sausage & Cheese Spaghetti, xd, 20, true, spaghetti pasta, water, half & half, cheese, italian sausage, butter
+Blueberry Pancake Mug, xd, 5, true, Pancake mix, water, frozen blueberries
+Sweet Potato Chips, xd, 10, true, Sweet Potato, olive oil, salt & pepper
+Rice Krispies Treats, xd, 5, true, Butter, Rice Krispies, Marshmallows
+Matcha Chia Pudding, xd, 5, false, chia seeds, non-dairy milk/ water, matcha green tea powder, maple syrup
+Tuna Salad Jar, xd, 10, false, white beans, black olives, red onions, celery, tuna
+Buffalo Chicken Jar Salad, xd, 15, false, Blue cheese salad dressing, celery, corn, red onion, cooked shredded chicken, buffalo sauce, lettuce
+Sriracha Nooch Popcorn, xd, 10, false, cooking oil, popcorn kernels, butter, sriracha (stove)
+Microwave Shakshuka, xd, 10, false, cooking spray, marinara sauce, cooked chickpeas, red pepper flakes, egg
+Loaded Baked Potato Soup, xd, 10, true, Potato, water, cheese, bacon, cornflour, chicken stock, milk
 
