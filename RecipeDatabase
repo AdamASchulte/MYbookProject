@@ -1,15 +1,15 @@
-Turkey Avocado Club, No Link Found, 30, false, false, false, Turkey, Avocado, Bread, Lettuce, Tomato
-Ham Sandwich, No Link Found, 5, false, false, false, Ham, Cheese, Bread
-Grilled Cheese ,No Link Found, 5, true, false, false, Bread, Cheese, Butter
-Tuna Sandwich, No Link Found, 10, false, false, false, Tuna, Mayo, Bread
+Turkey Avocado Club, https://www.savoryonline.com/recipes/110692/avocado-turkey-blt, 30, false, false, false, Turkey, Avocado, Bread, Lettuce, Tomato, Bacon
+Ham Sandwich, https://recipesformen.com/ham-and-cheese-sandwich-recipe/, 5, false, false, false, Ham, Cheese, Bread
+Grilled Cheese, https://www.allrecipes.com/recipe/23891/grilled-cheese-sandwich/, 5, true, false, false, Bread, Cheese, Butter
+Tuna Sandwich, https://starkist.com/recipes/classic-tuna-sandwich, 10, false, false, false, Tuna, Mayo, Bread
 Bean and Cheese Burrito, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 5, true, false, false, Tortilla, Refried Beans, Cheese
 Turkey Tortilla Roll up, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 5, false, false, false, Tortilla, Cream Cheese, Turkey
 Ham Tortilla Roll up, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 5, false, false, false, Tortilla, Cream Cheese, Ham
-Bean and Cheese Nachos, No Link Found, 5, true, false, false, Tortilla Chips, Beans, Cheese
+Bean and Cheese Nachos, https://www.allrecipes.com/recipe/273238/easy-nachos-with-refried-beans/, 5, true, false, false, Tortilla Chips, Beans, Cheese
 Ham and Egg Sandwich, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 10, true, false, false, Egg, Cheese, Ham, English Muffin
 Bacon and Egg Sandwich, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 10, true, false, false, Egg, Cheese, Bacon, English Muffin
 Egg Burrito, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 10, true, false, false, Egg, Hash Brown, Ham, Cheese, Tortilla
-Breakfast Nachos, No Link Found, 10, true, false, false, Egg, Beans, Avocado, Cheese, Tortilla
+Breakfast Nachos, https://www.sumptuousspoonfuls.com/breakfast-nachos-supreme/, 10, true, false, false, Egg, Beans, Avocado, Cheese, Tortilla Chips
 Micro Baked Potato, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 5, true, false, false, Potato, Sour Cream, Butter
 Taco Salad, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 10, true, false, false, Lettuce, Meat, Beans, Corn, Avocado
 Chef Salad with Turkey, https://www.itsalwaysautumn.com/easy-meals-for-college-students.html, 10, false, false, false, Turkey, Cheese, Lettuce, Dressing
@@ -78,29 +78,29 @@ Bisquick Strawberry Shortcake, https://insanelygoodrecipes.com/bisquick-strawber
 Lemon Fruit Parfait, https://insidebrucrewlife.com/lemon-mousse-fruit-parfaits/, 20, false, false, false, Lemon Pie Filling, Whipped Cream, Twinkies, Strawberries, Blueberries
 Strawberry Cheesecake, https://insanelygoodrecipes.com/strawberry-cheesecake-lasagna/, 25, true, false, false, Cream Cheese, Sugar, Whipped Cream, Non-Stick Spray, Graham Cracker, Strawberry Jam, Strawberries
 Caramel Apple Dump Cake, https://thenovicechefblog.com/caramel-apple-dump-cake/, 55, false, true, false, Apple Pie Filling, Cinnamon, Nutmeg, Caramel Squares, Cake Mix, Butter
-Bagel Breakfast, No Link Found, 10, false, false, false, Bagel, Avocado, Ham
-Baked Chicken Dinner, No Link Found, 60, false, true, false, Chicken, Potatoes, Carrot
-Chili Dogs, No Link Found, 10, false, false, true, Hot Dogs, Chilli, Hot Dog Buns
-Sloppy Joe, No Link Found, 15, false, false, true, Ground Beef, Chilli, Hamburger Buns
-Bacon & Cheese Mug, No Link Found, 5, true, false, false, Bread, Eggs, Milk, Cheese, Bacon
-Veggie & Cheese Mug, No Link Found, 5, true, false, false, Bread, Egg, Milk, Cheese, Spinach, Red Pepper, Tomatoes
-Banana Chocolate Mug, No Link Found, 5, true, false, false, Bread, Eggs, Milk, Chocolate Chips, Bananas
-Blueberry French Toast Mug, No Link Found, 5, true, false, false, Bread, Eggs, Milk, Blueberries, Cinnamon
-Broccoli Edamame Quinoa Bowl, No Link Found, 20, true, false, false, Frozen Broccoli, Quinoa, Cilantro, Edamame, Sesame Vinaigrette, Olive Oil
-Sausage & Tomato Sauce Pasta, No Link Found, 20, true, false, false, Penne, Cooked Sausage, Spaghetti Sauce, Cheese
-Southwestern Rice & Beans, No Link Found, 15, true, false, false, Rice, Black Beans, Avocado, Cilantro, Salsa
-Baked Apple Oatmeal, No Link Found, 10, true, false, false, Oats, Apple, Milk, Cinnamon, Peanut Butter
-Pesto Mozzarella Quesadillas, No Link Found, 10, true, false, false, Tortillas, Spinach, Tomatoes, Pesto, Mozzarella
-Spinach Ricotta Lasagna Mug, No Link Found, 15, true, false, false, Lasagna, Spinach, Ricotta, Spaghetti Sauce
-Brown Rice Edamame Pineapple Mug, No Link Found, 15, true, false, false, Rice, Edamame, Pineapple, Teriyaki
-Cheesy Broccoli Rice Casserole, No Link Found, 5, true, false, false, Rice, Cheese, Broccoli
-Egg Fried Rice Mug, No Link Found, 10, true, false, false, Rice, Peas, Cabbage, Eggs, Soy Sauce
-Egg Fried Rice, No Link Found, 20, false, false, true, Eggs, Olive Oil, Onion, Vegetables, Rice, Soy Sauce
-Sausage & Cheese Spaghetti, No Link Found, 20, true, false, false, Spaghetti, Whipping Cream, Cheese, Sausage, Butter
-Blueberry Pancake Mug, No Link Found, 5, true, false, false, Pancake Mix, Frozen Blueberries
-Sweet Potato Chips, No Link Found, 10, true, false, false, Sweet Potato, Olive Oil, Salt, Pepper
-Rice Krispies Treats, No Link Found, 5, true, false, false, Butter, Rice Krispies, Marshmallows
-Tuna Salad Jar, No Link Found, 10, false, false, false, White Beans, Black Olives, Onion, Celery, Tuna
-Buffalo Chicken Jar Salad, No Link Found, 15, false, false, false, Blue Cheese Dressing, Celery, Corn, Onion, Chicken, Buffalo Sauce, Lettuce
-Sriracha Nooch Popcorn, No Link Found, 10, false, false, true, Vegetable Oil, Popcorn Kernels, Butter, Sriracha
-Microwave Shakshuka, No Link Found, 10, false, false, false, Marinara, Cooked Chickpeas, Red Pepper Flakes, Eggs
+Bagel Breakfast, https://www.foodtolove.co.nz/recipes/bagel-with-avocado-ham-and-cheese-15105, 10, false, false, false, Bagel, Avocado, Ham, Cheese
+Baked Chicken Dinner, https://www.lecremedelacrumb.com/sheet-pan-balsamic-chicken-with-potatoes-and-carrots/, 60, false, true, false, Chicken, Potatoes, Carrot
+Chili Dogs, https://www.thekitchn.com/chili-dogs-22925361, 10, false, false, true, Hot Dogs, Chilli, Hot Dog Buns
+Sloppy Joe, https://www.thechunkychef.com/best-homemade-sloppy-joes/, 15, false, false, true, Ground Beef, Chilli, Hamburger Buns
+Bacon & Cheese Mug, https://tasty.co/recipe/bacon-and-cheese-in-a-mug, 5, true, false, false, Bread, Eggs, Milk, Cheese, Bacon
+Veggie & Cheese Mug, https://tasty.co/recipe/veggie-and-cheese-breakfast-in-a-mug, 5, true, false, false, Bread, Egg, Milk, Cheese, Spinach, Red Pepper, Tomatoes
+Banana Chocolate Mug, https://thealmondeater.com/chocolate-banana-mug-cake/, 5, true, false, false, Bread, Eggs, Milk, Chocolate Chips, Bananas
+Blueberry French Toast Mug, https://tasty.co/recipe/blueberry-french-toast-in-a-mug, 5, true, false, false, Bread, Eggs, Milk, Blueberries, Cinnamon
+Broccoli Edamame Quinoa Bowl, https://www.taste.com.au/recipes/quinoa-edamame-broccoli-salad-recipe/hfzps9o9, 20, true, false, false, Frozen Broccoli, Quinoa, Cilantro, Edamame, Sesame Vinaigrette, Olive Oil
+Sausage & Tomato Sauce Pasta, http://www.murakami-s.jp/sachikocooking/english/en0602.htm, 20, true, false, false, Penne, Cooked Sausage, Spaghetti Sauce, Cheese
+Southwestern Rice & Beans, https://onceamonthmeals.com/recipes/southwest-rice-and-beans/, 15, true, false, false, Rice, Black Beans, Avocado, Cilantro, Salsa
+Baked Apple Oatmeal, https://www.slenderkitchen.com/recipe/microwave-apple-peanut-butter-oatmeal, 10, true, false, false, Oats, Apple, Milk, Cinnamon, Peanut Butter
+Pesto Mozzarella Quesadillas, https://www.thegardengrazer.com/spinach-tomato-quesadilla-with-pesto/, 10, true, false, false, Tortillas, Spinach, Tomatoes, Pesto, Mozzarella
+Spinach Ricotta Lasagna Mug, https://healthynibblesandbits.com/spinach-ricotta-lasagna-in-a-mug/, 15, true, false, false, Lasagna, Spinach, Ricotta, Spaghetti Sauce
+Brown Rice Edamame Pineapple Mug, https://homecookingmemories.com/brown-rice-edamame-pineapple-meals-in-a-mug/, 15, true, false, false, Rice, Edamame, Pineapple, Teriyaki
+Cheesy Broccoli Rice Casserole, https://www.campbells.com/recipes/broccoli-rice-casserole/, 5, true, false, false, Rice, Cheese, Broccoli
+Egg Fried Rice Mug, https://healthynibblesandbits.com/egg-fried-rice-mug/, 10, true, false, false, Rice, Peas, Cabbage, Eggs, Soy Sauce
+Egg Fried Rice, https://healthynibblesandbits.com/easiest-egg-fried-rice/, 20, false, false, true, Eggs, Olive Oil, Onion, Vegetables, Rice, Soy Sauce
+Sausage & Cheese Spaghetti, https://www.spendwithpennies.com/stovetop-3-cheese-pasta-with-sausage/, 20, true, false, false, Spaghetti, Whipping Cream, Cheese, Sausage, Butter
+Blueberry Pancake Mug, https://justmicrowaveit.com/blueberry-pancake-in-a-mug/, 5, true, false, false, Pancake Mix, Frozen Blueberries
+Sweet Potato Chips, https://www.rachelcooks.com/sweet-potato-chips-in-the-microwave/, 10, true, false, false, Sweet Potato, Olive Oil, Salt, Pepper
+Rice Krispies Treats, https://www.ricekrispies.com/en_US/recipes/the-original-treats-recipe.html, 5, true, false, false, Butter, Rice Krispies, Marshmallows
+Tuna Salad Jar, https://theviewfromgreatisland.com/tuna-salad-jars-recipe/, 10, false, false, false, White Beans, Black Olives, Onion, Celery, Tuna
+Buffalo Chicken Jar Salad, https://www.organizeyourselfskinny.com/buffalo-chicken-mason-jar-salad/, 15, false, false, false, Blue Cheese Dressing, Celery, Corn, Onion, Chicken, Buffalo Sauce, Lettuce
+Sriracha Nooch Popcorn, https://www.budgetbytes.com/sriracha-nooch-popcorn/, 10, false, false, true, Vegetable Oil, Popcorn Kernels, Butter, Sriracha
+Microwave Shakshuka, https://www.thekitchn.com/recipe-single-serve-microwave-shakshuka-241991, 10, false, false, false, Marinara, Cooked Chickpeas, Red Pepper Flakes, Eggs
