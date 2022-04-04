@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet.ColorAttribute;
-
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,29 +19,44 @@ public class main extends JFrame implements ActionListener {
 	JPanel homeP, homeDisplayP, loginP, loginButtonsP, signupP, signupButtonsP, selectP, displayP, favoritesP,
 			customizeP, changeDisplayP, selectDisplayP, changePasswordP, selectProfileP, displayProfileP, recipeTitleP,
 			recipeDescriptionP, securityP, securityQuestionsP, forgotPasswordP, forgotPasswordQuestionsP,
-			forgotPasswordUsernameP, forgotPasswordPasswordP;
+			forgotPasswordUsernameP, forgotPasswordPasswordP, fruitsP, vegetablesP, grainsP, proteinsP, dairysP,
+			condimentsP, seasoningsP, miscP;
+	JTabbedPane tabbedIngredients;
 	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
-			nextRecipe, previousRecipe, submitAnswers, forgotPassword, submitUser, answerQuestions, fChangePasswordB;
+			nextRecipe, previousRecipe, submitAnswers, forgotPassword, submitUser, answerQuestions, fChangePasswordB,
+			clearAll;
 	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9;
 	JLabel l1, l2, selected, user, pass, profilePic, logo, logoName, displayName, welcome, mbhelp, homeButtons,
 			currPassword, newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
 			microwaveRequired, fquestion1, fquestion2, fquestion3, fUser, fCurrPassword, fNewPassword,
-			fConfirmNewPassword;
+			fConfirmNewPassword, recipeOutOfRecipes, ovenRequired, stoveRequired;
 	JTextField tf, username, usernameSignUp, displayNameTF, question1TF, question2TF, question3TF, fquestion1TF,
 			fquestion2TF, fquestion3TF, fUsername;
 	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF, fCurrPasswordPF,
 			fNewPasswordPF, fConfirmNewPasswordPF;
-	JCheckBox microwave, avocado, turkey, bread, lettuce, tomato, ham, cheese, butter, tuna, mayo, tortilla,
-			refriedBeans, creamCheese, tortillaChips, beans, egg, bacon, englishMuffin, hashBrown, potato, sourCream,
-			meat, corn, dressing, mustard, crackers, searchAllRecipes;
+	JCheckBox microwave, lime, apple, watermelon, pears, peaches, honeyDew, cantaloupe, lemon, avocado, lettuce, tomato, refriedBeans,
+			beans, hashBrown, potato, corn, frozenBroccoli, celery, onion, cucumber, blackBeans, jalapenos, cabbage, coleslaw, V8Juice,
+			greenPepper, radish, asparagus, carrot, cornstarch, bellPepper, spinach, frozenVegetables, redPepper, frozenCorn, kidneyBeans,
+			cornmeal, zucchini, mushrooms, polenta, yellowPepper, taterTots, bread, tortilla, tortillaChips, englishMuffin,
+			crackers, glassNoodles, flour, rice, breadCrumbs, penne, garlicBread, eggNoodles, spaghetti, macNCheese, turkey, ham, tuna, egg,
+			bacon, meat, chicken, cashews, pistachios, prosciutto, shrimp, walnuts, peanutButter, pepporoni, frozenMeatballs, groundSausage,
+			salmon, kielbasa, fishFillet, porkChops, chickenWings, cheese, butter, creamCheese, sourCream, pimientos, goatCheese, mozzarella,
+			feta, milk, swiss, parmesan, mayo, dressing, mustard, salsa, bbqSauce, italianDressing, peachJam, honey, marinara, soySauce,
+			enchiladaSauce, sweetSourSauce, tomatoSauce, spaghettiSauce, curryPowder, salt, garlic, paprika, italianSeasoning, basil, cumin,
+			sugar, sesameSeed, cayennePepper, redPepperFlakes, chilePaste, cilantro, lemonPepper, chiliPowder, blackPepper, vinegar, oliveOil,
+			limeJuice, lemonJuice, fishSauce, beefStock, bakingPowder, bakingSoda, chickenStock, vegetableOil, ranchDressingMix, pestoSauceMix,
+			chilli, creamOfChicken, creamOfMushroom, strawberries, raspberries, blueberries, blackberries, yogurt, orange, spongeCake, whippedCream,
+			almonds, oats, pecans, brownSugar, cinnamon, ginger, vanillaExtract, bisquickMix, twinkies, grahamCracker, strawberryJam, appliePieFilling,
+			nutmeg, caramelSquares, cakeMix, searchAllRecipes, oven, stove;
 	JComboBox<String> q1, q2, q3;
 	Font logoFont = new Font("Comic Sans MS", Font.PLAIN, 48);
-	String appliance;
+	Font timeFont = new Font("Comic Sans MS", Font.PLAIN, 32);
 	boolean[] checked;
 	boolean mbDisplay = false;
 	boolean validLogin = false;
 	boolean searchAllRecipesB = false;
 	String checkedBox;
+	String appliance[] = {"false","false","false"};
 	String question1[] = { "What is your favorite book?", "What is your favorite movie?",
 			"What is your favorite TV show?" };
 	String question2[] = { "What is your favorite drink?", "What city were you born in?",
@@ -50,7 +64,7 @@ public class main extends JFrame implements ActionListener {
 	String question3[] = { "What is your mother's maiden name?", "What is your favorite color?",
 			"What was your first pet's name?" };
 	String[] ingredients;
-	int currUser, currRecipe, fCurrUser;
+	int currUser, currRecipe, fCurrUser, currDisplayRecipe, totalRecipes;
 	ArrayList<String> displayNameLog = new ArrayList<String>();
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
@@ -301,67 +315,185 @@ public class main extends JFrame implements ActionListener {
 		displayProfileP = new JPanel();
 
 		// Ingredients List
-		checked = new boolean[26];
-		ingredients = new String[] { "Avocado", "Turkey", "Bread", "Lettuce", "Tomato", "Ham", "Cheese", "Butter",
-				"Tuna", "Mayo", "Tortilla", "Refried Beans", "Cream Cheese", "Tortilla Chips", "Beans", "Egg", "Bacon",
-				"English Muffin", "Hash Brown", "Potato", "Sour Cream", "Meat", "Corn", "Dressing", "Mustard",
-				"Crackers" };
+		checked = new boolean[156];
+		ingredients = new String[] { "Lime","Apple","Watermelon","Pears","Peaches","Honeydew","Cantaloupe","Lemon",
+				"Avocado","Lettuce","Tomato","Refried Beans","Beans","Hash Brown","Potato","Corn","Frozen Broccoli","Celery",
+				"Onion","Cucumber","Black Beans","Jalapeno","Cabbage","Coleslaw","V8 Juice","Green Pepper",
+				"Radish","Asparagus","Carrot","Cornstarch","Bell Pepper","Spinach","Frozen Vegetables","Red Pepper","Frozen Corn",
+				"Kidney Beans","Cornmeal","Zucchini","Mushrooms","Polenta","Yellow Pepper","Tater Tots",
+				"Bread","Tortilla","Tortilla Chips","English Muffin","Crackers","Glass Noodles","Flour","Rice","Bread Crumbs",
+				"Penne","Garlic Bread","Egg Noodles","Spaghetti","Mac n Cheese","Turkey","Ham","Tuna","Eggs","Bacon","Meat",
+				"Chicken","Cashews","Pistachios","Prosciutto","Shrimp","Walnuts","Peanut Butter","Pepperoni","Frozen Meatballs",
+				"Ground Sausage","Salmon","Kielbasa","Fish Fillets","Pork Chops","Chicken Wings","Cheese","Butter","Cream Cheese",
+				"Sour Cream","Pimientos","Goat Cheese","Mozzarella","Feta","Milk","Swiss","Parmesan","Mayo","Dressing","Mustard",
+				"Salsa","BBQ Sauce","Italian Dressing","Peach Jam","Honey","Marinara","Soy Sauce","Enchilada Sauce","Sweet and Sour Sauce",
+				"Tomato Sauce","Spaghetti Sauce","Curry Powder","Salt","Garlic","Paprika","Italian Seasoning","Basil","Cumin","Sugar",
+				"Sesame Seed","Cayenne","Red Pepper Flakes","Chile Paste","Cilantro","Lemon Pepper","Chili Powder","Black Pepper",
+				"Vinegar","Olive Oil","Lime Juice","Lemon Juice","Fish Sauce","Beef Stock","Baking Powder","Baking Soda","Chicken Stock",
+				"Vegetable Oil","Ranch Dressing Mix","Pesto Sauce Mix","Chilli","Cream of Chicken","Cream of Mushroom","Strawberries",
+				"Raspberries","Blueberries","Blackberries","Yogurt","Orange","Sponge Cake","Whipped Cream","Almonds","Oats","Pecans",
+				"Brown Sugar","Cinnamon","Ginger","Vanilla Extract","Bisquick Mix","Twinkies","Graham Cracker","Strawberry Jam",
+				"Apple Pie Filling","Nutmeg","Caramel Squares","Cake Mix"};
+		lime = new JCheckBox("Lime");
+		apple = new JCheckBox("Apple");
+		watermelon = new JCheckBox("Watermelon");
+		pears = new JCheckBox("Pears");
+		peaches = new JCheckBox("Peaches");
+		honeyDew = new JCheckBox("Honey Dew");
+		cantaloupe = new JCheckBox("Cantaloupe");
+		lemon = new JCheckBox("Lemon");
 		avocado = new JCheckBox("Avocado");
-		avocado.setBounds(100, 100, 112, 15);
-		turkey = new JCheckBox("Turkey");
-		turkey.setBounds(100, 140, 112, 15);
-		bread = new JCheckBox("Bread");
-		bread.setBounds(100, 180, 112, 15);
 		lettuce = new JCheckBox("Lettuce");
-		lettuce.setBounds(100, 220, 112, 15);
 		tomato = new JCheckBox("Tomato");
-		tomato.setBounds(100, 260, 112, 15);
-		ham = new JCheckBox("Ham");
-		ham.setBounds(100, 300, 112, 15);
-		cheese = new JCheckBox("Cheese");
-		cheese.setBounds(275, 100, 112, 15);
-		butter = new JCheckBox("Butter");
-		butter.setBounds(275, 140, 112, 15);
-		tuna = new JCheckBox("Tuna");
-		tuna.setBounds(275, 180, 112, 15);
-		mayo = new JCheckBox("Mayo");
-		mayo.setBounds(275, 220, 112, 15);
-		tortilla = new JCheckBox("Tortilla");
-		tortilla.setBounds(275, 260, 112, 15);
 		refriedBeans = new JCheckBox("Refried Beans");
-		refriedBeans.setBounds(275, 300, 112, 15);
-		creamCheese = new JCheckBox("Cream Cheese");
-		creamCheese.setBounds(450, 100, 112, 15);
-		tortillaChips = new JCheckBox("Tortilla Chips");
-		tortillaChips.setBounds(450, 140, 112, 15);
 		beans = new JCheckBox("Beans");
-		beans.setBounds(450, 180, 112, 15);
-		egg = new JCheckBox("Egg");
-		egg.setBounds(450, 220, 112, 15);
-		bacon = new JCheckBox("Bacon");
-		bacon.setBounds(450, 260, 112, 15);
-		englishMuffin = new JCheckBox("English Muffin");
-		englishMuffin.setBounds(450, 300, 112, 15);
 		hashBrown = new JCheckBox("Hash Brown");
-		hashBrown.setBounds(625, 100, 112, 15);
 		potato = new JCheckBox("Potato");
-		potato.setBounds(625, 140, 112, 15);
-		sourCream = new JCheckBox("Sour Cream");
-		sourCream.setBounds(625, 180, 112, 15);
-		meat = new JCheckBox("Meat");
-		meat.setBounds(625, 220, 112, 15);
 		corn = new JCheckBox("Corn");
-		corn.setBounds(625, 260, 112, 15);
-		dressing = new JCheckBox("Dressing");
-		dressing.setBounds(625, 300, 112, 15);
-		mustard = new JCheckBox("Mustard");
-		mustard.setBounds(100, 340, 112, 15);
+		frozenBroccoli = new JCheckBox("Frozen Broccoli");
+		celery = new JCheckBox("Celery");
+		onion = new JCheckBox("Onion");
+		cucumber = new JCheckBox("Cucumber");
+		blackBeans = new JCheckBox("Black Beans");
+		jalapenos = new JCheckBox("Jalapenos");
+		cabbage = new JCheckBox("Cabbage");
+		coleslaw = new JCheckBox("Coleslaw");
+		V8Juice = new JCheckBox("V8 Juice");
+		greenPepper = new JCheckBox("Green Pepper");
+		radish = new JCheckBox("Radish");
+		asparagus = new JCheckBox("Asparagus");
+		carrot = new JCheckBox("Carrot");
+		cornstarch = new JCheckBox("Cornstarch");
+		bellPepper = new JCheckBox("Bell Pepper");
+		spinach = new JCheckBox("Spinach");
+		frozenVegetables = new JCheckBox("Frozen Vegetables");
+		redPepper = new JCheckBox("Red Pepper");
+		frozenCorn = new JCheckBox("Frozen Corn");
+		kidneyBeans = new JCheckBox("Kidney Beans");
+		cornmeal = new JCheckBox("Cornmeal");
+		zucchini = new JCheckBox("Zucchini");
+		mushrooms = new JCheckBox("Mushrooms");
+		polenta = new JCheckBox("Polenta");
+		yellowPepper = new JCheckBox("Yellow Pepper");
+		creamOfMushroom = new JCheckBox("Cream of Mushroom");
+		taterTots = new JCheckBox("Tater Tots");
+		bread = new JCheckBox("Bread");
+		tortilla = new JCheckBox("Tortilla");
+		tortillaChips = new JCheckBox("Tortilla Chips");
+		englishMuffin = new JCheckBox("English Muffin");
 		crackers = new JCheckBox("Crackers");
-		crackers.setBounds(275, 340, 112, 15);
+		glassNoodles = new JCheckBox("Glass Noodles");
+		flour = new JCheckBox("Flour");
+		rice = new JCheckBox("Rice");
+		breadCrumbs = new JCheckBox("Bread Crumbs");
+		penne = new JCheckBox("Penne");
+		garlicBread = new JCheckBox("Garlic Bread");
+		eggNoodles = new JCheckBox("Egg Noodles");
+		spaghetti = new JCheckBox("Spaghetti");
+		macNCheese = new JCheckBox("Mac n' Cheese");
+		turkey = new JCheckBox("Turkey");
+		ham = new JCheckBox("Ham");
+		tuna = new JCheckBox("Tuna");
+		egg = new JCheckBox("Eggs");
+		bacon = new JCheckBox("Bacon");
+		meat = new JCheckBox("Meat");
+		chicken = new JCheckBox("Chicken");
+		cashews = new JCheckBox("Cashews");
+		pistachios = new JCheckBox("Pistachios");
+		prosciutto = new JCheckBox("Prosciutto");
+		shrimp = new JCheckBox("Shrimp");
+		walnuts = new JCheckBox("Walnuts");
+		peanutButter = new JCheckBox("Peanut Butter");
+		pepporoni = new JCheckBox("Pepporoni");
+		frozenMeatballs = new JCheckBox("Frozen Meatballs");
+		groundSausage = new JCheckBox("Ground Sausage");
+		salmon = new JCheckBox("Salmon");
+		kielbasa = new JCheckBox("Kielbasa");
+		fishFillet = new JCheckBox("Fish Fillet");
+		porkChops = new JCheckBox("Pork Chops");
+		chickenWings = new JCheckBox("Chicken Wings");
+		cheese = new JCheckBox("Cheese");
+		butter = new JCheckBox("Butter");
+		creamCheese = new JCheckBox("Cream Cheese");
+		sourCream = new JCheckBox("Sour Cream");
+		pimientos = new JCheckBox("Pimientos");
+		goatCheese = new JCheckBox("Goat Cheese");
+		mozzarella = new JCheckBox("Mozzarella");
+		feta = new JCheckBox("Feta");
+		milk = new JCheckBox("Milk");
+		swiss = new JCheckBox("Swiss");
+		parmesan = new JCheckBox("Parmesan");
+		mayo = new JCheckBox("Mayo");
+		dressing = new JCheckBox("Dressing");
+		mustard = new JCheckBox("Mustard");
+		salsa = new JCheckBox("Salsa");
+		bbqSauce = new JCheckBox("BBQ Sauce");
+		italianDressing = new JCheckBox("Italian Dressing");
+		peachJam = new JCheckBox("Peach Jam");
+		honey = new JCheckBox("Honey");
+		marinara = new JCheckBox("Marinara");
+		soySauce = new JCheckBox("Soy Sauce");
+		enchiladaSauce = new JCheckBox("Enchilada Sauce");
+		sweetSourSauce = new JCheckBox("Sweet & Sour Sauce");
+		curryPowder = new JCheckBox("Curry Powder");
+		salt = new JCheckBox("Salt");
+		garlic = new JCheckBox("Garlic");
+		paprika = new JCheckBox("Paprika");
+		italianSeasoning = new JCheckBox("Italian Seasoning");
+		basil = new JCheckBox("Basil");
+		cumin = new JCheckBox("Cumin");
+		sugar = new JCheckBox("Sugar");
+		sesameSeed = new JCheckBox("Sesame Seed");
+		cayennePepper = new JCheckBox("Cayenne Pepper");
+		redPepperFlakes = new JCheckBox("Red Pepper Flakes");
+		chilePaste = new JCheckBox("Chile Paste");
+		blackPepper = new JCheckBox("Black Pepper");
+		vinegar = new JCheckBox("Vinegar");
+		oliveOil = new JCheckBox("Olive Oil");
+		limeJuice = new JCheckBox("Lime Juice");
+		lemonJuice = new JCheckBox("Lemon Juice");
+		fishSauce = new JCheckBox("Fish Sauce");
+		beefStock = new JCheckBox("Beef Stock");
+		bakingPowder = new JCheckBox("Baking Powder");
+		bakingSoda = new JCheckBox("Baking Soda");
+		chickenStock = new JCheckBox("Chicken Stock");
+		vegetableOil = new JCheckBox("Vegetable Oil");
+		ranchDressingMix = new JCheckBox("Ranch Dressing Mix");
+		pestoSauceMix = new JCheckBox("Pesto Sauce Mix");
+		chilli = new JCheckBox("Chilli");
+		creamOfChicken = new JCheckBox("Cream of Chicken");
+		tomatoSauce = new JCheckBox("Tomato Sauce");
+		spaghettiSauce = new JCheckBox("Spaghetti Sauce");
+		cilantro = new JCheckBox("Cilantro");
+		chiliPowder = new JCheckBox("Chili Powder");
+		lemonPepper = new JCheckBox("Lemon Pepper");
+		strawberries = new JCheckBox("Strawberries");
+		raspberries = new JCheckBox("Raspberries");
+		blueberries = new JCheckBox("Blueberries");
+		blackberries = new JCheckBox("Blackberries");
+		yogurt = new JCheckBox("Yogurt");
+		orange = new JCheckBox("Orange");
+		spongeCake = new JCheckBox("Sponge Cake");
+		whippedCream = new JCheckBox("Whipped Cream");
+		almonds = new JCheckBox("Almonds");
+		oats = new JCheckBox("Oats");
+		pecans = new JCheckBox("Pecans");
+		brownSugar = new JCheckBox("Brown Sugar");
+		cinnamon = new JCheckBox("Cinnamon");
+		ginger = new JCheckBox("Ginger");
+		vanillaExtract = new JCheckBox("Vanilla Extract");
+		bisquickMix = new JCheckBox("Bisquick Mix");
+		twinkies = new JCheckBox("Twinkies");
+		grahamCracker = new JCheckBox("Graham Cracker");
+		strawberryJam = new JCheckBox("Strawberry Jam");
+		appliePieFilling = new JCheckBox("Apple Pie Filling");
+		nutmeg = new JCheckBox("Nutmeg");
+		caramelSquares = new JCheckBox("Caramel Squares");
+		cakeMix = new JCheckBox("Cake Mix");
 
 		// Search All Recipes
 		searchAllRecipes = new JCheckBox("Include Recipes w/o All My Ingredients");
-		searchAllRecipes.setBounds(320, 407, 255, 15);
+		searchAllRecipes.setBounds(320, 427, 255, 15);
 
 		// Time
 		l1 = new JLabel("Time:");
@@ -372,15 +504,216 @@ public class main extends JFrame implements ActionListener {
 		tf.setBounds(420, 507, 50, 20);
 
 		// Appliances
-		appliance = "false";
 		microwave = new JCheckBox("Microwave");
-		microwave.setBounds(140, 507, 90, 15);
+		microwave.setBounds(140, 487, 90, 15);
+		oven = new JCheckBox("Oven");
+		oven.setBounds(140, 507, 90, 15);
+		stove = new JCheckBox("Stove");
+		stove.setBounds(140, 527, 90, 15);
 
 		// Search/Enter Button
 		b = new JButton("Search");
 		b.setBounds(600, 500, 80, 30);
 		b.setBackground(Color.green);
 		b.addActionListener(this);
+		
+		// Clear All Button
+		clearAll = new JButton("Clear All");
+		clearAll.setBounds(375, 375, 120, 30);
+		clearAll.setBackground(Color.white);
+		clearAll.addActionListener(this);
+		
+		// Tabbed Fruits Panel
+		fruitsP = new JPanel();
+		fruitsP.add(lime);
+		fruitsP.add(apple);
+		fruitsP.add(watermelon);
+		fruitsP.add(pears);
+		fruitsP.add(peaches);
+		fruitsP.add(honeyDew);
+		fruitsP.add(cantaloupe);
+		fruitsP.add(lemon);
+		fruitsP.add(strawberries);
+		fruitsP.add(raspberries);
+		fruitsP.add(blueberries);
+		fruitsP.add(blackberries);
+		fruitsP.add(orange);
+		
+		// Tabbed Vegetables Panel
+		vegetablesP = new JPanel();
+		vegetablesP.add(beans);
+		vegetablesP.add(avocado);
+		vegetablesP.add(lettuce);
+		vegetablesP.add(tomato);
+		vegetablesP.add(refriedBeans);
+		vegetablesP.add(hashBrown);
+		vegetablesP.add(potato);
+		vegetablesP.add(corn);
+		vegetablesP.add(frozenBroccoli);
+		vegetablesP.add(celery);
+		vegetablesP.add(onion);
+		vegetablesP.add(cucumber);
+		vegetablesP.add(blackBeans);
+		vegetablesP.add(jalapenos);
+		vegetablesP.add(cabbage);
+		vegetablesP.add(coleslaw);
+		vegetablesP.add(V8Juice);
+		vegetablesP.add(greenPepper);
+		vegetablesP.add(radish);
+		vegetablesP.add(asparagus);
+		vegetablesP.add(carrot);
+		vegetablesP.add(cornstarch);
+		vegetablesP.add(bellPepper);
+		vegetablesP.add(spinach);
+		vegetablesP.add(frozenVegetables);
+		vegetablesP.add(redPepper);
+		vegetablesP.add(frozenCorn);
+		vegetablesP.add(kidneyBeans);
+		vegetablesP.add(cornmeal);
+		vegetablesP.add(zucchini);
+		vegetablesP.add(mushrooms);
+		vegetablesP.add(polenta);
+		vegetablesP.add(yellowPepper);
+		vegetablesP.add(taterTots);
+		
+		// Tabbed Grains Panel
+		grainsP = new JPanel();
+		grainsP.add(bread);
+		grainsP.add(tortilla);
+		grainsP.add(tortillaChips);
+		grainsP.add(englishMuffin);
+		grainsP.add(crackers);
+		grainsP.add(glassNoodles);
+		grainsP.add(flour);
+		grainsP.add(rice);
+		grainsP.add(breadCrumbs);
+		grainsP.add(penne);
+		grainsP.add(garlicBread);
+		grainsP.add(eggNoodles);
+		grainsP.add(spaghetti);
+		grainsP.add(macNCheese);
+		grainsP.add(spongeCake);
+		grainsP.add(oats);
+		grainsP.add(grahamCracker);
+		
+		// Tabbed Proteins Panel
+		proteinsP = new JPanel();
+		proteinsP.add(turkey);
+		proteinsP.add(ham);
+		proteinsP.add(tuna);
+		proteinsP.add(egg);
+		proteinsP.add(bacon);
+		proteinsP.add(meat);
+		proteinsP.add(chicken);
+		proteinsP.add(cashews);
+		proteinsP.add(pistachios);
+		proteinsP.add(prosciutto);
+		proteinsP.add(shrimp);
+		proteinsP.add(walnuts);
+		proteinsP.add(peanutButter);
+		proteinsP.add(pepporoni);
+		proteinsP.add(frozenMeatballs);
+		proteinsP.add(groundSausage);
+		proteinsP.add(salmon);
+		proteinsP.add(kielbasa);
+		proteinsP.add(fishFillet);
+		proteinsP.add(porkChops);
+		proteinsP.add(chickenWings);
+		proteinsP.add(almonds);
+		proteinsP.add(pecans);
+		
+		// Tabbed Dairys Panel
+		dairysP = new JPanel();
+		dairysP.add(cheese);
+		dairysP.add(butter);
+		dairysP.add(creamCheese);
+		dairysP.add(sourCream);
+		dairysP.add(pimientos);
+		dairysP.add(goatCheese);
+		dairysP.add(mozzarella);
+		dairysP.add(feta);
+		dairysP.add(swiss);
+		dairysP.add(parmesan);
+		dairysP.add(yogurt);
+		dairysP.add(whippedCream);
+		
+		// Tabbed Condiments Panel
+		condimentsP = new JPanel();
+		condimentsP.add(mayo);
+		condimentsP.add(dressing);
+		condimentsP.add(mustard);
+		condimentsP.add(salsa);
+		condimentsP.add(bbqSauce);
+		condimentsP.add(italianDressing);
+		condimentsP.add(peachJam);
+		condimentsP.add(honey);
+		condimentsP.add(marinara);
+		condimentsP.add(soySauce);
+		condimentsP.add(enchiladaSauce);
+		condimentsP.add(sweetSourSauce);
+		condimentsP.add(tomatoSauce);
+		condimentsP.add(spaghettiSauce);
+		condimentsP.add(strawberryJam);
+		
+		// Tabbed Seasonings Panel
+		seasoningsP = new JPanel();
+		seasoningsP.add(curryPowder);
+		seasoningsP.add(salt);
+		seasoningsP.add(garlic);
+		seasoningsP.add(paprika);
+		seasoningsP.add(italianSeasoning);
+		seasoningsP.add(basil);
+		seasoningsP.add(cumin);
+		seasoningsP.add(sugar);
+		seasoningsP.add(sesameSeed);
+		seasoningsP.add(cayennePepper);
+		seasoningsP.add(redPepperFlakes);
+		seasoningsP.add(chilePaste);
+		seasoningsP.add(cilantro);
+		seasoningsP.add(lemonPepper);
+		seasoningsP.add(chiliPowder);
+		seasoningsP.add(blackPepper);
+		seasoningsP.add(brownSugar);
+		seasoningsP.add(cinnamon);
+		seasoningsP.add(ginger);
+		seasoningsP.add(nutmeg);
+		
+		// Tabbed Miscellaneous Panel
+		miscP = new JPanel();
+		miscP.add(vinegar);
+		miscP.add(oliveOil);
+		miscP.add(limeJuice);
+		miscP.add(lemonJuice);
+		miscP.add(fishSauce);
+		miscP.add(beefStock);
+		miscP.add(bakingPowder);
+		miscP.add(bakingSoda);
+		miscP.add(chickenStock);
+		miscP.add(vegetableOil);
+		miscP.add(ranchDressingMix);
+		miscP.add(pestoSauceMix);
+		miscP.add(chilli);
+		miscP.add(creamOfMushroom);
+		miscP.add(creamOfChicken);
+		miscP.add(vanillaExtract);
+		miscP.add(bisquickMix);
+		miscP.add(twinkies);
+		miscP.add(appliePieFilling);
+		miscP.add(caramelSquares);
+		miscP.add(cakeMix);
+		
+		// Tabbed Ingredients Panel
+		tabbedIngredients = new JTabbedPane();
+		tabbedIngredients.add("Fruits",fruitsP);
+		tabbedIngredients.add("Vegetables",vegetablesP);
+		tabbedIngredients.add("Grains",grainsP);
+		tabbedIngredients.add("Proteins",proteinsP);
+		tabbedIngredients.add("Dairys",dairysP);
+		tabbedIngredients.add("Condiments",condimentsP);
+		tabbedIngredients.add("Seasonings",seasoningsP);
+		tabbedIngredients.add("Misc.",miscP);
+		tabbedIngredients.setVisible(true);
+		tabbedIngredients.setBounds(100, 50, 700, 300);
 
 		// Panel Login
 		login = new JButton("Login");
@@ -580,40 +913,19 @@ public class main extends JFrame implements ActionListener {
 
 		// Panel Select
 		selectP.add(b);
-		selectP.add(tf);
-		selectP.add(avocado);
-		selectP.add(turkey);
-		selectP.add(bread);
-		selectP.add(lettuce);
-		selectP.add(tomato);
-		selectP.add(ham);
-		selectP.add(cheese);
-		selectP.add(butter);
-		selectP.add(tuna);
-		selectP.add(mayo);
-		selectP.add(tortilla);
-		selectP.add(refriedBeans);
-		selectP.add(creamCheese);
-		selectP.add(tortillaChips);
-		selectP.add(beans);
-		selectP.add(egg);
-		selectP.add(bacon);
-		selectP.add(englishMuffin);
-		selectP.add(hashBrown);
-		selectP.add(potato);
-		selectP.add(sourCream);
-		selectP.add(meat);
-		selectP.add(corn);
-		selectP.add(dressing);
-		selectP.add(mustard);
-		selectP.add(crackers);
+		selectP.add(clearAll);
 		selectP.add(microwave);
+		selectP.add(oven);
+		selectP.add(stove);
 		selectP.add(l1);
 		selectP.add(tf);
 		selectP.add(searchAllRecipes);
+		selectP.add(tabbedIngredients);
 		selectP.setVisible(false);
 
 		// Panel Display
+		recipeOutOfRecipes = new JLabel();
+		recipeOutOfRecipes.setBounds(430, 160, 200, 30);
 		recipeTitleP.setBounds(115, 10, 650, 150);
 		recipeTitleP.setLayout(null);
 		recipeDescriptionP.setBounds(115, 200, 650, 400);
@@ -627,6 +939,8 @@ public class main extends JFrame implements ActionListener {
 		recipeIngredientList = new JLabel();
 		recipeIngredientList.setBounds(20, 260, 900, 30);
 		microwaveRequired = new JLabel();
+		ovenRequired = new JLabel();
+		stoveRequired = new JLabel();
 		nextRecipe = new JButton(">");
 		nextRecipe.setBounds(795, 300, 80, 80);
 		nextRecipe.setBackground(Color.gray);
@@ -635,16 +949,21 @@ public class main extends JFrame implements ActionListener {
 		previousRecipe.setBounds(10, 300, 80, 80);
 		previousRecipe.setBackground(Color.gray);
 		previousRecipe.addActionListener(this);
+		displayP.add(recipeOutOfRecipes);
 		displayP.add(nextRecipe);
 		displayP.add(previousRecipe);
-		l2.setBounds(10, 60, 900, 30);
+		l2.setBounds(10, 40, 900, 30);
 		selected.setBounds(10, 20, 900, 30);
-		microwaveRequired.setBounds(10, 100, 200, 30);
+		microwaveRequired.setBounds(10, 60, 200, 30);
+		ovenRequired.setBounds(10,80,200,30);
+		stoveRequired.setBounds(10,100,200,30);
 		displayP.add(recipeTitleP);
 		displayP.add(recipeDescriptionP);
 		recipeTitleP.add(selected);
 		recipeTitleP.add(l2);
 		recipeTitleP.add(microwaveRequired);
+		recipeTitleP.add(ovenRequired);
+		recipeTitleP.add(stoveRequired);
 		recipeDescriptionP.add(recipeTitle);
 		recipeDescriptionP.add(recipeTime);
 		recipeDescriptionP.add(recipeLink);
@@ -740,7 +1059,17 @@ public class main extends JFrame implements ActionListener {
 		// Buttons Selected
 		microwave.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				appliance = (e.getStateChange() == 1 ? "true" : "false");
+				appliance[0] = (e.getStateChange() == 1 ? "true" : "false");
+			}
+		});
+		oven.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				appliance[1] = (e.getStateChange() == 1 ? "true" : "false");
+			}
+		});
+		stove.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				appliance[2] = (e.getStateChange() == 1 ? "true" : "false");
 			}
 		});
 		searchAllRecipes.addItemListener(new ItemListener() {
@@ -748,57 +1077,57 @@ public class main extends JFrame implements ActionListener {
 				searchAllRecipesB = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		avocado.addItemListener(new ItemListener() {
+		lime.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[0] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		turkey.addItemListener(new ItemListener() {
+		apple.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[1] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		bread.addItemListener(new ItemListener() {
+		watermelon.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[2] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		lettuce.addItemListener(new ItemListener() {
+		pears.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[3] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		tomato.addItemListener(new ItemListener() {
+		peaches.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[4] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		ham.addItemListener(new ItemListener() {
+		honeyDew.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[5] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		cheese.addItemListener(new ItemListener() {
+		cantaloupe.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[6] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		butter.addItemListener(new ItemListener() {
+		lemon.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[7] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		tuna.addItemListener(new ItemListener() {
+		avocado.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[8] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		mayo.addItemListener(new ItemListener() {
+		lettuce.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[9] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		tortilla.addItemListener(new ItemListener() {
+		tomato.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[10] = (e.getStateChange() == 1 ? true : false);
 			}
@@ -808,74 +1137,724 @@ public class main extends JFrame implements ActionListener {
 				checked[11] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		creamCheese.addItemListener(new ItemListener() {
+		beans.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[12] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		tortillaChips.addItemListener(new ItemListener() {
+		hashBrown.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[13] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		beans.addItemListener(new ItemListener() {
+		potato.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[14] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		egg.addItemListener(new ItemListener() {
+		corn.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[15] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		bacon.addItemListener(new ItemListener() {
+		frozenBroccoli.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[16] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		englishMuffin.addItemListener(new ItemListener() {
+		celery.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[17] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		hashBrown.addItemListener(new ItemListener() {
+		onion.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[18] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		potato.addItemListener(new ItemListener() {
+		cucumber.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[19] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		sourCream.addItemListener(new ItemListener() {
+		blackBeans.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[20] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		meat.addItemListener(new ItemListener() {
+		jalapenos.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[21] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		corn.addItemListener(new ItemListener() {
+		cabbage.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[22] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		dressing.addItemListener(new ItemListener() {
+		coleslaw.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[23] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		mustard.addItemListener(new ItemListener() {
+		V8Juice.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[24] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
-		crackers.addItemListener(new ItemListener() {
+		greenPepper.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				checked[25] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		radish.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[26] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		asparagus.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[27] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		carrot.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[28] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cornstarch.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[29] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bellPepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[30] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		spinach.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[31] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		frozenVegetables.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[32] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		redPepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[33] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		frozenCorn.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[34] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		kidneyBeans.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[35] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cornmeal.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[36] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		zucchini.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[37] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		mushrooms.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[38] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		polenta.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[39] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		yellowPepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[40] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		taterTots.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[41] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bread.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[42] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		tortilla.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[43] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		tortillaChips.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[44] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		englishMuffin.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[45] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		crackers.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[46] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		glassNoodles.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[47] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		flour.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[48] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		rice.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[49] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		breadCrumbs.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[50] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		penne.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[51] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		garlicBread.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[52] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		eggNoodles.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[53] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		spaghetti.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[54] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		macNCheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[55] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		turkey.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[56] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		ham.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[57] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		tuna.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[58] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		egg.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[59] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bacon.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[60] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		meat.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[61] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chicken.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[62] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cashews.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[63] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		pistachios.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[64] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		prosciutto.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[65] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		shrimp.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[66] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		walnuts.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[67] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		peanutButter.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[68] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		pepporoni.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[69] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		frozenMeatballs.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[70] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		groundSausage.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[71] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		salmon.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[72] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		kielbasa.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[73] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		fishFillet.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[74] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		porkChops.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[75] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chickenWings.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[76] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[77] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		butter.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[78] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		creamCheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[79] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		sourCream.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[80] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		pimientos.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[81] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		goatCheese.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[82] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		mozzarella.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[83] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		feta.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[84] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		milk.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[85] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		swiss.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[86] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		parmesan.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[87] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		mayo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[88] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		dressing.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[89] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		mustard.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[90] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		salsa.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[91] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bbqSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[92] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		italianDressing.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[93] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		peachJam.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[94] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		honey.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[95] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		marinara.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[96] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		soySauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[97] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		enchiladaSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[98] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		sweetSourSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[99] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		tomatoSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[100] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		spaghettiSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[101] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		curryPowder.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[102] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		salt.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[103] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		garlic.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[104] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		paprika.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[105] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		italianSeasoning.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[106] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		basil.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[107] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cumin.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[108] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		sugar.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[109] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		sesameSeed.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[110] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cayennePepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[111] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		redPepperFlakes.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[112] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chilePaste.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[113] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cilantro.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[114] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		lemonPepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[115] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chiliPowder.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[116] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		blackPepper.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[117] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		vinegar.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[118] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		oliveOil.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[119] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		limeJuice.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[120] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		lemonJuice.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[121] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		fishSauce.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[122] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		beefStock.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[123] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bakingPowder.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[124] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bakingSoda.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[125] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chickenStock.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[126] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		vegetableOil.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[127] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		ranchDressingMix.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[128] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		pestoSauceMix.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[129] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		chilli.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[130] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		creamOfChicken.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[131] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		creamOfMushroom.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[132] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		strawberries.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[133] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		raspberries.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[134] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		blueberries.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[135] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		blackberries.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[136] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		yogurt.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[137] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		orange.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[138] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		spongeCake.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[139] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		whippedCream.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[140] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		almonds.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[141] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		oats.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[142] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		pecans.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[143] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		brownSugar.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[144] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cinnamon.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[145] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		ginger.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[146] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		vanillaExtract.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[147] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		bisquickMix.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[148] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		twinkies.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[149] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		grahamCracker.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[150] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		strawberryJam.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[151] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		appliePieFilling.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[152] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		nutmeg.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[153] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		caramelSquares.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[154] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		cakeMix.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				checked[155] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
 
@@ -888,6 +1867,169 @@ public class main extends JFrame implements ActionListener {
 
 	// clickButton.exe
 	public void actionPerformed(ActionEvent e) {
+		// Clear All Selected
+		if (e.getSource() == clearAll) {
+			for (int i = 0; i < checked.length; i++) {
+				checked[i] = false;
+			}
+			lime.setSelected(false);
+			apple.setSelected(false);
+			watermelon.setSelected(false);
+			pears.setSelected(false);
+			peaches.setSelected(false);
+			honeyDew.setSelected(false);
+			cantaloupe.setSelected(false);
+			lemon.setSelected(false);
+			avocado.setSelected(false);
+			lettuce.setSelected(false);
+			tomato.setSelected(false);
+			refriedBeans.setSelected(false);
+			beans.setSelected(false);
+			hashBrown.setSelected(false);
+			potato.setSelected(false);
+			corn.setSelected(false);
+			frozenBroccoli.setSelected(false);
+			celery.setSelected(false);
+			onion.setSelected(false);
+			cucumber.setSelected(false);
+			blackBeans.setSelected(false);
+			jalapenos.setSelected(false);
+			cabbage.setSelected(false);
+			coleslaw.setSelected(false);
+			V8Juice.setSelected(false);
+			greenPepper.setSelected(false);
+			radish.setSelected(false);
+			asparagus.setSelected(false);
+			carrot.setSelected(false);
+			cornstarch.setSelected(false);
+			bellPepper.setSelected(false);
+			spinach.setSelected(false);
+			frozenVegetables.setSelected(false);
+			redPepper.setSelected(false);
+			frozenCorn.setSelected(false);
+			kidneyBeans.setSelected(false);
+			cornmeal.setSelected(false);
+			zucchini.setSelected(false);
+			mushrooms.setSelected(false);
+			polenta.setSelected(false);
+			yellowPepper.setSelected(false);
+			creamOfMushroom.setSelected(false);
+			taterTots.setSelected(false);
+			bread.setSelected(false);
+			tortilla.setSelected(false);
+			tortillaChips.setSelected(false);
+			englishMuffin.setSelected(false);
+			crackers.setSelected(false);
+			glassNoodles.setSelected(false);
+			flour.setSelected(false);
+			rice.setSelected(false);
+			breadCrumbs.setSelected(false);
+			penne.setSelected(false);
+			garlicBread.setSelected(false);
+			eggNoodles.setSelected(false);
+			spaghetti.setSelected(false);
+			macNCheese.setSelected(false);
+			turkey.setSelected(false);
+			ham.setSelected(false);
+			tuna.setSelected(false);
+			egg.setSelected(false);
+			bacon.setSelected(false);
+			meat.setSelected(false);
+			chicken.setSelected(false);
+			cashews.setSelected(false);
+			pistachios.setSelected(false);
+			prosciutto.setSelected(false);
+			shrimp.setSelected(false);
+			walnuts.setSelected(false);
+			peanutButter.setSelected(false);
+			pepporoni.setSelected(false);
+			frozenMeatballs.setSelected(false);
+			groundSausage.setSelected(false);
+			salmon.setSelected(false);
+			kielbasa.setSelected(false);
+			fishFillet.setSelected(false);
+			porkChops.setSelected(false);
+			chickenWings.setSelected(false);
+			cheese.setSelected(false);
+			butter.setSelected(false);
+			creamCheese.setSelected(false);
+			sourCream.setSelected(false);
+			pimientos.setSelected(false);
+			goatCheese.setSelected(false);
+			mozzarella.setSelected(false);
+			feta.setSelected(false);
+			milk.setSelected(false);
+			swiss.setSelected(false);
+			parmesan.setSelected(false);
+			mayo.setSelected(false);
+			dressing.setSelected(false);
+			mustard.setSelected(false);
+			salsa.setSelected(false);
+			bbqSauce.setSelected(false);
+			italianDressing.setSelected(false);
+			peachJam.setSelected(false);
+			honey.setSelected(false);
+			marinara.setSelected(false);
+			soySauce.setSelected(false);
+			enchiladaSauce.setSelected(false);
+			sweetSourSauce.setSelected(false);
+			curryPowder.setSelected(false);
+			salt.setSelected(false);
+			garlic.setSelected(false);
+			paprika.setSelected(false);
+			italianSeasoning.setSelected(false);
+			basil.setSelected(false);
+			cumin.setSelected(false);
+			sugar.setSelected(false);
+			sesameSeed.setSelected(false);
+			cayennePepper.setSelected(false);
+			redPepperFlakes.setSelected(false);
+			chilePaste.setSelected(false);
+			blackPepper.setSelected(false);
+			vinegar.setSelected(false);
+			oliveOil.setSelected(false);
+			limeJuice.setSelected(false);
+			lemonJuice.setSelected(false);
+			fishSauce.setSelected(false);
+			beefStock.setSelected(false);
+			bakingPowder.setSelected(false);
+			bakingSoda.setSelected(false);
+			chickenStock.setSelected(false);
+			vegetableOil.setSelected(false);
+			ranchDressingMix.setSelected(false);
+			pestoSauceMix.setSelected(false);
+			chilli.setSelected(false);
+			creamOfChicken.setSelected(false);
+			tomatoSauce.setSelected(false);
+			spaghettiSauce.setSelected(false);
+			cilantro.setSelected(false);
+			chiliPowder.setSelected(false);
+			lemonPepper.setSelected(false);
+			strawberries.setSelected(false);
+			raspberries.setSelected(false);
+			blueberries.setSelected(false);
+			blackberries.setSelected(false);
+			yogurt.setSelected(false);
+			orange.setSelected(false);
+			spongeCake.setSelected(false);
+			whippedCream.setSelected(false);
+			almonds.setSelected(false);
+			oats.setSelected(false);
+			pecans.setSelected(false);
+			brownSugar.setSelected(false);
+			cinnamon.setSelected(false);
+			ginger.setSelected(false);
+			vanillaExtract.setSelected(false);
+			bisquickMix.setSelected(false);
+			twinkies.setSelected(false);
+			grahamCracker.setSelected(false);
+			strawberryJam.setSelected(false);
+			appliePieFilling.setSelected(false);
+			nutmeg.setSelected(false);
+			caramelSquares.setSelected(false);
+			cakeMix.setSelected(false);
+		}
+		
 		// Load Selected Profile Picture
 		if (e.getSource() == p0 || e.getSource() == p1 || e.getSource() == p2 || e.getSource() == p3
 				|| e.getSource() == p4 || e.getSource() == p5 || e.getSource() == p6 || e.getSource() == p7
@@ -1223,6 +2365,8 @@ public class main extends JFrame implements ActionListener {
 			if (validRecipes.size() <= currRecipe + 1) {
 				nextRecipe.setBackground(Color.gray);
 			}
+			currDisplayRecipe++;
+			recipeOutOfRecipes.setText(currDisplayRecipe + "/" + totalRecipes);
 		}
 
 		// Previous Recipe
@@ -1236,6 +2380,8 @@ public class main extends JFrame implements ActionListener {
 			if (currRecipe <= 0) {
 				previousRecipe.setBackground(Color.gray);
 			}
+			currDisplayRecipe--;
+			recipeOutOfRecipes.setText(currDisplayRecipe + "/" + totalRecipes);
 		}
 
 		// Menu Selections
@@ -1349,10 +2495,24 @@ public class main extends JFrame implements ActionListener {
 			}
 
 			// Display Microwave Required
-			if (appliance.equals("true")) {
+			if (appliance[0].equals("true")) {
 				microwaveRequired.setText("Microwave Selected? Yes");
 			} else {
 				microwaveRequired.setText("Microwave Selected? No");
+			}
+			
+			// Display Oven Required
+			if (appliance[1].equals("true")) {
+				ovenRequired.setText("Oven Selected? Yes");
+			} else {
+				ovenRequired.setText("Oven Selected? No");
+			}
+			
+			// Display Stove Required
+			if (appliance[2].equals("true")) {
+				stoveRequired.setText("Stove Selected? Yes");
+			} else {
+				stoveRequired.setText("Stove Selected? No");
 			}
 
 			// Display Selected Ingredients
@@ -1391,10 +2551,16 @@ public class main extends JFrame implements ActionListener {
 				validRecipes = searchRecipe(time, appliance, userIngredients, holder.getRecipes());
 			}
 			if (validRecipes.size() >= 1) {
+				totalRecipes = 1;
+				for(int i = 1; i < validRecipes.size(); i++) {
+					totalRecipes++;
+				}
 				recipeTitle.setText(validRecipes.get(currRecipe).getName());
 				recipeTime.setText("Time to Make: " + validRecipes.get(currRecipe).getTime() + " minutes");
 				recipeLink.setText(validRecipes.get(currRecipe).getLink());
 				recipeIngredientList.setText("Ingredients: " + validRecipes.get(currRecipe).getIngredientList());
+				currDisplayRecipe = 1;
+				recipeOutOfRecipes.setText(currDisplayRecipe + "/" + totalRecipes);
 			}
 			if (validRecipes.size() > 1) {
 				nextRecipe.setBackground(Color.green);
@@ -1693,7 +2859,7 @@ public class main extends JFrame implements ActionListener {
 		new main();
 	}
 
-	static ArrayList<Recipe> searchRecipe(int time, String microwaveable, ArrayList<String> userInput,
+	static ArrayList<Recipe> searchRecipe(int time, String[] appliances, ArrayList<String> userInput,
 			ArrayList<Recipe> database) {
 
 		ArrayList<Recipe> sendToMain = new ArrayList<Recipe>();
@@ -1702,6 +2868,25 @@ public class main extends JFrame implements ActionListener {
 		}
 		for (int i = 0; i < database.size(); i++) {
 			boolean validRecipe = true;
+			/*"Lime","Apple","Watermelon","Pears","Peaches","Honeydew","Cantaloupe","Lemon",
+				"Frozen Broccoli","Celery",
+				"Onion","Cucumber","Black Beans","Jalapeno","Cabbage","Coleslaw","V8 Juice","Green Pepper",
+				"Radish","Asparagus","Carrot","Cornstarch","Bell Pepper","Spinach","Frozen Vegetables","Red Pepper","Frozen Corn",
+				"Kidney Beans","Cornmeal","Zucchini","Mushrooms","Polenta","Yellow Pepper","Tater Tots",
+				"Glass Noodles","Flour","Rice","Bread Crumbs",
+				"Penne","Garlic Bread","Egg Noodles","Spaghetti","Mac n Cheese",
+				"Chicken","Cashews","Pistachios","Prosciutto","Shrimp","Walnuts","Peanut Butter","Pepperoni","Frozen Meatballs",
+				"Ground Sausage","Salmon","Kielbasa","Fish Fillets","Pork Chops","Chicken Wings"
+				"Pimientos","Goat Cheese","Mozzarella","Feta","Milk","Swiss","Parmesan"
+				"Salsa","BBQ Sauce","Italian Dressing","Peach Jam","Honey","Marinara","Soy Sauce","Enchilada Sauce","Sweet and Sour Sauce",
+				"Tomato Sauce","Spaghetti Sauce","Curry Powder","Salt","Garlic","Paprika","Italian Seasoning","Basil","Cumin","Sugar",
+				"Sesame Seed","Cayenne","Red Pepper Flakes","Chile Paste","Cilantro","Lemon Pepper","Chili Powder","Black Pepper",
+				"Vinegar","Olive Oil","Lime Juice","Lemon Juice","Fish Sauce","Beef Stock","Baking Powder","Baking Soda","Chicken Stock",
+				"Vegetable Oil","Ranch Dressing Mix","Pesto Sauce Mix","Chilli","Cream of Chicken","Cream of Mushroom"
+				"Strawberries",
+			"Raspberries","Blueberries","Blackberries","Yogurt","Orange","Sponge Cake","Whipped Cream","Almonds","Oats","Pecans",
+			"Brown Sugar","Cinnamon","Ginger","Vanilla Extract","Bisquick Mix","Twinkies","Graham Cracker","Strawberry Jam",
+			"Apple Pie Filling","Nutmeg","Caramel Squares","Cake Mix*/
 			if (!userInput.contains("turkey") && database.get(i).getIngredientList().contains("turkey")) {
 				validRecipe = false;
 			} else if (!userInput.contains("ham") && database.get(i).getIngredientList().contains("ham")) {
@@ -1772,7 +2957,13 @@ public class main extends JFrame implements ActionListener {
 			}
 		}
 		for (int k = 0; k < sendToMain.size(); k++) {
-			if (microwaveable.equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+			if (appliances[0].equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+				sendToMain.remove(k);
+			}
+			if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
+				sendToMain.remove(k);
+			}
+			if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
 				sendToMain.remove(k);
 			}
 		}
@@ -1780,7 +2971,7 @@ public class main extends JFrame implements ActionListener {
 		return sendToMain;
 	}
 
-	static ArrayList<Recipe> searchAllRecipe(int time, String microwaveable, ArrayList<String> userInput,
+	static ArrayList<Recipe> searchAllRecipe(int time, String[] appliances, ArrayList<String> userInput,
 			ArrayList<Recipe> database) {
 
 		ArrayList<Recipe> sendToMain = new ArrayList<Recipe>();
@@ -1857,7 +3048,13 @@ public class main extends JFrame implements ActionListener {
 			}
 		}
 		for (int k = 0; k < sendToMain.size(); k++) {
-			if (microwaveable.equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+			if (appliances[0].equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
+				sendToMain.remove(k);
+			}
+			if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
+				sendToMain.remove(k);
+			}
+			if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
 				sendToMain.remove(k);
 			}
 		}
