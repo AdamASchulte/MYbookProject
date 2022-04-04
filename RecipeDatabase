@@ -75,11 +75,11 @@ Watermelon Lemon Cream Tart, https://www.tasteofhome.com/recipes/frozen-watermel
 Mug Apple Pie, https://www.biggerbolderbaking.com/microwave-mug-pies/, 15, true, Butter, Oats, Pecans, Flour, Brown Sugar, Cinnamon, Salt, Apple
 Strawberry Oatmeal Bars, https://www.wellplated.com/strawberry-oatmeal-bars/, 55, true, true, false, Oats, Flour, Brown Sugar, Ginger, Salt, Butter, Strawberries, Cornstarch, Lemon Juice, Sugar, Milk, Vanilla Extract
 Bisquick Strawberry Shortcake, https://insanelygoodrecipes.com/bisquick-strawberry-shortcake/, 35, true, true, false, Strawberries, Sugar, Bisquick Mix, Milk, Sugar, Butter, Whipped Cream
-Lemon Fruit Parfait, https://insidebrucrewlife.com/lemon-mousse-fruit-parfaits/, 20, false, Lemon Pie Filling, Whipped Cream, Twinkies, Strawberries, Blueberries
-Strawberry Cheesecake, https://insanelygoodrecipes.com/strawberry-cheesecake-lasagna/, 25, true, Cream Cheese, Sugar, Whipped Cream, Non-Stick Spray, Graham Cracker, Strawberry Jam, Strawberries
-Caramel Apple Dump Cake, https://thenovicechefblog.com/caramel-apple-dump-cake/, 55, true, true, false, Apple Pie Filling, Cinnamon, Nutmeg, Caramel Squares, Cake Mix, Butter
+Lemon Fruit Parfait, https://insidebrucrewlife.com/lemon-mousse-fruit-parfaits/, 20, false, false, false, Lemon Pie Filling, Whipped Cream, Twinkies, Strawberries, Blueberries
+Strawberry Cheesecake, https://insanelygoodrecipes.com/strawberry-cheesecake-lasagna/, 25, true, false, false, Cream Cheese, Sugar, Whipped Cream, Non-Stick Spray, Graham Cracker, Strawberry Jam, Strawberries
+Caramel Apple Dump Cake, https://thenovicechefblog.com/caramel-apple-dump-cake/, 55, false, true, false, Apple Pie Filling, Cinnamon, Nutmeg, Caramel Squares, Cake Mix, Butter
 Bagel Breakfast, No Link Found, 10, false, false, false, Bagel, Avocado, Ham
-Baked Chicken Dinner, No Link Found, 60, false, true, false, Chicken, Potatoes, Carrot
+Baked Chicken Dinner, No Link Found, 60, false, true, false Chicken, Potatoes, Carrot
 Chili Dogs, No Link Found, 10, false, false, true, Hot Dogs, Chilli, Hot Dog Buns
 Sloppy Joe, No Link Found, 15, false, false, true, Ground Beef, Chili Sauce, Hamburger Buns
 Bacon & Cheese Mug, No Link Found, 5, true, false, false, Bread, Eggs, Milk, Cheese, Bacon
