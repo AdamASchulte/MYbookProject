@@ -2868,25 +2868,6 @@ public class main extends JFrame implements ActionListener {
 		}
 		for (int i = 0; i < database.size(); i++) {
 			boolean validRecipe = true;
-			/*"Lime","Apple","Watermelon","Pears","Peaches","Honeydew","Cantaloupe","Lemon",
-				"Frozen Broccoli","Celery",
-				"Onion","Cucumber","Black Beans","Jalapeno","Cabbage","Coleslaw","V8 Juice","Green Pepper",
-				"Radish","Asparagus","Carrot","Cornstarch","Bell Pepper","Spinach","Frozen Vegetables","Red Pepper","Frozen Corn",
-				"Kidney Beans","Cornmeal","Zucchini","Mushrooms","Polenta","Yellow Pepper","Tater Tots",
-				"Glass Noodles","Flour","Rice","Bread Crumbs",
-				"Penne","Garlic Bread","Egg Noodles","Spaghetti","Mac n Cheese",
-				"Chicken","Cashews","Pistachios","Prosciutto","Shrimp","Walnuts","Peanut Butter","Pepperoni","Frozen Meatballs",
-				"Ground Sausage","Salmon","Kielbasa","Fish Fillets","Pork Chops","Chicken Wings"
-				"Pimientos","Goat Cheese","Mozzarella","Feta","Milk","Swiss","Parmesan"
-				"Salsa","BBQ Sauce","Italian Dressing","Peach Jam","Honey","Marinara","Soy Sauce","Enchilada Sauce","Sweet and Sour Sauce",
-				"Tomato Sauce","Spaghetti Sauce","Curry Powder","Salt","Garlic","Paprika","Italian Seasoning","Basil","Cumin","Sugar",
-				"Sesame Seed","Cayenne","Red Pepper Flakes","Chile Paste","Cilantro","Lemon Pepper","Chili Powder","Black Pepper",
-				"Vinegar","Olive Oil","Lime Juice","Lemon Juice","Fish Sauce","Beef Stock","Baking Powder","Baking Soda","Chicken Stock",
-				"Vegetable Oil","Ranch Dressing Mix","Pesto Sauce Mix","Chilli","Cream of Chicken","Cream of Mushroom"
-				"Strawberries",
-			"Raspberries","Blueberries","Blackberries","Yogurt","Orange","Sponge Cake","Whipped Cream","Almonds","Oats","Pecans",
-			"Brown Sugar","Cinnamon","Ginger","Vanilla Extract","Bisquick Mix","Twinkies","Graham Cracker","Strawberry Jam",
-			"Apple Pie Filling","Nutmeg","Caramel Squares","Cake Mix*/
 			if (!userInput.contains("turkey") && database.get(i).getIngredientList().contains("turkey")) {
 				validRecipe = false;
 			} else if (!userInput.contains("ham") && database.get(i).getIngredientList().contains("ham")) {
@@ -2945,6 +2926,297 @@ public class main extends JFrame implements ActionListener {
 				validRecipe = false;
 			} else if (!userInput.contains("mayo") && database.get(i).getIngredientList().contains("mayo")) {
 				validRecipe = false;
+			} else if (!userInput.contains("lime") && database.get(i).getIngredientList().contains("lime")) {
+				validRecipe = true;
+			} else if (!userInput.contains("watermelon") && database.get(i).getIngredientList().contains("watermelon")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pears") && database.get(i).getIngredientList().contains("pears")) {
+				validRecipe = true;
+			} else if (!userInput.contains("peaches") && database.get(i).getIngredientList().contains("peaches")) {
+				validRecipe = true;
+			} else if (!userInput.contains("honeydew") && database.get(i).getIngredientList().contains("honeydew")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cantaloupe") && database.get(i).getIngredientList().contains("cantaloupe")) {
+				validRecipe = true;
+			} else if (!userInput.contains("lemon") && database.get(i).getIngredientList().contains("lemon")) {
+				validRecipe = true;
+			} else if (!userInput.contains("frozen broccoli") && database.get(i).getIngredientList().contains("frozen broccoli")) {
+				validRecipe = true;
+			} else if (!userInput.contains("celery") && database.get(i).getIngredientList().contains("celery")) {
+				validRecipe = true;
+			} else if (!userInput.contains("onion")
+					&& database.get(i).getIngredientList().contains("onion")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cucumber") && database.get(i).getIngredientList().contains("cucumber")) {
+				validRecipe = true;
+			} else if (!userInput.contains("black beans") && database.get(i).getIngredientList().contains("black beans")) {
+				validRecipe = true;
+			} else if (!userInput.contains("jalapeno") && database.get(i).getIngredientList().contains("jalapeno")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cabbage") && database.get(i).getIngredientList().contains("cabbage")) {
+				validRecipe = true;
+			} else if (!userInput.contains("coleslaw") && database.get(i).getIngredientList().contains("coleslaw")) {
+				validRecipe = true;
+			} else if (!userInput.contains("v8 juice") && database.get(i).getIngredientList().contains("v8 juice")) {
+				validRecipe = true;
+			} else if (!userInput.contains("green pepper") && database.get(i).getIngredientList().contains("green pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("radish")
+					&& database.get(i).getIngredientList().contains("radish")) {
+				validRecipe = true;
+			} else if (!userInput.contains("asparagus") && database.get(i).getIngredientList().contains("asparagus")) {
+				validRecipe = true;
+			} else if (!userInput.contains("carrot")
+					&& database.get(i).getIngredientList().contains("carrot")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cornstarch") && database.get(i).getIngredientList().contains("cornstarch")) {
+				validRecipe = true;
+			} else if (!userInput.contains("bell pepper") && database.get(i).getIngredientList().contains("bell pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("spinach") && database.get(i).getIngredientList().contains("spinach")) {
+				validRecipe = true;
+			} else if (!userInput.contains("frozen vegetables")
+					&& database.get(i).getIngredientList().contains("frozen vegetables")) {
+				validRecipe = true;
+			} else if (!userInput.contains("red pepper") && database.get(i).getIngredientList().contains("red pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("frozen corn") && database.get(i).getIngredientList().contains("frozen corn")) {
+				validRecipe = true;
+			} else if (!userInput.contains("kidney beans") && database.get(i).getIngredientList().contains("kidney beans")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cornmeal") && database.get(i).getIngredientList().contains("cornmeal")) {
+				validRecipe = true;
+			} else if (!userInput.contains("zucchini") && database.get(i).getIngredientList().contains("zucchini")) {
+				validRecipe = true;
+			} else if (!userInput.contains("mushrooms") && database.get(i).getIngredientList().contains("mushrooms")) {
+				validRecipe = true;
+			} else if (!userInput.contains("polenta") && database.get(i).getIngredientList().contains("polenta")) {
+				validRecipe = true;
+			} else if (!userInput.contains("yellow pepper") && database.get(i).getIngredientList().contains("yellow pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("tater tots") && database.get(i).getIngredientList().contains("tater tots")) {
+				validRecipe = true;
+			} else if (!userInput.contains("glass noodles") && database.get(i).getIngredientList().contains("glass noodles")) {
+				validRecipe = true;
+			} else if (!userInput.contains("flour") && database.get(i).getIngredientList().contains("flour")) {
+				validRecipe = true;
+			} else if (!userInput.contains("rice")
+					&& database.get(i).getIngredientList().contains("rice")) {
+				validRecipe = true;
+			} else if (!userInput.contains("bread crumbs") && database.get(i).getIngredientList().contains("bread crumbs")) {
+				validRecipe = true;
+			} else if (!userInput.contains("penne") && database.get(i).getIngredientList().contains("penne")) {
+				validRecipe = true;
+			} else if (!userInput.contains("garlic bread") && database.get(i).getIngredientList().contains("garlic bread")) {
+				validRecipe = true;
+			} else if (!userInput.contains("egg noodles") && database.get(i).getIngredientList().contains("egg noodles")) {
+				validRecipe = true;
+			} else if (!userInput.contains("spaghetti") && database.get(i).getIngredientList().contains("spaghetti")) {
+				validRecipe = true;
+			} else if (!userInput.contains("mac n cheese") && database.get(i).getIngredientList().contains("mac n cheese")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chicken") && database.get(i).getIngredientList().contains("chicken")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cashews")
+					&& database.get(i).getIngredientList().contains("cashews")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pistachios") && database.get(i).getIngredientList().contains("pistachios")) {
+				validRecipe = true;
+			} else if (!userInput.contains("prosciutto")
+					&& database.get(i).getIngredientList().contains("prosciutto")) {
+				validRecipe = true;
+			} else if (!userInput.contains("shrimp") && database.get(i).getIngredientList().contains("shrimp")) {
+				validRecipe = true;
+			} else if (!userInput.contains("walnuts") && database.get(i).getIngredientList().contains("walnuts")) {
+				validRecipe = true;
+			} else if (!userInput.contains("peanut butter") && database.get(i).getIngredientList().contains("peanut butter")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pepperoni")
+					&& database.get(i).getIngredientList().contains("pepperoni")) {
+				validRecipe = true;
+			} else if (!userInput.contains("frozen meatballs") && database.get(i).getIngredientList().contains("frozen meatballs")) {
+				validRecipe = true;
+			} else if (!userInput.contains("ground sausage") && database.get(i).getIngredientList().contains("ground sausage")) {
+				validRecipe = true;
+			} else if (!userInput.contains("salmon") && database.get(i).getIngredientList().contains("salmon")) {
+				validRecipe = true;
+			} else if (!userInput.contains("kielbasa") && database.get(i).getIngredientList().contains("kielbasa")) {
+				validRecipe = true;
+			} else if (!userInput.contains("fish fillet") && database.get(i).getIngredientList().contains("fish fillets")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pork chops") && database.get(i).getIngredientList().contains("pork chops")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chicken wings") && database.get(i).getIngredientList().contains("chicken wings")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pimientos") && database.get(i).getIngredientList().contains("pimientos")) {
+				validRecipe = true;
+			} else if (!userInput.contains("goat cheese") && database.get(i).getIngredientList().contains("goat cheese")) {
+				validRecipe = true;
+			} else if (!userInput.contains("mozzarella") && database.get(i).getIngredientList().contains("mozzarella")) {
+				validRecipe = true;
+			} else if (!userInput.contains("feta") && database.get(i).getIngredientList().contains("feta")) {
+				validRecipe = true;
+			} else if (!userInput.contains("milk")
+					&& database.get(i).getIngredientList().contains("milk")) {
+				validRecipe = true;
+			} else if (!userInput.contains("swiss") && database.get(i).getIngredientList().contains("swiss")) {
+				validRecipe = true;
+			} else if (!userInput.contains("parmesan") && database.get(i).getIngredientList().contains("parmesan")) {
+				validRecipe = true;
+			} else if (!userInput.contains("salsa") && database.get(i).getIngredientList().contains("salsa")) {
+				validRecipe = true;
+			} else if (!userInput.contains("bbq sauce") && database.get(i).getIngredientList().contains("bbq sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("italian dressing") && database.get(i).getIngredientList().contains("italian dressing")) {
+				validRecipe = true;
+			} else if (!userInput.contains("peach jam") && database.get(i).getIngredientList().contains("peach jam")) {
+				validRecipe = true;
+			} else if (!userInput.contains("honey") && database.get(i).getIngredientList().contains("honey")) {
+				validRecipe = true;
+			} else if (!userInput.contains("marinara")
+					&& database.get(i).getIngredientList().contains("marinara")) {
+				validRecipe = true;
+			} else if (!userInput.contains("soy sauce") && database.get(i).getIngredientList().contains("soy sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("enchilada sauce")
+					&& database.get(i).getIngredientList().contains("enchilada sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sweet and sour sauce") && database.get(i).getIngredientList().contains("sweet and sour sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("tomato sauce") && database.get(i).getIngredientList().contains("tomato sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("spaghetti sauce") && database.get(i).getIngredientList().contains("spaghetti sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("curry powder")
+					&& database.get(i).getIngredientList().contains("curry powder")) {
+				validRecipe = true;
+			} else if (!userInput.contains("salt") && database.get(i).getIngredientList().contains("salt")) {
+				validRecipe = true;
+			} else if (!userInput.contains("garlic") && database.get(i).getIngredientList().contains("garlic")) {
+				validRecipe = true;
+			} else if (!userInput.contains("paprika") && database.get(i).getIngredientList().contains("paprika")) {
+				validRecipe = true;
+			} else if (!userInput.contains("italian seasoning") && database.get(i).getIngredientList().contains("italian seasoning")) {
+				validRecipe = true;
+			} else if (!userInput.contains("basil") && database.get(i).getIngredientList().contains("basil")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cumin") && database.get(i).getIngredientList().contains("cumin")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sugar") && database.get(i).getIngredientList().contains("sugar")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sesame seed") && database.get(i).getIngredientList().contains("sesame seed")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cayenne")
+					&& database.get(i).getIngredientList().contains("cayenne")) {
+				validRecipe = true;
+			} else if (!userInput.contains("red pepper flakes") && database.get(i).getIngredientList().contains("red pepper flakes")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chile paste")
+					&& database.get(i).getIngredientList().contains("chile paste")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cilantro") && database.get(i).getIngredientList().contains("cilantro")) {
+				validRecipe = true;
+			} else if (!userInput.contains("lemon pepper") && database.get(i).getIngredientList().contains("lemon pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chili powder") && database.get(i).getIngredientList().contains("chili powder")) {
+				validRecipe = true;
+			} else if (!userInput.contains("black pepper")
+					&& database.get(i).getIngredientList().contains("black pepper")) {
+				validRecipe = true;
+			} else if (!userInput.contains("vinegar") && database.get(i).getIngredientList().contains("vinegar")) {
+				validRecipe = true;
+			} else if (!userInput.contains("olive oil") && database.get(i).getIngredientList().contains("olive oil")) {
+				validRecipe = true;
+			} else if (!userInput.contains("lime juice") && database.get(i).getIngredientList().contains("lime juice")) {
+				validRecipe = true;
+			} else if (!userInput.contains("lemon juice") && database.get(i).getIngredientList().contains("lemon juice")) {
+				validRecipe = true;
+			} else if (!userInput.contains("fish sauce") && database.get(i).getIngredientList().contains("fish sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("beef stock") && database.get(i).getIngredientList().contains("beef stock")) {
+				validRecipe = true;
+			} else if (!userInput.contains("baking powder") && database.get(i).getIngredientList().contains("baking powder")) {
+				validRecipe = true;
+			} else if (!userInput.contains("baking soda") && database.get(i).getIngredientList().contains("baking soda")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chicken stock")
+					&& database.get(i).getIngredientList().contains("chicken stock")) {
+				validRecipe = true;
+			} else if (!userInput.contains("vegetable oil") && database.get(i).getIngredientList().contains("vegetable oil")) {
+				validRecipe = true;
+			} else if (!userInput.contains("ranch dressing mix")
+					&& database.get(i).getIngredientList().contains("ranch dressing mix")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pesto sauce mix") && database.get(i).getIngredientList().contains("pesto sauce mix")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chilli") && database.get(i).getIngredientList().contains("chilli")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cream of chicken") && database.get(i).getIngredientList().contains("cream of chicken")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cream of mushroom")
+					&& database.get(i).getIngredientList().contains("cream of mushroom")) {
+				validRecipe = true;
+			} else if (!userInput.contains("strawberries") && database.get(i).getIngredientList().contains("strawberries")) {
+				validRecipe = true;
+			} else if (!userInput.contains("hot dogs") && database.get(i).getIngredientList().contains("hot dogs")) {
+				validRecipe = true;
+			} else if (!userInput.contains("hot dog buns") && database.get(i).getIngredientList().contains("hot dog buns")) {
+				validRecipe = true;
+			} else if (!userInput.contains("hamburger buns") && database.get(i).getIngredientList().contains("hamburger buns")) {
+				validRecipe = true;
+			} else if (!userInput.contains("chocolate chips") && database.get(i).getIngredientList().contains("chocolate chips")) {
+				validRecipe = true;
+			} else if (!userInput.contains("bananas") && database.get(i).getIngredientList().contains("bananas")) {
+				validRecipe = true;
+			} else if (!userInput.contains("quinoa") && database.get(i).getIngredientList().contains("quinoa")) {
+				validRecipe = true;
+			} else if (!userInput.contains("edamame") && database.get(i).getIngredientList().contains("edamame")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sesame vinaigrette")
+					&& database.get(i).getIngredientList().contains("sesame vinaigrette")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cooked sausage") && database.get(i).getIngredientList().contains("cooked sausage")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pesto")
+					&& database.get(i).getIngredientList().contains("pesto")) {
+				validRecipe = true;
+			} else if (!userInput.contains("ricatta") && database.get(i).getIngredientList().contains("ricatta")) {
+				validRecipe = true;
+			} else if (!userInput.contains("lasgna") && database.get(i).getIngredientList().contains("lasagna")) {
+				validRecipe = true;
+			} else if (!userInput.contains("teryaki") && database.get(i).getIngredientList().contains("teryaki")) {
+				validRecipe = true;
+			} else if (!userInput.contains("pineapple")
+					&& database.get(i).getIngredientList().contains("pineapple")) {
+				validRecipe = true;
+			} else if (!userInput.contains("peas") && database.get(i).getIngredientList().contains("peas")) {
+				validRecipe = true;
+			} else if (!userInput.contains("whipping cream") && database.get(i).getIngredientList().contains("whipping cream")) {
+				validRecipe = true;
+			} else if (!userInput.contains("frozen blueberries") && database.get(i).getIngredientList().contains("frozen blueberries")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sweet potato") && database.get(i).getIngredientList().contains("sweet potato")) {
+				validRecipe = true;
+			} else if (!userInput.contains("rice krispies") && database.get(i).getIngredientList().contains("rice krispies")) {
+				validRecipe = true;
+			} else if (!userInput.contains("marshmallows") && database.get(i).getIngredientList().contains("marshmallows")) {
+				validRecipe = true;
+			} else if (!userInput.contains("white beans") && database.get(i).getIngredientList().contains("white beans")) {
+				validRecipe = true;
+			} else if (!userInput.contains("black olives") && database.get(i).getIngredientList().contains("black olives")) {
+				validRecipe = true;
+			} else if (!userInput.contains("blue cheese dressing")
+					&& database.get(i).getIngredientList().contains("blue cheese dressing")) {
+				validRecipe = true;
+			} else if (!userInput.contains("buffalo sauce") && database.get(i).getIngredientList().contains("buffalo sauce")) {
+				validRecipe = true;
+			} else if (!userInput.contains("popcorn kernels")
+					&& database.get(i).getIngredientList().contains("popcorn kernels")) {
+				validRecipe = true;
+			} else if (!userInput.contains("sriracha") && database.get(i).getIngredientList().contains("sriracha")) {
+				validRecipe = true;
+			} else if (!userInput.contains("cooked chickpeas") && database.get(i).getIngredientList().contains("cooked chickpeas")) {
+				validRecipe = true;
 			}
 			if (validRecipe) {
 				sendToMain.add(database.get(i));
@@ -2960,12 +3232,13 @@ public class main extends JFrame implements ActionListener {
 			if (appliances[0].equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
 				sendToMain.remove(k);
 			}
-			if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
+			else if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
 				sendToMain.remove(k);
 			}
-			if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
+			else if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
 				sendToMain.remove(k);
 			}
+			
 		}
 
 		return sendToMain;
@@ -3036,6 +3309,299 @@ public class main extends JFrame implements ActionListener {
 				validRecipe = true;
 			} else if (userInput.contains("mayo") && database.get(i).getIngredientList().contains("mayo")) {
 				validRecipe = true;
+			} else if (userInput.contains("lime") && database.get(i).getIngredientList().contains("lime")) {
+				validRecipe = true;
+			} else if (userInput.contains("apple") && database.get(i).getIngredientList().contains("apple")) {
+				validRecipe = true;
+			} else if (userInput.contains("watermelon") && database.get(i).getIngredientList().contains("watermelon")) {
+				validRecipe = true;
+			} else if (userInput.contains("pears") && database.get(i).getIngredientList().contains("pears")) {
+				validRecipe = true;
+			} else if (userInput.contains("peaches") && database.get(i).getIngredientList().contains("peaches")) {
+				validRecipe = true;
+			} else if (userInput.contains("honeydew") && database.get(i).getIngredientList().contains("honeydew")) {
+				validRecipe = true;
+			} else if (userInput.contains("cantaloupe") && database.get(i).getIngredientList().contains("cantaloupe")) {
+				validRecipe = true;
+			} else if (userInput.contains("lemon") && database.get(i).getIngredientList().contains("lemon")) {
+				validRecipe = true;
+			} else if (userInput.contains("frozen broccoli") && database.get(i).getIngredientList().contains("frozen broccoli")) {
+				validRecipe = true;
+			} else if (userInput.contains("celery") && database.get(i).getIngredientList().contains("celery")) {
+				validRecipe = true;
+			} else if (userInput.contains("onion")
+					&& database.get(i).getIngredientList().contains("onion")) {
+				validRecipe = true;
+			} else if (userInput.contains("cucumber") && database.get(i).getIngredientList().contains("cucumber")) {
+				validRecipe = true;
+			} else if (userInput.contains("black beans") && database.get(i).getIngredientList().contains("black beans")) {
+				validRecipe = true;
+			} else if (userInput.contains("jalapeno") && database.get(i).getIngredientList().contains("jalapeno")) {
+				validRecipe = true;
+			} else if (userInput.contains("cabbage") && database.get(i).getIngredientList().contains("cabbage")) {
+				validRecipe = true;
+			} else if (userInput.contains("coleslaw") && database.get(i).getIngredientList().contains("coleslaw")) {
+				validRecipe = true;
+			} else if (userInput.contains("v8 juice") && database.get(i).getIngredientList().contains("v8 juice")) {
+				validRecipe = true;
+			} else if (userInput.contains("green pepper") && database.get(i).getIngredientList().contains("green pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("radish")
+					&& database.get(i).getIngredientList().contains("radish")) {
+				validRecipe = true;
+			} else if (userInput.contains("asparagus") && database.get(i).getIngredientList().contains("asparagus")) {
+				validRecipe = true;
+			} else if (userInput.contains("carrot")
+					&& database.get(i).getIngredientList().contains("carrot")) {
+				validRecipe = true;
+			} else if (userInput.contains("cornstarch") && database.get(i).getIngredientList().contains("cornstarch")) {
+				validRecipe = true;
+			} else if (userInput.contains("bell pepper") && database.get(i).getIngredientList().contains("bell pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("spinach") && database.get(i).getIngredientList().contains("spinach")) {
+				validRecipe = true;
+			} else if (userInput.contains("frozen vegetables")
+					&& database.get(i).getIngredientList().contains("frozen vegetables")) {
+				validRecipe = true;
+			} else if (userInput.contains("red pepper") && database.get(i).getIngredientList().contains("red pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("frozen corn") && database.get(i).getIngredientList().contains("frozen corn")) {
+				validRecipe = true;
+			} else if (userInput.contains("kidney beans") && database.get(i).getIngredientList().contains("kidney beans")) {
+				validRecipe = true;
+			} else if (userInput.contains("cornmeal") && database.get(i).getIngredientList().contains("cornmeal")) {
+				validRecipe = true;
+			} else if (userInput.contains("zucchini") && database.get(i).getIngredientList().contains("zucchini")) {
+				validRecipe = true;
+			} else if (userInput.contains("mushrooms") && database.get(i).getIngredientList().contains("mushrooms")) {
+				validRecipe = true;
+			} else if (userInput.contains("polenta") && database.get(i).getIngredientList().contains("polenta")) {
+				validRecipe = true;
+			} else if (userInput.contains("yellow pepper") && database.get(i).getIngredientList().contains("yellow pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("tater tots") && database.get(i).getIngredientList().contains("tater tots")) {
+				validRecipe = true;
+			} else if (userInput.contains("glass noodles") && database.get(i).getIngredientList().contains("glass noodles")) {
+				validRecipe = true;
+			} else if (userInput.contains("flour") && database.get(i).getIngredientList().contains("flour")) {
+				validRecipe = true;
+			} else if (userInput.contains("rice")
+					&& database.get(i).getIngredientList().contains("rice")) {
+				validRecipe = true;
+			} else if (userInput.contains("bread crumbs") && database.get(i).getIngredientList().contains("bread crumbs")) {
+				validRecipe = true;
+			} else if (userInput.contains("penne") && database.get(i).getIngredientList().contains("penne")) {
+				validRecipe = true;
+			} else if (userInput.contains("garlic bread") && database.get(i).getIngredientList().contains("garlic bread")) {
+				validRecipe = true;
+			} else if (userInput.contains("egg noodles") && database.get(i).getIngredientList().contains("egg noodles")) {
+				validRecipe = true;
+			} else if (userInput.contains("spaghetti") && database.get(i).getIngredientList().contains("spaghetti")) {
+				validRecipe = true;
+			} else if (userInput.contains("mac n cheese") && database.get(i).getIngredientList().contains("mac n cheese")) {
+				validRecipe = true;
+			} else if (userInput.contains("chicken") && database.get(i).getIngredientList().contains("chicken")) {
+				validRecipe = true;
+			} else if (userInput.contains("cashews")
+					&& database.get(i).getIngredientList().contains("cashews")) {
+				validRecipe = true;
+			} else if (userInput.contains("pistachios") && database.get(i).getIngredientList().contains("pistachios")) {
+				validRecipe = true;
+			} else if (userInput.contains("prosciutto")
+					&& database.get(i).getIngredientList().contains("prosciutto")) {
+				validRecipe = true;
+			} else if (userInput.contains("shrimp") && database.get(i).getIngredientList().contains("shrimp")) {
+				validRecipe = true;
+			} else if (userInput.contains("walnuts") && database.get(i).getIngredientList().contains("walnuts")) {
+				validRecipe = true;
+			} else if (userInput.contains("peanut butter") && database.get(i).getIngredientList().contains("peanut butter")) {
+				validRecipe = true;
+			} else if (userInput.contains("pepperoni")
+					&& database.get(i).getIngredientList().contains("pepperoni")) {
+				validRecipe = true;
+			} else if (userInput.contains("frozen meatballs") && database.get(i).getIngredientList().contains("frozen meatballs")) {
+				validRecipe = true;
+			} else if (userInput.contains("ground sausage") && database.get(i).getIngredientList().contains("ground sausage")) {
+				validRecipe = true;
+			} else if (userInput.contains("salmon") && database.get(i).getIngredientList().contains("salmon")) {
+				validRecipe = true;
+			} else if (userInput.contains("kielbasa") && database.get(i).getIngredientList().contains("kielbasa")) {
+				validRecipe = true;
+			} else if (userInput.contains("fish fillet") && database.get(i).getIngredientList().contains("fish fillets")) {
+				validRecipe = true;
+			} else if (userInput.contains("pork chops") && database.get(i).getIngredientList().contains("pork chops")) {
+				validRecipe = true;
+			} else if (userInput.contains("chicken wings") && database.get(i).getIngredientList().contains("chicken wings")) {
+				validRecipe = true;
+			} else if (userInput.contains("pimientos") && database.get(i).getIngredientList().contains("pimientos")) {
+				validRecipe = true;
+			} else if (userInput.contains("goat cheese") && database.get(i).getIngredientList().contains("goat cheese")) {
+				validRecipe = true;
+			} else if (userInput.contains("mozzarella") && database.get(i).getIngredientList().contains("mozzarella")) {
+				validRecipe = true;
+			} else if (userInput.contains("feta") && database.get(i).getIngredientList().contains("feta")) {
+				validRecipe = true;
+			} else if (userInput.contains("milk")
+					&& database.get(i).getIngredientList().contains("milk")) {
+				validRecipe = true;
+			} else if (userInput.contains("swiss") && database.get(i).getIngredientList().contains("swiss")) {
+				validRecipe = true;
+			} else if (userInput.contains("parmesan") && database.get(i).getIngredientList().contains("parmesan")) {
+				validRecipe = true;
+			} else if (userInput.contains("salsa") && database.get(i).getIngredientList().contains("salsa")) {
+				validRecipe = true;
+			} else if (userInput.contains("bbq sauce") && database.get(i).getIngredientList().contains("bbq sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("italian dressing") && database.get(i).getIngredientList().contains("italian dressing")) {
+				validRecipe = true;
+			} else if (userInput.contains("peach jam") && database.get(i).getIngredientList().contains("peach jam")) {
+				validRecipe = true;
+			} else if (userInput.contains("honey") && database.get(i).getIngredientList().contains("honey")) {
+				validRecipe = true;
+			} else if (userInput.contains("marinara")
+					&& database.get(i).getIngredientList().contains("marinara")) {
+				validRecipe = true;
+			} else if (userInput.contains("soy sauce") && database.get(i).getIngredientList().contains("soy sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("enchilada sauce")
+					&& database.get(i).getIngredientList().contains("enchilada sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("sweet and sour sauce") && database.get(i).getIngredientList().contains("sweet and sour sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("tomato sauce") && database.get(i).getIngredientList().contains("tomato sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("spaghetti sauce") && database.get(i).getIngredientList().contains("spaghetti sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("curry powder")
+					&& database.get(i).getIngredientList().contains("curry powder")) {
+				validRecipe = true;
+			} else if (userInput.contains("salt") && database.get(i).getIngredientList().contains("salt")) {
+				validRecipe = true;
+			} else if (userInput.contains("garlic") && database.get(i).getIngredientList().contains("garlic")) {
+				validRecipe = true;
+			} else if (userInput.contains("paprika") && database.get(i).getIngredientList().contains("paprika")) {
+				validRecipe = true;
+			} else if (userInput.contains("italian seasoning") && database.get(i).getIngredientList().contains("italian seasoning")) {
+				validRecipe = true;
+			} else if (userInput.contains("basil") && database.get(i).getIngredientList().contains("basil")) {
+				validRecipe = true;
+			} else if (userInput.contains("cumin") && database.get(i).getIngredientList().contains("cumin")) {
+				validRecipe = true;
+			} else if (userInput.contains("sugar") && database.get(i).getIngredientList().contains("sugar")) {
+				validRecipe = true;
+			} else if (userInput.contains("sesame seed") && database.get(i).getIngredientList().contains("sesame seed")) {
+				validRecipe = true;
+			} else if (userInput.contains("cayenne")
+					&& database.get(i).getIngredientList().contains("cayenne")) {
+				validRecipe = true;
+			} else if (userInput.contains("red pepper flakes") && database.get(i).getIngredientList().contains("red pepper flakes")) {
+				validRecipe = true;
+			} else if (userInput.contains("chile paste")
+					&& database.get(i).getIngredientList().contains("chile paste")) {
+				validRecipe = true;
+			} else if (userInput.contains("cilantro") && database.get(i).getIngredientList().contains("cilantro")) {
+				validRecipe = true;
+			} else if (userInput.contains("lemon pepper") && database.get(i).getIngredientList().contains("lemon pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("chili powder") && database.get(i).getIngredientList().contains("chili powder")) {
+				validRecipe = true;
+			} else if (userInput.contains("black pepper")
+					&& database.get(i).getIngredientList().contains("black pepper")) {
+				validRecipe = true;
+			} else if (userInput.contains("vinegar") && database.get(i).getIngredientList().contains("vinegar")) {
+				validRecipe = true;
+			} else if (userInput.contains("olive oil") && database.get(i).getIngredientList().contains("olive oil")) {
+				validRecipe = true;
+			} else if (userInput.contains("lime juice") && database.get(i).getIngredientList().contains("lime juice")) {
+				validRecipe = true;
+			} else if (userInput.contains("lemon juice") && database.get(i).getIngredientList().contains("lemon juice")) {
+				validRecipe = true;
+			} else if (userInput.contains("fish sauce") && database.get(i).getIngredientList().contains("fish sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("beef stock") && database.get(i).getIngredientList().contains("beef stock")) {
+				validRecipe = true;
+			} else if (userInput.contains("baking powder") && database.get(i).getIngredientList().contains("baking powder")) {
+				validRecipe = true;
+			} else if (userInput.contains("baking soda") && database.get(i).getIngredientList().contains("baking soda")) {
+				validRecipe = true;
+			} else if (userInput.contains("chicken stock")
+					&& database.get(i).getIngredientList().contains("chicken stock")) {
+				validRecipe = true;
+			} else if (userInput.contains("vegetable oil") && database.get(i).getIngredientList().contains("vegetable oil")) {
+				validRecipe = true;
+			} else if (userInput.contains("ranch dressing mix")
+					&& database.get(i).getIngredientList().contains("ranch dressing mix")) {
+				validRecipe = true;
+			} else if (userInput.contains("pesto sauce mix") && database.get(i).getIngredientList().contains("pesto sauce mix")) {
+				validRecipe = true;
+			} else if (userInput.contains("chilli") && database.get(i).getIngredientList().contains("chilli")) {
+				validRecipe = true;
+			} else if (userInput.contains("cream of chicken") && database.get(i).getIngredientList().contains("cream of chicken")) {
+				validRecipe = true;
+			} else if (userInput.contains("cream of mushroom")
+					&& database.get(i).getIngredientList().contains("cream of mushroom")) {
+				validRecipe = true;
+			} else if (userInput.contains("strawberries") && database.get(i).getIngredientList().contains("strawberries")) {
+				validRecipe = true;
+			} else if (userInput.contains("hot dogs") && database.get(i).getIngredientList().contains("hot dogs")) {
+				validRecipe = true;
+			} else if (userInput.contains("hot dog buns") && database.get(i).getIngredientList().contains("hot dog buns")) {
+				validRecipe = true;
+			} else if (userInput.contains("hamburger buns") && database.get(i).getIngredientList().contains("hamburger buns")) {
+				validRecipe = true;
+			} else if (userInput.contains("chocolate chips") && database.get(i).getIngredientList().contains("chocolate chips")) {
+				validRecipe = true;
+			} else if (userInput.contains("bananas") && database.get(i).getIngredientList().contains("bananas")) {
+				validRecipe = true;
+			} else if (userInput.contains("quinoa") && database.get(i).getIngredientList().contains("quinoa")) {
+				validRecipe = true;
+			} else if (userInput.contains("edamame") && database.get(i).getIngredientList().contains("edamame")) {
+				validRecipe = true;
+			} else if (userInput.contains("sesame vinaigrette")
+					&& database.get(i).getIngredientList().contains("sesame vinaigrette")) {
+				validRecipe = true;
+			} else if (userInput.contains("cooked sausage") && database.get(i).getIngredientList().contains("cooked sausage")) {
+				validRecipe = true;
+			} else if (userInput.contains("pesto")
+					&& database.get(i).getIngredientList().contains("pesto")) {
+				validRecipe = true;
+			} else if (userInput.contains("ricatta") && database.get(i).getIngredientList().contains("ricatta")) {
+				validRecipe = true;
+			} else if (userInput.contains("lasgna") && database.get(i).getIngredientList().contains("lasagna")) {
+				validRecipe = true;
+			} else if (userInput.contains("teryaki") && database.get(i).getIngredientList().contains("teryaki")) {
+				validRecipe = true;
+			} else if (userInput.contains("pineapple")
+					&& database.get(i).getIngredientList().contains("pineapple")) {
+				validRecipe = true;
+			} else if (userInput.contains("peas") && database.get(i).getIngredientList().contains("peas")) {
+				validRecipe = true;
+			} else if (userInput.contains("whipping cream") && database.get(i).getIngredientList().contains("whipping cream")) {
+				validRecipe = true;
+			} else if (userInput.contains("frozen blueberries") && database.get(i).getIngredientList().contains("frozen blueberries")) {
+				validRecipe = true;
+			} else if (userInput.contains("sweet potato") && database.get(i).getIngredientList().contains("sweet potato")) {
+				validRecipe = true;
+			} else if (userInput.contains("rice krispies") && database.get(i).getIngredientList().contains("rice krispies")) {
+				validRecipe = true;
+			} else if (userInput.contains("marshmallows") && database.get(i).getIngredientList().contains("marshmallows")) {
+				validRecipe = true;
+			} else if (userInput.contains("white beans") && database.get(i).getIngredientList().contains("white beans")) {
+				validRecipe = true;
+			} else if (userInput.contains("black olives") && database.get(i).getIngredientList().contains("black olives")) {
+				validRecipe = true;
+			} else if (userInput.contains("blue cheese dressing")
+					&& database.get(i).getIngredientList().contains("blue cheese dressing")) {
+				validRecipe = true;
+			} else if (userInput.contains("buffalo sauce") && database.get(i).getIngredientList().contains("buffalo sauce")) {
+				validRecipe = true;
+			} else if (userInput.contains("popcorn kernels")
+					&& database.get(i).getIngredientList().contains("popcorn kernels")) {
+				validRecipe = true;
+			} else if (userInput.contains("sriracha") && database.get(i).getIngredientList().contains("sriracha")) {
+				validRecipe = true;
+			} else if (userInput.contains("cooked chickpeas") && database.get(i).getIngredientList().contains("cooked chickpeas")) {
+				validRecipe = true;
 			}
 			if (validRecipe) {
 				sendToMain.add(database.get(i));
@@ -3051,14 +3617,14 @@ public class main extends JFrame implements ActionListener {
 			if (appliances[0].equals("false") && sendToMain.get(k).getMicrowaveable().equals("true")) {
 				sendToMain.remove(k);
 			}
-			if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
+			else if (appliances[1].equals("false") && sendToMain.get(k).getOven().equals("true")) {
 				sendToMain.remove(k);
 			}
-			if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
+			else if (appliances[2].equals("false") && sendToMain.get(k).getStove().equals("true")) {
 				sendToMain.remove(k);
 			}
+			
 		}
-
 		return sendToMain;
 	}
 }
