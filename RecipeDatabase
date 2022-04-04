@@ -69,10 +69,10 @@ Butter Noodles, https://www.allrecipes.com/recipe/244458/buttered-noodles/, 15, 
 Chilli Mac, https://www.allrecipes.com/recipe/139471/dorm-room-chili-mac/, 15, true, false, true, Mac n Cheese, Chilli, Cheese
 Sheperd's Pie, https://www.thewholesomedish.com/the-best-classic-shepherds-pie/, 50, true, true, false, Olive Oil, Onion, Ground Beef, Italian Seasoning, Salt, Pepper, Garlic, Flour, Beef Stock, Frozen Vegetables, Potatoes, Butter, Milk
 Chicken Provolone, https://www.tasteofhome.com/recipes/chicken-provolone/, 25, true, true, false, Chicken, Pepper, Butter, Basil, Ham, Provolone
-Honey Yogurt Berry Salad, https://www.tasteofhome.com/recipes/honey-yogurt-berry-salad/, 10, false, Strawberries, Raspberries, Blueberries, Blackberries, Yogurt, Honey, Orange
-Picnic Berry Shortcakes, https://www.tasteofhome.com/recipes/picnic-berry-shortcakes/, 20, false, Sugar, Cornstarch, Strawberries, Lime, Sponge Cake, Blueberries, Whipped Cream
-Watermelon Lemon Cream Tart, https://www.tasteofhome.com/recipes/frozen-watermelon-lemon-cream-tarts/, 25, false, Watermelon, Yogurt, Honey, Lemon, Almonds
-Mug Apple Pie, https://www.biggerbolderbaking.com/microwave-mug-pies/, 15, true, Butter, Oats, Pecans, Flour, Brown Sugar, Cinnamon, Salt, Apple
+Honey Yogurt Berry Salad, https://www.tasteofhome.com/recipes/honey-yogurt-berry-salad/, 10, false, false, false, Strawberries, Raspberries, Blueberries, Blackberries, Yogurt, Honey, Orange
+Picnic Berry Shortcakes, https://www.tasteofhome.com/recipes/picnic-berry-shortcakes/, 20, false, false, true, Sugar, Cornstarch, Strawberries, Lime, Sponge Cake, Blueberries, Whipped Cream
+Watermelon Lemon Cream Tart, https://www.tasteofhome.com/recipes/frozen-watermelon-lemon-cream-tarts/, 25, false, false, false, Watermelon, Yogurt, Honey, Lemon, Almonds
+Mug Apple Pie, https://www.biggerbolderbaking.com/microwave-mug-pies/, 15, true, false, false, Butter, Oats, Pecans, Flour, Brown Sugar, Cinnamon, Salt, Apple
 Strawberry Oatmeal Bars, https://www.wellplated.com/strawberry-oatmeal-bars/, 55, true, true, false, Oats, Flour, Brown Sugar, Ginger, Salt, Butter, Strawberries, Cornstarch, Lemon Juice, Sugar, Milk, Vanilla Extract
 Bisquick Strawberry Shortcake, https://insanelygoodrecipes.com/bisquick-strawberry-shortcake/, 35, true, true, false, Strawberries, Sugar, Bisquick Mix, Milk, Sugar, Butter, Whipped Cream
 Lemon Fruit Parfait, https://insidebrucrewlife.com/lemon-mousse-fruit-parfaits/, 20, false, false, false, Lemon Pie Filling, Whipped Cream, Twinkies, Strawberries, Blueberries
