@@ -1,31 +1,30 @@
 Bagel Breakfast, xd, 10, false, Bagel, Avocado, Ham
-Baked Chicken Dinner, xd, 60, false, Chicken Leg Quarters, Potato, Carrot (oven)
-Chili Dogs, xd, 10, false, Hot Dogs, Chili, Hot Dog Buns (stove)
-Sloppy Joe, xd, 15, Beef, Chili Sauce, Hamburger Buns (stove)
-Chicken Parmigiana, xd, 45, Chicken Breasts, Egg, Panko Crumbs, Pasta, Marinara (stove)
-Bacon & Cheese Mug, xd, 5, true, Bread, egg, milk, cheese, bacon
-Veggie & Cheese Mug, xd, 5, true, Bread, egg, milk, cheese, spinach, red pepper, tomato
-Banana Chocolate Mug, xd, 5, true, Bread, egg milk, chocolate chips, banana
-Blueberry French Toast Mug, xd, 5, true, Bread, egg , milk, blueberry, cinnamon
-Broccoli Edamame Quinoa Bowl, xd, 20, true, Broccoli, quinoa, cilantro, edamame, sesame vinaigrette, olive oil
-Sausage & Tomato Sauce Pasta, xd, 20, true, Pasta, pre-cooked sausage, tomato sauce, cheese
-Southwestern Rice & Beans, xd, 15, true, Rice, black beans, avocado, cilantro, salsa
-Baked Apple Oatmeal, xd, 10, true, Oats, apple, milk, cinnamon, peanut butter
-Pesto Mozzarella Quesadillas, xd, 10, true, Tortillas, spinach, tomato, pesto, mozzarella
-Spinach Ricotta Lasagna Mug, xd, 15, true, Lasagna sheet, spinach, ricotta cheese, pasta sauce
-Brown Rice Edamame Pineapple Mug, xd, 15, true, instant brown rice, water, edamame, canned pineapple, teriyaki sauce
-Cheesy Broccoli Rice Casserole, xd, 5, true, instant Jasmine rice, cheese, broccoli
-Microwavable Enchiladas, xd, 10, true, enchilada sauce, cooked chicken, cheese, corn tortillas
-Egg Fried Rice Mug, xd, 10, true, instant jasmine rice, peas, purple cabbage, egg, sesame oil, soy sauce
-Egg Fried Rice, xd, 20, false, eggs, olive oil, onion, mixed vegetables, jasmine rice, soy sauce (stove)
-Sausage & Cheese Spaghetti, xd, 20, true, spaghetti pasta, water, half & half, cheese, italian sausage, butter
-Blueberry Pancake Mug, xd, 5, true, Pancake mix, water, frozen blueberries
-Sweet Potato Chips, xd, 10, true, Sweet Potato, olive oil, salt & pepper
+Baked Chicken Dinner, xd, 60, false, Chicken, Potato, Carrot, [oven]
+Chili Dogs, xd, 10, false, Hot Dogs, Chili, Hot Dog Buns, [stove]
+Sloppy Joe, xd, 15, Beef, Chili Sauce, Hamburger Buns, [stove]
+Chicken Parmigiana, xd, 45, Chicken Breasts, Egg, Bread Crumbs, Pasta, Marinara [stove]
+Bacon & Cheese Mug, xd, 5, true, Bread, Eggs, Milk, Cheese, Bacon
+Veggie & Cheese Mug, xd, 5, true, Bread, Egg, Milk, Cheese, Spinach, Red Pepper, Tomatoes
+Banana Chocolate Mug, xd, 5, true, Bread, Eggs, Milk, Chocolate Chips, Bananas
+Blueberry French Toast Mug, xd, 5, true, Bread, Eggs, Milk, Blueberries, Cinnamon
+Broccoli Edamame Quinoa Bowl, xd, 20, true, Broccoli, Quinoa, Cilantro, Edamame, Sesame Vinaigrette, Olive Oil
+Sausage & Tomato Sauce Pasta, xd, 20, true, Pasta, Pre-Cooked Sausage, Tomato Sauce, Cheese
+Southwestern Rice & Beans, xd, 15, true, Rice, Black Beans, Avocados, Cilantro, Salsa
+Baked Apple Oatmeal, xd, 10, true, Oats, Apple, Milk, Cinnamon, Peanut Butter
+Pesto Mozzarella Quesadillas, xd, 10, true, Tortillas, Spinach, Tomatoes, Pesto, Mozzarella
+Spinach Ricotta Lasagna Mug, xd, 15, true, Lasagna, Spinach, Ricotta, Pasta Sauce
+Brown Rice Edamame Pineapple Mug, xd, 15, true, Brown Rice, Edamame, Canned Pineapple, Teriyaki
+Cheesy Broccoli Rice Casserole, xd, 5, true, Rice, Cheese, Broccoli
+Microwavable Enchiladas, xd, 10, true, Enchilada Sauce, Cooked Chicken, Cheese, Tortillas
+Egg Fried Rice Mug, xd, 10, true, Rice, Peas, Cabbage, Eggs, Soy Sauce
+Egg Fried Rice, xd, 20, false, Eggs, Olive Oil, Onion, Vegetables, Rice, Soy Sauce [stove]
+Sausage & Cheese Spaghetti, xd, 20, true, Spaghetti, Whipping Cream, Cheese, Sausage, Butter
+Blueberry Pancake Mug, xd, 5, true, Pancake Mix, Frozen Blueberries
+Sweet Potato Chips, xd, 10, true, Sweet Potato, Olive Oil, Salt, Pepper
 Rice Krispies Treats, xd, 5, true, Butter, Rice Krispies, Marshmallows
-Matcha Chia Pudding, xd, 5, false, chia seeds, non-dairy milk/ water, matcha green tea powder, maple syrup
-Tuna Salad Jar, xd, 10, false, white beans, black olives, red onions, celery, tuna
-Buffalo Chicken Jar Salad, xd, 15, false, Blue cheese salad dressing, celery, corn, red onion, cooked shredded chicken, buffalo sauce, lettuce
-Sriracha Nooch Popcorn, xd, 10, false, cooking oil, popcorn kernels, butter, sriracha (stove)
-Microwave Shakshuka, xd, 10, false, cooking spray, marinara sauce, cooked chickpeas, red pepper flakes, egg
-Loaded Baked Potato Soup, xd, 10, true, Potato, water, cheese, bacon, cornflour, chicken stock, milk
+Tuna Salad Jar, xd, 10, false, White Beans, Black Olives, Onions, Celery, Tuna
+Buffalo Chicken Jar Salad, xd, 15, false, Blue Cheese Dressing, Celery, Corn, Onion, Cooked Chicken, Buffalo Sauce, Lettuce
+Sriracha Nooch Popcorn, xd, 10, false, Vegetable Oil, Popcorn Kernels, Butter, Sriracha [stove]
+Microwave Shakshuka, xd, 10, false, Marinara, Cooked Chickpeas, Red Pepper Flake, Eggs
+Loaded Baked Potato Soup, xd, 10, true, Potato, Cheese, Bacon, Cornflour, Chicken Stock, Milk
 
