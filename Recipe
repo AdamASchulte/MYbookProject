@@ -7,22 +7,24 @@ public class Recipe {
 	private String time;
 	private String microwaveable;
 	private String link;
+	private String oven;
+	private String stove;
 	private ArrayList<String> ingredientList = new ArrayList<String>();
 
 	public Recipe() {
 
 	}
-
 	public Recipe(String[] info) {
 		name = info[0].trim();
 		link = info[1].trim();
 		time = info[2].trim();
 		microwaveable = info[3].trim();
-		for (int i = 4; i < info.length; i++) {
+		oven = info[4].trim();
+		stove = info[5].trim();
+		for (int i = 6; i < info.length; i++) {
 			ingredientList.add(info[i].trim().toLowerCase());
 		}
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -41,5 +43,15 @@ public class Recipe {
 
 	public String getLink() {
 		return link;
+	}
+	
+	public String getOven()
+	{
+		return oven;
+	}
+	
+	public String getStove()
+	{
+		return stove;
 	}
 }
