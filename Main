@@ -37,8 +37,8 @@ public class main extends JFrame implements ActionListener {
 			microwaveRequired, fquestion1, fquestion2, fquestion3, fUser, fCurrPassword, fNewPassword,
 			fConfirmNewPassword, recipeOutOfRecipes, ovenRequired, stoveRequired, recipeOutOfRecipesFav, recipeTitleFav,
 			recipeTimeFav, recipeLinkFav, recipeIngredientListFav, crName, crLink, crTime, crAppliances, crIngredients,
-			recipeOutOfRecipesUser, userRecipeTitle, userRecipeLink, userRecipeTime, userRecipeMicrowave, userRecipeOven,
-			userRecipeStove, userRecipeIngredientList;
+			recipeOutOfRecipesUser, userRecipeTitle, userRecipeLink, userRecipeTime, userRecipeMicrowave,
+			userRecipeOven, userRecipeStove, userRecipeIngredientList;
 	JTextField tf, username, usernameSignUp, displayNameTF, question1TF, question2TF, question3TF, fquestion1TF,
 			fquestion2TF, fquestion3TF, fUsername, crNameTF, crLinkTF, crTimeTF, crIngredientsTF;
 	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF, fCurrPasswordPF,
@@ -2302,9 +2302,9 @@ public class main extends JFrame implements ActionListener {
 						if (crAppliancesBoolean[2]) {
 							tempAppliances[2] = "true";
 						}
-						String tempUserRecipe = crNameTF.getText() + ", " + crLinkTF.getText() + ", " + crTimeTF.getText()
-								+ ", " + tempAppliances[0] + ", " + tempAppliances[1] + ", " + tempAppliances[2] + ", "
-								+ crIngredientsTF.getText();
+						String tempUserRecipe = crNameTF.getText() + ", " + crLinkTF.getText() + ", "
+								+ crTimeTF.getText() + ", " + tempAppliances[0] + ", " + tempAppliances[1] + ", "
+								+ tempAppliances[2] + ", " + crIngredientsTF.getText();
 						userRecipes.add(tempUserRecipe);
 						try {
 							BufferedWriter bw = new BufferedWriter(
@@ -2334,7 +2334,7 @@ public class main extends JFrame implements ActionListener {
 			} else
 				JOptionPane.showMessageDialog(f, "Recipe Name cannot be blank.");
 		}
-		
+
 		// Remove User Recipe
 		if (e.getSource() == removeRecipe) {
 			if (userRecipes.size() >= 1) {
@@ -2373,7 +2373,7 @@ public class main extends JFrame implements ActionListener {
 				homeP.setVisible(true);
 			}
 		}
-		
+
 		// Remove from Favorites
 		if (e.getSource() == removeFromFavorites) {
 			if (favRecipes.size() >= 1) {
@@ -2413,20 +2413,23 @@ public class main extends JFrame implements ActionListener {
 		// Add to Favorites
 		if (e.getSource() == addToFavorites) {
 			if (validRecipes.size() >= 1) {
-				favRecipes.add(newFav);
-				JOptionPane.showMessageDialog(f, "Recipe added to Favorites.");
-				try {
-					BufferedWriter bw = new BufferedWriter(
-							new FileWriter("profile" + displayNameLog.get(currUser) + ".txt"));
+				if (!favRecipes.contains(newFav)) {
+					favRecipes.add(newFav);
+					JOptionPane.showMessageDialog(f, "Recipe added to Favorites.");
+					try {
+						BufferedWriter bw = new BufferedWriter(
+								new FileWriter("profile" + displayNameLog.get(currUser) + ".txt"));
 
-					for (int i = 0; i < favRecipes.size(); i++) {
-						bw.write(favRecipes.get(i));
-						bw.newLine();
+						for (int i = 0; i < favRecipes.size(); i++) {
+							bw.write(favRecipes.get(i));
+							bw.newLine();
+						}
+						bw.close();
+					} catch (Exception ex) {
+						ex.printStackTrace();
 					}
-					bw.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				} else
+					JOptionPane.showMessageDialog(f, "Recipe is already in favorites.");
 			}
 		}
 
@@ -3011,7 +3014,7 @@ public class main extends JFrame implements ActionListener {
 			currDisplayRecipeFav++;
 			recipeOutOfRecipesFav.setText(currDisplayRecipeFav + "/" + totalRecipesFav);
 		}
-		
+
 		if (e.getSource() == nextUserRecipe && userRecipes.size() > currUserRecipe + 1) {
 			currUserRecipe++;
 			totalUserRecipes = userRecipes.size();
@@ -3084,7 +3087,7 @@ public class main extends JFrame implements ActionListener {
 			currDisplayRecipeFav--;
 			recipeOutOfRecipesFav.setText(currDisplayRecipeFav + "/" + totalRecipesFav);
 		}
-		
+
 		// Previous User Recipe
 		if (e.getSource() == previousUserRecipe && currUserRecipe > 0) {
 			currUserRecipe--;
@@ -3132,6 +3135,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 			}
 		}
 		if (e.getSource() == search) {
@@ -3144,6 +3154,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 			}
 		}
 		if (e.getSource() == userRecipesMI) {
@@ -3156,6 +3173,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(true);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 				if (userRecipes.size() >= 1) {
 					totalUserRecipes = userRecipes.size();
 					String[] combinedRecipes = userRecipes.get(0).split(",");
@@ -3221,6 +3245,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 				totalRecipesFav = favRecipes.size();
 				if (favRecipes.size() >= 1) {
 					String[] combinedRecipes = favRecipes.get(0).split(",");
@@ -3274,6 +3305,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 			}
 		}
 		if (e.getSource() == changePassword) {
@@ -3286,6 +3324,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(true);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 			}
 		}
 		if (e.getSource() == changeDisplayColor) {
@@ -3298,6 +3343,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(true);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 			}
 		}
 		if (e.getSource() == logout) {
@@ -3310,6 +3362,13 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
 				loginP.setVisible(true);
 				username.setText("");
 				password.setText("");
@@ -3377,6 +3436,9 @@ public class main extends JFrame implements ActionListener {
 				String text = tf.getText();
 				if (text.equals(""))
 					l2.setText("No time was entered; displaying all recipes.");
+				else if (text.contains(" ")) {
+					l2.setText("Time entered invalid; please check for whitespaces.");
+				}
 				else {
 					time = Integer.parseInt(text);
 					l2.setText("Displaying recipes that can be made in " + time + " minutes or less.");
@@ -3487,6 +3549,10 @@ public class main extends JFrame implements ActionListener {
 				recipeTime.setText("");
 				recipeLink.setText("");
 				recipeIngredientList.setText("");
+				nextRecipe.setBackground(Color.gray);
+			}
+			if (validRecipes.size() == 1) {
+				nextRecipe.setBackground(Color.gray);
 			}
 
 			// Switch Panes
