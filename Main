@@ -19,24 +19,28 @@ public class main extends JFrame implements ActionListener {
 
 	JFrame f;
 	JMenu main, profile, options;
-	JMenuItem home, search, favorites, customize, changePassword, changeDisplayColor, logout;
+	JMenuItem home, search, favorites, userRecipesMI, customize, changePassword, changeDisplayColor, logout;
 	JPanel homeP, homeDisplayP, loginP, loginButtonsP, signupP, signupButtonsP, selectP, displayP, favoritesP,
 			customizeP, changeDisplayP, selectDisplayP, changePasswordP, selectProfileP, displayProfileP, recipeTitleP,
 			recipeDescriptionP, securityP, securityQuestionsP, forgotPasswordP, forgotPasswordQuestionsP,
 			forgotPasswordUsernameP, forgotPasswordPasswordP, fruitsP, vegetablesP, grainsP, proteinsP, dairysP,
-			condimentsP, seasoningsP, miscP, recipeDescriptionPFav;
+			condimentsP, seasoningsP, miscP, recipeDescriptionPFav, userRecipesP, userRecipesDisplayP,
+			userCreateRecipeP;
 	JTabbedPane tabbedIngredients;
 	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
 			nextRecipe, previousRecipe, submitAnswers, forgotPassword, submitUser, answerQuestions, fChangePasswordB,
-			clearAll, nextRecipeFav, previousRecipeFav, addToFavorites, removeFromFavorites;
+			clearAll, nextRecipeFav, previousRecipeFav, addToFavorites, removeFromFavorites, createRecipe, submitRecipe,
+			removeRecipe, nextUserRecipe, previousUserRecipe;
 	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9;
 	JLabel l1, l2, selected, user, pass, profilePic, logo, logoName, displayName, welcome, mbhelp, homeButtons,
 			currPassword, newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
 			microwaveRequired, fquestion1, fquestion2, fquestion3, fUser, fCurrPassword, fNewPassword,
 			fConfirmNewPassword, recipeOutOfRecipes, ovenRequired, stoveRequired, recipeOutOfRecipesFav, recipeTitleFav,
-			recipeTimeFav, recipeLinkFav, recipeIngredientListFav;
+			recipeTimeFav, recipeLinkFav, recipeIngredientListFav, crName, crLink, crTime, crAppliances, crIngredients,
+			recipeOutOfRecipesUser, userRecipeTitle, userRecipeLink, userRecipeTime, userRecipeMicrowave, userRecipeOven,
+			userRecipeStove, userRecipeIngredientList;
 	JTextField tf, username, usernameSignUp, displayNameTF, question1TF, question2TF, question3TF, fquestion1TF,
-			fquestion2TF, fquestion3TF, fUsername;
+			fquestion2TF, fquestion3TF, fUsername, crNameTF, crLinkTF, crTimeTF, crIngredientsTF;
 	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF, fCurrPasswordPF,
 			fNewPasswordPF, fConfirmNewPasswordPF;
 	JCheckBox microwave, lime, apple, watermelon, pears, peaches, honeyDew, cantaloupe, lemon, avocado, lettuce, tomato,
@@ -58,7 +62,8 @@ public class main extends JFrame implements ActionListener {
 			nutmeg, caramelSquares, cakeMix, hotDogs, hotDogBuns, hamburgerBuns, chocolateChips, bananas, quinoa,
 			edamame, sesame, sesameVinaigrette, cookedSausage, pesto, ricatta, lasagna, teryaki, pineapple, peas,
 			whippingCream, frozenBlueberries, sweetPotato, riceKrispies, marshmallows, whiteBeans, blackOlives,
-			blueCheeseDressing, buffaloSauce, popcornKernels, sriracha, cookedChickpeas, searchAllRecipes, oven, stove;
+			blueCheeseDressing, buffaloSauce, popcornKernels, sriracha, cookedChickpeas, searchAllRecipes, oven, stove,
+			crMicrowave, crOven, crStove;
 	JComboBox<String> q1, q2, q3;
 	Font logoFont = new Font("Comic Sans MS", Font.PLAIN, 48);
 	Font timeFont = new Font("Comic Sans MS", Font.PLAIN, 32);
@@ -66,6 +71,7 @@ public class main extends JFrame implements ActionListener {
 	boolean mbDisplay = false;
 	boolean validLogin = false;
 	boolean searchAllRecipesB = false;
+	boolean[] crAppliancesBoolean = { false, false, false };
 	String checkedBox;
 	String appliance[] = { "false", "false", "false" };
 	String question1[] = { "What is your favorite book?", "What is your favorite movie?",
@@ -77,7 +83,7 @@ public class main extends JFrame implements ActionListener {
 	String[] ingredients;
 	String newFav;
 	int currUser, currRecipe, fCurrUser, currDisplayRecipe, totalRecipes, currFavRecipe, currDisplayRecipeFav,
-			totalRecipesFav;
+			totalRecipesFav, currUserRecipe, currUserDisplayRecipe, totalUserRecipes;
 	ArrayList<String> displayNameLog = new ArrayList<String>();
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
@@ -92,6 +98,7 @@ public class main extends JFrame implements ActionListener {
 	static ArrayList<String> userIngredients = new ArrayList<String>();
 	ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
 	ArrayList<String> favRecipes = new ArrayList<String>();
+	ArrayList<String> userRecipes = new ArrayList<String>();
 
 	main() {
 		f = new JFrame("MyBook");
@@ -244,6 +251,7 @@ public class main extends JFrame implements ActionListener {
 		home = new JMenuItem("Home");
 		search = new JMenuItem("Search");
 		favorites = new JMenuItem("Favorites");
+		userRecipesMI = new JMenuItem("My Recipes");
 		customize = new JMenuItem("Customize");
 		changePassword = new JMenuItem("Change Password");
 		changeDisplayColor = new JMenuItem("Change Display");
@@ -254,6 +262,7 @@ public class main extends JFrame implements ActionListener {
 		main.add(home);
 		main.add(search);
 		main.add(favorites);
+		main.add(userRecipesMI);
 		profile.add(customize);
 		profile.add(changePassword);
 		profile.add(changeDisplayColor);
@@ -263,6 +272,7 @@ public class main extends JFrame implements ActionListener {
 		home.addActionListener(this);
 		search.addActionListener(this);
 		favorites.addActionListener(this);
+		userRecipesMI.addActionListener(this);
 		customize.addActionListener(this);
 		changePassword.addActionListener(this);
 		changeDisplayColor.addActionListener(this);
@@ -276,28 +286,42 @@ public class main extends JFrame implements ActionListener {
 		homeDisplayP = new JPanel();
 		homeDisplayP.setBackground(Color.white);
 		homeDisplayP.setLayout(null);
+		homeDisplayP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		loginP = new JPanel();
 		loginP.setBounds(0, 0, 900, 650);
 		loginP.setBackground(Color.orange);
 		loginP.setLayout(null);
 		loginButtonsP = new JPanel();
+		loginButtonsP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		signupP = new JPanel();
 		signupP.setBounds(0, 0, 900, 650);
 		signupP.setBackground(Color.orange);
 		signupP.setLayout(null);
 		signupButtonsP = new JPanel();
+		signupButtonsP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		securityP = new JPanel();
 		securityP.setBounds(0, 0, 900, 650);
 		securityP.setBackground(Color.orange);
 		securityP.setLayout(null);
 		securityQuestionsP = new JPanel();
+		securityQuestionsP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		forgotPasswordP = new JPanel();
 		forgotPasswordP.setBounds(0, 0, 900, 650);
 		forgotPasswordP.setBackground(Color.orange);
 		forgotPasswordP.setLayout(null);
 		forgotPasswordQuestionsP = new JPanel();
+		forgotPasswordQuestionsP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		forgotPasswordUsernameP = new JPanel();
+		forgotPasswordUsernameP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		forgotPasswordPasswordP = new JPanel();
+		forgotPasswordPasswordP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		selectP = new JPanel();
 		selectP.setBounds(0, 0, 900, 650);
 		selectP.setBackground(Color.orange);
@@ -307,11 +331,19 @@ public class main extends JFrame implements ActionListener {
 		displayP.setBackground(Color.orange);
 		displayP.setLayout(null);
 		recipeTitleP = new JPanel();
+		recipeTitleP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		recipeDescriptionP = new JPanel();
+		recipeDescriptionP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		favoritesP = new JPanel();
 		favoritesP.setBounds(0, 0, 900, 650);
 		favoritesP.setBackground(Color.orange);
 		favoritesP.setLayout(null);
+		userRecipesP = new JPanel();
+		userRecipesP.setBounds(0, 0, 900, 650);
+		userRecipesP.setBackground(Color.orange);
+		userRecipesP.setLayout(null);
 		customizeP = new JPanel();
 		customizeP.setBounds(0, 0, 900, 650);
 		customizeP.setBackground(Color.orange);
@@ -704,6 +736,7 @@ public class main extends JFrame implements ActionListener {
 		dairysP.add(whippedCream);
 		dairysP.add(ricatta);
 		dairysP.add(whippingCream);
+		dairysP.add(milk);
 
 		// Tabbed Condiments Panel
 		condimentsP = new JPanel();
@@ -1051,6 +1084,111 @@ public class main extends JFrame implements ActionListener {
 		recipeDescriptionP.add(addToFavorites);
 		displayP.setVisible(false);
 
+		// User Recipes
+		userRecipesDisplayP = new JPanel();
+		userRecipesDisplayP.setBounds(115, 100, 650, 400);
+		userRecipesDisplayP.setLayout(null);
+		createRecipe = new JButton("Create Recipe");
+		createRecipe.setBounds(375, 510, 150, 30);
+		createRecipe.setBackground(Color.green);
+		createRecipe.addActionListener(this);
+		removeRecipe = new JButton("Remove Recipe");
+		removeRecipe.setBounds(375, 550, 150, 30);
+		removeRecipe.setBackground(Color.gray);
+		removeRecipe.addActionListener(this);
+		recipeOutOfRecipesUser = new JLabel();
+		recipeOutOfRecipesUser.setBounds(430, 50, 200, 30);
+		userRecipeTitle = new JLabel("No Recipes Created");
+		userRecipeTitle.setBounds(20, 20, 200, 30);
+		userRecipeTime = new JLabel();
+		userRecipeTime.setBounds(350, 20, 300, 30);
+		userRecipeLink = new JLabel();
+		userRecipeLink.setBounds(20, 100, 600, 30);
+		userRecipeIngredientList = new JLabel();
+		userRecipeIngredientList.setBounds(20, 300, 300, 30);
+		nextUserRecipe = new JButton(">");
+		nextUserRecipe.setBounds(795, 300, 80, 80);
+		nextUserRecipe.setBackground(Color.gray);
+		nextUserRecipe.addActionListener(this);
+		previousUserRecipe = new JButton("<");
+		previousUserRecipe.setBounds(10, 300, 80, 80);
+		previousUserRecipe.setBackground(Color.gray);
+		previousUserRecipe.addActionListener(this);
+		userRecipeMicrowave = new JLabel();
+		userRecipeMicrowave.setBounds(20, 180, 300, 30);
+		userRecipeStove = new JLabel();
+		userRecipeStove.setBounds(20, 200, 300, 30);
+		userRecipeOven = new JLabel();
+		userRecipeOven.setBounds(20, 220, 300, 30);
+		userRecipesP.add(recipeOutOfRecipesUser);
+		userRecipesP.add(nextUserRecipe);
+		userRecipesP.add(previousUserRecipe);
+		userRecipesDisplayP.add(userRecipeTitle);
+		userRecipesDisplayP.add(userRecipeTime);
+		userRecipesDisplayP.add(userRecipeLink);
+		userRecipesDisplayP.add(userRecipeIngredientList);
+		userRecipesDisplayP.add(userRecipeMicrowave);
+		userRecipesDisplayP.add(userRecipeOven);
+		userRecipesDisplayP.add(userRecipeStove);
+		userRecipesP.add(removeRecipe);
+		userRecipesDisplayP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		submitRecipe = new JButton("Submit Recipe");
+		submitRecipe.setBounds(375, 525, 150, 30);
+		submitRecipe.setBackground(Color.green);
+		submitRecipe.addActionListener(this);
+		submitRecipe.setVisible(false);
+		userCreateRecipeP = new JPanel();
+		userCreateRecipeP.setBounds(115, 100, 650, 400);
+		userCreateRecipeP.setLayout(null);
+		userCreateRecipeP.setVisible(false);
+		userCreateRecipeP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		crName = new JLabel("Enter Recipe Name:");
+		crName.setBounds(20, 20, 200, 30);
+		crNameTF = new JTextField();
+		crNameTF.setBounds(20, 50, 200, 30);
+		crLink = new JLabel("Enter Recipe Link: (Leave blank if there is none)");
+		crLink.setBounds(20, 100, 600, 30);
+		crLinkTF = new JTextField();
+		crLinkTF.setBounds(20, 130, 600, 30);
+		crTime = new JLabel("Enter Recipe Time: (In minutes)");
+		crTime.setBounds(350, 20, 300, 30);
+		crTimeTF = new JTextField();
+		crTimeTF.setBounds(350, 50, 200, 30);
+		crAppliances = new JLabel("Check All That Apply:");
+		crAppliances.setBounds(20, 180, 300, 30);
+		crMicrowave = new JCheckBox("Microwave");
+		crMicrowave.setBounds(20, 210, 100, 30);
+		crMicrowave.addActionListener(this);
+		crOven = new JCheckBox("Oven");
+		crOven.setBounds(155, 210, 100, 30);
+		crOven.addActionListener(this);
+		crStove = new JCheckBox("Stove");
+		crStove.setBounds(255, 210, 100, 30);
+		crStove.addActionListener(this);
+		crIngredients = new JLabel("Enter All Ingredients in a Comma-Separated List:");
+		crIngredients.setBounds(20, 260, 300, 30);
+		crIngredientsTF = new JTextField();
+		crIngredientsTF.setBounds(20, 290, 600, 30);
+		userRecipesP.setVisible(false);
+		userCreateRecipeP.add(crName);
+		userCreateRecipeP.add(crNameTF);
+		userCreateRecipeP.add(crLink);
+		userCreateRecipeP.add(crLinkTF);
+		userCreateRecipeP.add(crTime);
+		userCreateRecipeP.add(crTimeTF);
+		userCreateRecipeP.add(crAppliances);
+		userCreateRecipeP.add(crMicrowave);
+		userCreateRecipeP.add(crOven);
+		userCreateRecipeP.add(crStove);
+		userCreateRecipeP.add(crIngredients);
+		userCreateRecipeP.add(crIngredientsTF);
+		userRecipesP.add(createRecipe);
+		userRecipesP.add(submitRecipe);
+		userRecipesP.add(userCreateRecipeP);
+		userRecipesP.add(userRecipesDisplayP);
+
 		// Panel Favorites
 		removeFromFavorites = new JButton("Remove from Favorites");
 		removeFromFavorites.setBounds(250, 325, 180, 30);
@@ -1086,6 +1224,8 @@ public class main extends JFrame implements ActionListener {
 		recipeDescriptionPFav.add(recipeLinkFav);
 		recipeDescriptionPFav.add(recipeIngredientListFav);
 		recipeDescriptionPFav.add(removeFromFavorites);
+		recipeDescriptionPFav.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		favoritesP.setVisible(false);
 
 		// Panel Customize
@@ -1119,7 +1259,7 @@ public class main extends JFrame implements ActionListener {
 		selectDisplayP.setLayout(new BoxLayout(selectDisplayP, BoxLayout.PAGE_AXIS));
 		selectDisplayP.setAlignmentX(Component.CENTER_ALIGNMENT);
 		selectDisplayP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Select Display"),
-				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		selectDisplayP.add(d0);
 		selectDisplayP.add(d1);
 		selectDisplayP.add(d2);
@@ -1170,6 +1310,7 @@ public class main extends JFrame implements ActionListener {
 		f.add(changePasswordP);
 		f.add(securityP);
 		f.add(forgotPasswordP);
+		f.add(userRecipesP);
 
 		// Buttons Selected
 		microwave.addItemListener(new ItemListener() {
@@ -2107,6 +2248,21 @@ public class main extends JFrame implements ActionListener {
 				checked[182] = (e.getStateChange() == 1 ? true : false);
 			}
 		});
+		crMicrowave.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				crAppliancesBoolean[0] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		crOven.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				crAppliancesBoolean[1] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
+		crStove.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				crAppliancesBoolean[2] = (e.getStateChange() == 1 ? true : false);
+			}
+		});
 
 		f.setSize(900, 650);
 		f.setLayout(null);
@@ -2117,6 +2273,107 @@ public class main extends JFrame implements ActionListener {
 
 	// clickButton.exe
 	public void actionPerformed(ActionEvent e) {
+		// Create Recipe
+		if (e.getSource() == createRecipe) {
+			userRecipesDisplayP.setVisible(false);
+			userCreateRecipeP.setVisible(true);
+			createRecipe.setVisible(false);
+			submitRecipe.setVisible(true);
+			removeRecipe.setVisible(false);
+			nextUserRecipe.setVisible(false);
+			previousUserRecipe.setVisible(false);
+		}
+
+		// Submit Recipe
+		if (e.getSource() == submitRecipe) {
+			if (!crNameTF.getText().equals("")) {
+				if (!crTimeTF.getText().equals("")) {
+					if (!crIngredientsTF.getText().equals("")) {
+						if (crLinkTF.getText().equals("")) {
+							crLinkTF.setText("No Link Available.");
+						}
+						String[] tempAppliances = { "false", "false", "false" };
+						if (crAppliancesBoolean[0]) {
+							tempAppliances[0] = "true";
+						}
+						if (crAppliancesBoolean[1]) {
+							tempAppliances[1] = "true";
+						}
+						if (crAppliancesBoolean[2]) {
+							tempAppliances[2] = "true";
+						}
+						String tempUserRecipe = crNameTF.getText() + ", " + crLinkTF.getText() + ", " + crTimeTF.getText()
+								+ ", " + tempAppliances[0] + ", " + tempAppliances[1] + ", " + tempAppliances[2] + ", "
+								+ crIngredientsTF.getText();
+						userRecipes.add(tempUserRecipe);
+						try {
+							BufferedWriter bw = new BufferedWriter(
+									new FileWriter(displayNameLog.get(currUser) + "Recipes.txt"));
+							for (int i = 0; i < userRecipes.size(); i++) {
+								bw.write(userRecipes.get(i));
+								bw.newLine();
+							}
+							bw.close();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						userRecipesDisplayP.setVisible(true);
+						userCreateRecipeP.setVisible(false);
+						createRecipe.setVisible(true);
+						submitRecipe.setVisible(false);
+						userRecipesP.setVisible(false);
+						removeRecipe.setVisible(true);
+						nextUserRecipe.setVisible(true);
+						previousUserRecipe.setVisible(true);
+						homeP.setVisible(true);
+						JOptionPane.showMessageDialog(f, "Recipe has been created.");
+					} else
+						JOptionPane.showMessageDialog(f, "Recipe Ingredients cannot be blank.");
+				} else
+					JOptionPane.showMessageDialog(f, "Recipe Time cannot be blank.");
+			} else
+				JOptionPane.showMessageDialog(f, "Recipe Name cannot be blank.");
+		}
+		
+		// Remove User Recipe
+		if (e.getSource() == removeRecipe) {
+			if (userRecipes.size() >= 1) {
+				userRecipes.remove(currUserRecipe);
+				currUserRecipe--;
+				totalUserRecipes--;
+				try {
+					BufferedWriter bw = new BufferedWriter(
+							new FileWriter(displayNameLog.get(currUser) + "Recipes.txt"));
+
+					for (int i = 0; i < userRecipes.size(); i++) {
+						bw.write(userRecipes.get(i));
+						bw.newLine();
+					}
+					bw.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				if (userRecipes.size() == 1) {
+					nextUserRecipe.setBackground(Color.gray);
+					previousUserRecipe.setBackground(Color.gray);
+				}
+				if (userRecipes.size() == 0) {
+					removeRecipe.setBackground(Color.gray);
+					userRecipeTitle.setText("No recipes favorited.");
+					userRecipeLink.setText("");
+					userRecipeTime.setText("");
+					userRecipeIngredientList.setText("");
+					recipeOutOfRecipesUser.setText("");
+					userRecipeMicrowave.setText("");
+					userRecipeOven.setText("");
+					userRecipeStove.setText("");
+				}
+				JOptionPane.showMessageDialog(f, "Recipe deleted.");
+				userRecipesP.setVisible(false);
+				homeP.setVisible(true);
+			}
+		}
+		
 		// Remove from Favorites
 		if (e.getSource() == removeFromFavorites) {
 			if (favRecipes.size() >= 1) {
@@ -2522,6 +2779,16 @@ public class main extends JFrame implements ActionListener {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
+						File newUserRecipes = new File(displayNameLog.get(displayNameLog.size() - 1) + "Recipes.txt");
+						try {
+							if (newUserRecipes.createNewFile()) {
+								System.out.println("File created");
+							} else {
+								System.out.println("File already exists");
+							}
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 						securityP.setVisible(false);
 						loginP.setVisible(true);
 						JOptionPane.showMessageDialog(f, "Account has been created.");
@@ -2580,6 +2847,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.orange);
 				changePasswordP.setBackground(Color.orange);
 				changeDisplayP.setBackground(Color.orange);
+				userRecipesP.setBackground(Color.orange);
 				break;
 			case "1":
 				homeP.setBackground(Color.red);
@@ -2589,6 +2857,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.red);
 				changePasswordP.setBackground(Color.red);
 				changeDisplayP.setBackground(Color.red);
+				userRecipesP.setBackground(Color.red);
 				break;
 			case "2":
 				homeP.setBackground(Color.blue);
@@ -2598,6 +2867,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.blue);
 				changePasswordP.setBackground(Color.blue);
 				changeDisplayP.setBackground(Color.blue);
+				userRecipesP.setBackground(Color.blue);
 				break;
 			case "3":
 				homeP.setBackground(Color.yellow);
@@ -2607,6 +2877,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.yellow);
 				changePasswordP.setBackground(Color.yellow);
 				changeDisplayP.setBackground(Color.yellow);
+				userRecipesP.setBackground(Color.yellow);
 				break;
 			case "4":
 				homeP.setBackground(Color.green);
@@ -2616,6 +2887,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.green);
 				changePasswordP.setBackground(Color.green);
 				changeDisplayP.setBackground(Color.green);
+				userRecipesP.setBackground(Color.green);
 				break;
 			case "5":
 				homeP.setBackground(Color.magenta);
@@ -2625,6 +2897,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.magenta);
 				changePasswordP.setBackground(Color.magenta);
 				changeDisplayP.setBackground(Color.magenta);
+				userRecipesP.setBackground(Color.magenta);
 				break;
 			case "6":
 				homeP.setBackground(Color.pink);
@@ -2634,6 +2907,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.pink);
 				changePasswordP.setBackground(Color.pink);
 				changeDisplayP.setBackground(Color.pink);
+				userRecipesP.setBackground(Color.pink);
 				break;
 			case "7":
 				homeP.setBackground(Color.gray);
@@ -2643,6 +2917,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.gray);
 				changePasswordP.setBackground(Color.gray);
 				changeDisplayP.setBackground(Color.gray);
+				userRecipesP.setBackground(Color.gray);
 				break;
 			case "8":
 				homeP.setBackground(Color.white);
@@ -2652,6 +2927,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.white);
 				changePasswordP.setBackground(Color.white);
 				changeDisplayP.setBackground(Color.white);
+				userRecipesP.setBackground(Color.white);
 				break;
 			case "9":
 				homeP.setBackground(Color.black);
@@ -2661,6 +2937,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setBackground(Color.black);
 				changePasswordP.setBackground(Color.black);
 				changeDisplayP.setBackground(Color.black);
+				userRecipesP.setBackground(Color.black);
 				break;
 			}
 			displayColorLog.set(currUser, e.getActionCommand());
@@ -2734,6 +3011,41 @@ public class main extends JFrame implements ActionListener {
 			currDisplayRecipeFav++;
 			recipeOutOfRecipesFav.setText(currDisplayRecipeFav + "/" + totalRecipesFav);
 		}
+		
+		if (e.getSource() == nextUserRecipe && userRecipes.size() > currUserRecipe + 1) {
+			currUserRecipe++;
+			totalUserRecipes = userRecipes.size();
+			String[] combinedRecipes = userRecipes.get(currUserRecipe).split(",");
+			userRecipeTitle.setText("Title: " + combinedRecipes[0]);
+			userRecipeLink.setText(combinedRecipes[1]);
+			userRecipeTime.setText("Time: " + combinedRecipes[2]);
+			System.out.println(combinedRecipes[3]);
+			System.out.println(combinedRecipes[4]);
+			System.out.println(combinedRecipes[5]);
+			if (combinedRecipes[3].equals(" true")) {
+				userRecipeMicrowave.setText("Microwave Needed?: Yes");
+			} else
+				userRecipeMicrowave.setText("Microwave Needed?: No");
+			if (combinedRecipes[4].equals(" true")) {
+				userRecipeOven.setText("Oven Needed?: Yes");
+			} else
+				userRecipeOven.setText("Oven Needed?: No");
+			if (combinedRecipes[5].equals(" true")) {
+				userRecipeStove.setText("Stove Needed?: Yes");
+			} else
+				userRecipeStove.setText("Stove Needed?: No");
+			String userIngredientList = "Ingredients: ";
+			for (int i = 6; i < combinedRecipes.length; i++) {
+				userIngredientList += combinedRecipes[i];
+			}
+			userRecipeIngredientList.setText(userIngredientList);
+			previousUserRecipe.setBackground(Color.green);
+			if (userRecipes.size() <= currUserRecipe + 1) {
+				nextUserRecipe.setBackground(Color.gray);
+			}
+			currUserDisplayRecipe++;
+			recipeOutOfRecipesUser.setText(currUserDisplayRecipe + "/" + totalUserRecipes);
+		}
 
 		// Previous Recipe
 		if (e.getSource() == previousRecipe && currRecipe > 0) {
@@ -2772,6 +3084,42 @@ public class main extends JFrame implements ActionListener {
 			currDisplayRecipeFav--;
 			recipeOutOfRecipesFav.setText(currDisplayRecipeFav + "/" + totalRecipesFav);
 		}
+		
+		// Previous User Recipe
+		if (e.getSource() == previousUserRecipe && currUserRecipe > 0) {
+			currUserRecipe--;
+			totalUserRecipes = userRecipes.size();
+			String[] combinedRecipes = userRecipes.get(currUserRecipe).split(",");
+			userRecipeTitle.setText("Title: " + combinedRecipes[0]);
+			userRecipeLink.setText(combinedRecipes[1]);
+			userRecipeTime.setText("Time: " + combinedRecipes[2]);
+			System.out.println(combinedRecipes[3]);
+			System.out.println(combinedRecipes[4]);
+			System.out.println(combinedRecipes[5]);
+			if (combinedRecipes[3].equals(" true")) {
+				userRecipeMicrowave.setText("Microwave Needed?: Yes");
+			} else
+				userRecipeMicrowave.setText("Microwave Needed?: No");
+			if (combinedRecipes[4].equals(" true")) {
+				userRecipeOven.setText("Oven Needed?: Yes");
+			} else
+				userRecipeOven.setText("Oven Needed?: No");
+			if (combinedRecipes[5].equals(" true")) {
+				userRecipeStove.setText("Stove Needed?: Yes");
+			} else
+				userRecipeStove.setText("Stove Needed?: No");
+			String userIngredientList = "Ingredients: ";
+			for (int i = 6; i < combinedRecipes.length; i++) {
+				userIngredientList += combinedRecipes[i];
+			}
+			userRecipeIngredientList.setText(userIngredientList);
+			nextUserRecipe.setBackground(Color.green);
+			if (currUserRecipe <= 0) {
+				previousUserRecipe.setBackground(Color.gray);
+			}
+			currUserDisplayRecipe--;
+			recipeOutOfRecipesUser.setText(currUserDisplayRecipe + "/" + totalUserRecipes);
+		}
 
 		// Menu Selections
 		if (e.getSource() == home) {
@@ -2783,6 +3131,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
 			}
 		}
 		if (e.getSource() == search) {
@@ -2794,6 +3143,72 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
+			}
+		}
+		if (e.getSource() == userRecipesMI) {
+			if (mbDisplay) {
+				homeP.setVisible(false);
+				favoritesP.setVisible(false);
+				selectP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(true);
+				if (userRecipes.size() >= 1) {
+					totalUserRecipes = userRecipes.size();
+					String[] combinedRecipes = userRecipes.get(0).split(",");
+					currUserRecipe = 0;
+					userRecipeTitle.setText("Title: " + combinedRecipes[0]);
+					userRecipeLink.setText(combinedRecipes[1]);
+					userRecipeLink.setForeground(Color.blue);
+					userRecipeLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					userRecipeLink.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent e) {
+							// User clicked on the label
+							try {
+								Desktop.getDesktop().browse(new URI(userRecipeLink.getText()));
+							} catch (URISyntaxException | IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+
+						public void mouseEntered(MouseEvent e) {
+							// Mouse entered label
+							userRecipeLink.setForeground(Color.yellow);
+						}
+
+						public void mouseExited(MouseEvent e) {
+							// Mouse left label
+							userRecipeLink.setForeground(Color.blue);
+						}
+					});
+					userRecipeTime.setText("Time: " + combinedRecipes[2]);
+					if (combinedRecipes[3].equals(" true")) {
+						userRecipeMicrowave.setText("Microwave Needed?: Yes");
+					} else
+						userRecipeMicrowave.setText("Microwave Needed?: No");
+					if (combinedRecipes[4].equals(" true")) {
+						userRecipeOven.setText("Oven Needed?: Yes");
+					} else
+						userRecipeOven.setText("Oven Needed?: No");
+					if (combinedRecipes[5].equals(" true")) {
+						userRecipeStove.setText("Stove Needed?: Yes");
+					} else
+						userRecipeStove.setText("Stove Needed?: No");
+					String userIngredientList = "Ingredients: ";
+					for (int i = 6; i < combinedRecipes.length; i++) {
+						userIngredientList += combinedRecipes[i];
+					}
+					userRecipeIngredientList.setText(userIngredientList);
+					currUserDisplayRecipe = 1;
+					removeRecipe.setBackground(Color.green);
+					recipeOutOfRecipesUser.setText(currUserDisplayRecipe + "/" + totalUserRecipes);
+				}
+				if (userRecipes.size() > 1) {
+					nextUserRecipe.setBackground(Color.green);
+				}
 			}
 		}
 		if (e.getSource() == favorites) {
@@ -2805,6 +3220,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
 				totalRecipesFav = favRecipes.size();
 				if (favRecipes.size() >= 1) {
 					String[] combinedRecipes = favRecipes.get(0).split(",");
@@ -2857,6 +3273,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(true);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
 			}
 		}
 		if (e.getSource() == changePassword) {
@@ -2868,6 +3285,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(true);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
 			}
 		}
 		if (e.getSource() == changeDisplayColor) {
@@ -2879,6 +3297,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(true);
+				userRecipesP.setVisible(false);
 			}
 		}
 		if (e.getSource() == logout) {
@@ -2890,6 +3309,7 @@ public class main extends JFrame implements ActionListener {
 				customizeP.setVisible(false);
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
 				loginP.setVisible(true);
 				username.setText("");
 				password.setText("");
@@ -3170,6 +3590,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.orange);
 					changePasswordP.setBackground(Color.orange);
 					changeDisplayP.setBackground(Color.orange);
+					userRecipesP.setBackground(Color.orange);
 					break;
 				case "1":
 					homeP.setBackground(Color.red);
@@ -3179,6 +3600,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.red);
 					changePasswordP.setBackground(Color.red);
 					changeDisplayP.setBackground(Color.red);
+					userRecipesP.setBackground(Color.red);
 					break;
 				case "2":
 					homeP.setBackground(Color.blue);
@@ -3188,6 +3610,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.blue);
 					changePasswordP.setBackground(Color.blue);
 					changeDisplayP.setBackground(Color.blue);
+					userRecipesP.setBackground(Color.blue);
 					break;
 				case "3":
 					homeP.setBackground(Color.yellow);
@@ -3197,6 +3620,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.yellow);
 					changePasswordP.setBackground(Color.yellow);
 					changeDisplayP.setBackground(Color.yellow);
+					userRecipesP.setBackground(Color.yellow);
 					break;
 				case "4":
 					homeP.setBackground(Color.green);
@@ -3206,6 +3630,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.green);
 					changePasswordP.setBackground(Color.green);
 					changeDisplayP.setBackground(Color.green);
+					userRecipesP.setBackground(Color.green);
 					break;
 				case "5":
 					homeP.setBackground(Color.magenta);
@@ -3215,6 +3640,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.magenta);
 					changePasswordP.setBackground(Color.magenta);
 					changeDisplayP.setBackground(Color.magenta);
+					userRecipesP.setBackground(Color.magenta);
 					break;
 				case "6":
 					homeP.setBackground(Color.pink);
@@ -3224,6 +3650,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.pink);
 					changePasswordP.setBackground(Color.pink);
 					changeDisplayP.setBackground(Color.pink);
+					userRecipesP.setBackground(Color.pink);
 					break;
 				case "7":
 					homeP.setBackground(Color.gray);
@@ -3233,6 +3660,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.gray);
 					changePasswordP.setBackground(Color.gray);
 					changeDisplayP.setBackground(Color.gray);
+					userRecipesP.setBackground(Color.gray);
 					break;
 				case "8":
 					homeP.setBackground(Color.white);
@@ -3242,6 +3670,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.white);
 					changePasswordP.setBackground(Color.white);
 					changeDisplayP.setBackground(Color.white);
+					userRecipesP.setBackground(Color.white);
 					break;
 				case "9":
 					homeP.setBackground(Color.black);
@@ -3251,6 +3680,7 @@ public class main extends JFrame implements ActionListener {
 					customizeP.setBackground(Color.black);
 					changePasswordP.setBackground(Color.black);
 					changeDisplayP.setBackground(Color.black);
+					userRecipesP.setBackground(Color.black);
 					break;
 				}
 				recipeTitle.setText("");
@@ -3271,6 +3701,21 @@ public class main extends JFrame implements ActionListener {
 					br.close();
 				} catch (Exception e1) {
 					e1.printStackTrace();
+				}
+				for (int i = userRecipes.size(); userRecipes.size() > 0; i--) {
+					userRecipes.remove(i);
+				}
+				try {
+					BufferedReader br = new BufferedReader(
+							new FileReader(displayNameLog.get(currUser) + "Recipes.txt"));
+					String contentLine = br.readLine();
+					while (contentLine != null) {
+						userRecipes.add(contentLine);
+						contentLine = br.readLine();
+					}
+					br.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
 				}
 			} else {
 				JOptionPane.showMessageDialog(f, "Username or password is incorrect.");
