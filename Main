@@ -3429,7 +3429,7 @@ public class main extends JFrame implements ActionListener {
 			}
 			selected.setText(checkedBox);
 
-			Database holder = new Database();
+			Database holder = Database.getInstance();
 			holder.fillDatabase();
 			currRecipe = 0;
 			previousRecipe.setBackground(Color.gray);
