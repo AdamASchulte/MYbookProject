@@ -8,9 +8,15 @@ import java.io.FileNotFoundException;
 public class Database {
 
 	private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
-
-	public Database() {
-
+	private static Database instance;
+	private Database() {
+		
+	}
+	
+	public static Database getInstance() {
+		if( instance == null)
+			instance = new Database();
+		return instance;
 	}
 
 	public void fillDatabase() {
@@ -20,38 +26,19 @@ public class Database {
 			Scanner reader = new Scanner(bruh);
 
 			while (reader.hasNextLine()) {
-				int i = 0;
 				String[] recipes = reader.nextLine().split(",");
 				for (int k = 0; k < recipes.length; k++) {
 					recipes[k] = recipes[k].trim();
 				}
 				myRecipe = new Recipe(recipes);
 				recipeList.add(myRecipe);
-				i++;
 			}
-
+			reader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("did not work");
 
 		}
 		return;
-	}
-
-	public void printInfo() {
-		for (int i = 0; i < 20; i++) {
-			Recipe temp = new Recipe();
-			temp = recipeList.get(i);
-			System.out.println(temp.getName());
-			System.out.println(temp.getTime());
-			System.out.println(temp.getMicrowaveable());
-			ArrayList<String> bruh;
-			bruh = temp.getIngredientList();
-			int x = bruh.size();
-			for (int j = 0; j < x; j++) {
-				System.out.println(bruh.get(j));
-			}
-		}
-
 	}
 
 	public ArrayList<Recipe> getRecipes() {
