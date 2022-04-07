@@ -14,6 +14,7 @@ public class Recipe {
 	public Recipe() {
 
 	}
+
 	public Recipe(String[] info) {
 		name = info[0].trim();
 		link = info[1].trim();
@@ -25,6 +26,7 @@ public class Recipe {
 			ingredientList.add(info[i].trim().toLowerCase());
 		}
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -36,6 +38,14 @@ public class Recipe {
 	public String getMicrowaveable() {
 		return microwaveable;
 	}
+	
+	public String getOven() {
+		return oven;
+	}
+	
+	public String getStove() {
+		return stove;
+	}
 
 	public ArrayList<String> getIngredientList() {
 		return ingredientList;
@@ -43,15 +53,5 @@ public class Recipe {
 
 	public String getLink() {
 		return link;
-	}
-	
-	public String getOven()
-	{
-		return oven;
-	}
-	
-	public String getStove()
-	{
-		return stove;
 	}
 }
