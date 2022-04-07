@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet.ColorAttribute;
 import java.awt.event.*;
 import java.awt.*;
@@ -18,19 +19,21 @@ public class main extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	JFrame f;
-	JMenu main, profile, options;
-	JMenuItem home, search, favorites, userRecipesMI, customize, changePassword, changeDisplayColor, logout;
+	JMenu main, profile, social, options;
+	JMenuItem home, search, favorites, userRecipesMI, friends, addFriends, removeFriends, customize, changePassword,
+			changeDisplayColor, logout;
 	JPanel homeP, homeDisplayP, loginP, loginButtonsP, signupP, signupButtonsP, selectP, displayP, favoritesP,
 			customizeP, changeDisplayP, selectDisplayP, changePasswordP, selectProfileP, displayProfileP, recipeTitleP,
 			recipeDescriptionP, securityP, securityQuestionsP, forgotPasswordP, forgotPasswordQuestionsP,
 			forgotPasswordUsernameP, forgotPasswordPasswordP, fruitsP, vegetablesP, grainsP, proteinsP, dairysP,
 			condimentsP, seasoningsP, miscP, recipeDescriptionPFav, userRecipesP, userRecipesDisplayP,
-			userCreateRecipeP;
+			userCreateRecipeP, friendsP, friendsDisplayP, friendsAddP, friendsRemoveP, friendsRecipesP;
 	JTabbedPane tabbedIngredients;
 	JButton b, login, signup, createAccount, homeSearch, homeFavorites, homeCustomize, changePasswordB, back,
 			nextRecipe, previousRecipe, submitAnswers, forgotPassword, submitUser, answerQuestions, fChangePasswordB,
 			clearAll, nextRecipeFav, previousRecipeFav, addToFavorites, removeFromFavorites, createRecipe, submitRecipe,
-			removeRecipe, nextUserRecipe, previousUserRecipe;
+			removeRecipe, nextUserRecipe, previousUserRecipe, addToFriends, removeFromFriends, nextFriend,
+			previousFriend, friendsFav, friendsCustom, nextFF, nextFC, previousFF, previousFC;
 	JRadioButton p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9;
 	JLabel l1, l2, selected, user, pass, profilePic, logo, logoName, displayName, welcome, mbhelp, homeButtons,
 			currPassword, newPassword, confirmNewPassword, recipeTitle, recipeTime, recipeLink, recipeIngredientList,
@@ -38,9 +41,11 @@ public class main extends JFrame implements ActionListener {
 			fConfirmNewPassword, recipeOutOfRecipes, ovenRequired, stoveRequired, recipeOutOfRecipesFav, recipeTitleFav,
 			recipeTimeFav, recipeLinkFav, recipeIngredientListFav, crName, crLink, crTime, crAppliances, crIngredients,
 			recipeOutOfRecipesUser, userRecipeTitle, userRecipeLink, userRecipeTime, userRecipeMicrowave,
-			userRecipeOven, userRecipeStove, userRecipeIngredientList;
+			userRecipeOven, userRecipeStove, userRecipeIngredientList, friendsProfile, friendsName,
+			enterFriendNameLabel, enterFriendNameLabelR;
 	JTextField tf, username, usernameSignUp, displayNameTF, question1TF, question2TF, question3TF, fquestion1TF,
-			fquestion2TF, fquestion3TF, fUsername, crNameTF, crLinkTF, crTimeTF, crIngredientsTF;
+			fquestion2TF, fquestion3TF, fUsername, crNameTF, crLinkTF, crTimeTF, crIngredientsTF, enterFriendName,
+			enterFriendNameR;
 	JPasswordField password, passwordSignUp, currPasswordPF, newPasswordPF, confirmNewPasswordPF, fCurrPasswordPF,
 			fNewPasswordPF, fConfirmNewPasswordPF;
 	JCheckBox microwave, lime, apple, watermelon, pears, peaches, honeyDew, cantaloupe, lemon, avocado, lettuce, tomato,
@@ -67,6 +72,7 @@ public class main extends JFrame implements ActionListener {
 	JComboBox<String> q1, q2, q3;
 	Font logoFont = new Font("Comic Sans MS", Font.PLAIN, 48);
 	Font timeFont = new Font("Comic Sans MS", Font.PLAIN, 32);
+	Font friendNameFont = new Font("Comic Sans MS", Font.BOLD, 24);
 	boolean[] checked;
 	boolean mbDisplay = false;
 	boolean validLogin = false;
@@ -83,7 +89,7 @@ public class main extends JFrame implements ActionListener {
 	String[] ingredients;
 	String newFav;
 	int currUser, currRecipe, fCurrUser, currDisplayRecipe, totalRecipes, currFavRecipe, currDisplayRecipeFav,
-			totalRecipesFav, currUserRecipe, currUserDisplayRecipe, totalUserRecipes;
+			totalRecipesFav, currUserRecipe, currUserDisplayRecipe, totalUserRecipes, currFriend;
 	ArrayList<String> displayNameLog = new ArrayList<String>();
 	ArrayList<String> userLog = new ArrayList<String>();
 	ArrayList<String> passLog = new ArrayList<String>();
@@ -99,6 +105,7 @@ public class main extends JFrame implements ActionListener {
 	ArrayList<Recipe> validRecipes = new ArrayList<Recipe>();
 	ArrayList<String> favRecipes = new ArrayList<String>();
 	ArrayList<String> userRecipes = new ArrayList<String>();
+	ArrayList<String> userFriends = new ArrayList<String>();
 
 	main() {
 		f = new JFrame("MyBook");
@@ -247,22 +254,30 @@ public class main extends JFrame implements ActionListener {
 		JMenuBar mb = new JMenuBar();
 		main = new JMenu("Main");
 		profile = new JMenu("Profile");
+		social = new JMenu("Social");
 		options = new JMenu("Options");
 		home = new JMenuItem("Home");
 		search = new JMenuItem("Search");
 		favorites = new JMenuItem("Favorites");
 		userRecipesMI = new JMenuItem("My Recipes");
+		friends = new JMenuItem("Friends");
+		addFriends = new JMenuItem("Add Friends");
+		removeFriends = new JMenuItem("Remove Friends");
 		customize = new JMenuItem("Customize");
 		changePassword = new JMenuItem("Change Password");
 		changeDisplayColor = new JMenuItem("Change Display");
 		logout = new JMenuItem("Logout");
 		mb.add(main);
 		mb.add(profile);
+		mb.add(social);
 		mb.add(options);
 		main.add(home);
 		main.add(search);
 		main.add(favorites);
 		main.add(userRecipesMI);
+		social.add(friends);
+		social.add(addFriends);
+		social.add(removeFriends);
 		profile.add(customize);
 		profile.add(changePassword);
 		profile.add(changeDisplayColor);
@@ -276,6 +291,9 @@ public class main extends JFrame implements ActionListener {
 		customize.addActionListener(this);
 		changePassword.addActionListener(this);
 		changeDisplayColor.addActionListener(this);
+		friends.addActionListener(this);
+		addFriends.addActionListener(this);
+		removeFriends.addActionListener(this);
 		logout.addActionListener(this);
 
 		// Panels
@@ -344,6 +362,14 @@ public class main extends JFrame implements ActionListener {
 		userRecipesP.setBounds(0, 0, 900, 650);
 		userRecipesP.setBackground(Color.orange);
 		userRecipesP.setLayout(null);
+		friendsP = new JPanel();
+		friendsP.setLayout(null);
+		friendsP.setBounds(0, 0, 900, 650);
+		friendsP.setBackground(Color.orange);
+		friendsDisplayP = new JPanel();
+		friendsAddP = new JPanel();
+		friendsRemoveP = new JPanel();
+		friendsRecipesP = new JPanel();
 		customizeP = new JPanel();
 		customizeP.setBounds(0, 0, 900, 650);
 		customizeP.setBackground(Color.orange);
@@ -1189,6 +1215,111 @@ public class main extends JFrame implements ActionListener {
 		userRecipesP.add(userCreateRecipeP);
 		userRecipesP.add(userRecipesDisplayP);
 
+		// Panel Friends
+		friendsProfile = new JLabel();
+		friendsProfile.setBounds(125, 50, 150, 150);
+		friendsProfile.setHorizontalAlignment(JLabel.CENTER);
+		friendsProfile.setVerticalAlignment(JLabel.CENTER);
+		friendsProfile.setHorizontalTextPosition(JLabel.CENTER);
+		friendsProfile.setVerticalTextPosition(JLabel.CENTER);
+		friendsProfile.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		friendsProfile.setIcon(new ImageIcon("src/images/youHaveNoFriends.jpg"));
+		friendsProfile.setText("");
+		friendsName = new JLabel();
+		friendsName.setText("You have no friends.");
+		friendsName.setBounds(50, 225, 300, 50);
+		friendsName.setHorizontalAlignment(JLabel.CENTER);
+		friendsName.setFont(friendNameFont);
+		nextFriend = new JButton(">");
+		nextFriend.setBounds(795, 300, 80, 80);
+		nextFriend.setBackground(Color.gray);
+		nextFriend.addActionListener(this);
+		previousFriend = new JButton("<");
+		previousFriend.setBounds(10, 300, 80, 80);
+		previousFriend.setBackground(Color.gray);
+		previousFriend.addActionListener(this);
+		friendsFav = new JButton("Favorites");
+		friendsFav.setBounds(150, 350, 100, 30);
+		friendsFav.setBackground(Color.gray);
+		friendsFav.addActionListener(this);
+		friendsCustom = new JButton("Customs");
+		friendsCustom.setBounds(150, 400, 100, 30);
+		friendsCustom.setBackground(Color.gray);
+		friendsCustom.addActionListener(this);
+		friendsP.add(nextFriend);
+		friendsP.add(previousFriend);
+		friendsDisplayP.add(friendsName);
+		friendsDisplayP.add(friendsProfile);
+		friendsAddP.setVisible(false);
+		friendsAddP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		friendsAddP.setBounds(250, 150, 400, 300);
+		friendsAddP.setLayout(null);
+		addToFriends = new JButton("Add Friend");
+		addToFriends.setBounds(130, 200, 150, 30);
+		addToFriends.setBackground(Color.white);
+		addToFriends.addActionListener(this);
+		enterFriendName = new JTextField();
+		enterFriendName.setBounds(100, 100, 210, 30);
+		enterFriendNameLabel = new JLabel("Enter Friend's Username:");
+		enterFriendNameLabel.setBounds(100, 70, 210, 30);
+		friendsAddP.add(enterFriendNameLabel);
+		friendsAddP.add(enterFriendName);
+		friendsAddP.add(addToFriends);
+		friendsRemoveP.setVisible(false);
+		friendsRemoveP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		friendsRemoveP.setBounds(250, 150, 400, 300);
+		friendsRemoveP.setLayout(null);
+		removeFromFriends = new JButton("Remove Friend");
+		removeFromFriends.setBounds(130, 200, 150, 30);
+		removeFromFriends.setBackground(Color.white);
+		removeFromFriends.addActionListener(this);
+		enterFriendNameR = new JTextField();
+		enterFriendNameR.setBounds(100, 100, 210, 30);
+		enterFriendNameLabelR = new JLabel("Enter Friend's Username:");
+		enterFriendNameLabelR.setBounds(100, 70, 210, 30);
+		friendsRemoveP.add(enterFriendNameLabelR);
+		friendsRemoveP.add(enterFriendNameR);
+		friendsRemoveP.add(removeFromFriends);
+		friendsDisplayP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		friendsDisplayP.setBounds(250, 50, 400, 500);
+		friendsDisplayP.setLayout(null);
+		friendsRecipesP.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLoweredBevelBorder(),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		friendsRecipesP.setBounds(115, 100, 650, 400);
+		friendsRecipesP.setLayout(null);
+		friendsRecipesP.setVisible(false);
+		nextFF = new JButton(">");
+		nextFF.setVisible(false);
+		nextFF.setBounds(795, 300, 80, 80);
+		nextFF.setBackground(Color.gray);
+		nextFC = new JButton(">");
+		nextFC.setVisible(false);
+		nextFC.setBounds(795, 300, 80, 80);
+		nextFC.setBackground(Color.gray);
+		previousFF = new JButton("<");
+		previousFF.setVisible(false);
+		previousFF.setBounds(10, 300, 80, 80);
+		previousFF.setBackground(Color.gray);
+		previousFC = new JButton("<");
+		previousFC.setVisible(false);
+		previousFC.setBounds(10, 300, 80, 80);
+		previousFC.setBackground(Color.gray);
+		friendsP.add(nextFF);
+		friendsP.add(nextFC);
+		friendsP.add(previousFF);
+		friendsP.add(previousFC);
+		friendsDisplayP.add(friendsFav);
+		friendsDisplayP.add(friendsCustom);
+		friendsP.add(friendsRecipesP);
+		friendsP.setVisible(false);
+		friendsP.add(friendsDisplayP);
+		friendsP.add(friendsAddP);
+		friendsP.add(friendsRemoveP);
+
 		// Panel Favorites
 		removeFromFavorites = new JButton("Remove from Favorites");
 		removeFromFavorites.setBounds(250, 325, 180, 30);
@@ -1305,6 +1436,7 @@ public class main extends JFrame implements ActionListener {
 		f.add(selectP);
 		f.add(displayP);
 		f.add(favoritesP);
+		f.add(friendsP);
 		f.add(customizeP);
 		f.add(changeDisplayP);
 		f.add(changePasswordP);
@@ -2273,6 +2405,219 @@ public class main extends JFrame implements ActionListener {
 
 	// clickButton.exe
 	public void actionPerformed(ActionEvent e) {
+		// Friends Favorites
+		if (e.getSource() == friendsFav) {
+			friendsDisplayP.setVisible(false);
+			nextFriend.setVisible(false);
+			previousFriend.setVisible(false);
+			friendsRecipesP.setVisible(true);
+			nextFF.setVisible(true);
+			previousFF.setVisible(true);
+		}
+		
+		// Friends Custom
+		if (e.getSource() == friendsCustom) {
+			friendsDisplayP.setVisible(false);
+			nextFriend.setVisible(false);
+			previousFriend.setVisible(false);
+			friendsRecipesP.setVisible(true);
+			nextFC.setVisible(true);
+			previousFC.setVisible(true);
+		}
+		
+		// Next Friend
+		if (e.getSource() == nextFriend) {
+			if (userFriends.size() > currFriend + 1) {
+				currFriend++;
+				String[] tempFriend = userFriends.get(currFriend).split(",");
+				friendsProfile.setIcon(new ImageIcon("src/images/Profile" + tempFriend[1] + ".png"));
+				friendsName.setText(tempFriend[0]);
+				if (userFriends.size() <= currFriend + 1) {
+					nextFriend.setBackground(Color.gray);
+				}
+				previousFriend.setBackground(Color.green);
+			}
+		}
+
+		// Previous Friend
+		if (e.getSource() == previousFriend) {
+			if (currFriend > 0) {
+				currFriend--;
+				String[] tempFriend = userFriends.get(currFriend).split(",");
+				friendsProfile.setIcon(new ImageIcon("src/images/Profile" + tempFriend[1] + ".png"));
+				friendsName.setText(tempFriend[0]);
+				if (currFriend <= 0) {
+					previousFriend.setBackground(Color.gray);
+				}
+				nextFriend.setBackground(Color.green);
+			}
+		}
+
+		// Add Friend Button
+		if (e.getSource() == addToFriends) {
+			if (userLog.contains(enterFriendName.getText())) {
+				int i = 0;
+				while (!enterFriendName.getText().equals(userLog.get(i))) {
+					i++;
+				}
+				userFriends.add(displayNameLog.get(i) + "," + profilePicLog.get(i) + "," + userLog.get(i));
+				String[] tempFriend = userFriends.get(0).split(",");
+				friendsProfile.setIcon(new ImageIcon("src/images/Profile" + tempFriend[1] + ".png"));
+				friendsName.setText(tempFriend[0]);
+				friendsAddP.setVisible(false);
+				friendsDisplayP.setVisible(true);
+				nextFriend.setVisible(true);
+				previousFriend.setVisible(true);
+				if (userFriends.size() >= 1) {
+					friendsFav.setBackground(Color.green);
+					friendsCustom.setBackground(Color.green);
+				}
+				if (userFriends.size() > 1) {
+					nextFriend.setBackground(Color.green);
+				} else {
+					nextFriend.setBackground(Color.gray);
+				}
+				previousFriend.setBackground(Color.gray);
+				try {
+					BufferedWriter bw = new BufferedWriter(
+							new FileWriter(displayNameLog.get(currUser) + "Friends.txt"));
+
+					for (int j = 0; j < userFriends.size(); j++) {
+						bw.write(userFriends.get(j));
+						bw.newLine();
+					}
+					bw.close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(f, displayNameLog.get(i) + " has been added to your friends list.");
+			} else
+				JOptionPane.showMessageDialog(f, "User does not exist.");
+		}
+
+		if (e.getSource() == removeFromFriends) {
+			if (userLog.contains(enterFriendNameR.getText())) {
+				boolean valid = false;
+				int i = 0;
+				while (!enterFriendNameR.getText().equals(userLog.get(i))) {
+					i++;
+				}
+				for (int k = 0; k < userFriends.size(); k++) {
+					String[] validFriend = userFriends.get(k).split(",");
+					if (validFriend[2].equals(enterFriendNameR.getText())) {
+						userFriends.remove(k);
+						k = userFriends.size();
+						valid = true;
+						try {
+							BufferedWriter bw = new BufferedWriter(
+									new FileWriter(displayNameLog.get(currUser) + "Friends.txt"));
+
+							for (int j = 0; j < userFriends.size(); j++) {
+								bw.write(userFriends.get(j));
+								bw.newLine();
+							}
+							bw.close();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+				if (!valid) {
+					JOptionPane.showMessageDialog(f, "User is already not on your friends list.");
+				}
+				if (userFriends.size() >= 1) {
+					String[] tempFixFriends = userFriends.get(0).split(",");
+					friendsProfile.setIcon(new ImageIcon("src/images/Profile" + tempFixFriends[1] + ".png"));
+					friendsName.setText(tempFixFriends[0]);
+				}
+				if (userFriends.size() <= 1) {
+					nextFriend.setBackground(Color.gray);
+				}
+				if (userFriends.size() == 0) {
+					friendsProfile.setIcon(new ImageIcon("src/images/youHaveNoFriends.jpg"));
+					friendsName.setText("You have no friends...");
+					friendsFav.setBackground(Color.gray);
+					friendsCustom.setBackground(Color.gray);
+					previousFriend.setBackground(Color.gray);
+				}
+				if (valid) {
+					JOptionPane.showMessageDialog(f,
+							displayNameLog.get(i) + " has been removed from your friends list.");
+				}
+				friendsDisplayP.setVisible(true);
+				friendsRemoveP.setVisible(false);
+				nextFriend.setVisible(true);
+				previousFriend.setVisible(true);
+			} else
+				JOptionPane.showMessageDialog(f, "User does not exist.");
+		}
+
+		// Add Friends Panel
+		if (e.getSource() == addFriends) {
+			if (mbDisplay) {
+				friendsAddP.setVisible(true);
+				friendsDisplayP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				homeP.setVisible(false);
+				friendsP.setVisible(true);
+				selectP.setVisible(false);
+				favoritesP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
+				enterFriendName.setText("");
+				nextFriend.setVisible(false);
+				previousFriend.setVisible(false);
+				friendsRecipesP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
+			}
+		}
+
+		// Remove Friends Panel
+		if (e.getSource() == removeFriends) {
+			if (mbDisplay) {
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(true);
+				friendsDisplayP.setVisible(false);
+				friendsP.setVisible(true);
+				homeP.setVisible(false);
+				selectP.setVisible(false);
+				favoritesP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
+				enterFriendName.setText("");
+				nextFriend.setVisible(false);
+				previousFriend.setVisible(false);
+				friendsRecipesP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
+			}
+		}
+
 		// Create Recipe
 		if (e.getSource() == createRecipe) {
 			userRecipesDisplayP.setVisible(false);
@@ -2792,6 +3137,16 @@ public class main extends JFrame implements ActionListener {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
+						File newUserFriends = new File(displayNameLog.get(displayNameLog.size() - 1) + "Friends.txt");
+						try {
+							if (newUserFriends.createNewFile()) {
+								System.out.println("File created");
+							} else {
+								System.out.println("File already exists");
+							}
+						} catch (IOException e2) {
+							e2.printStackTrace();
+						}
 						securityP.setVisible(false);
 						loginP.setVisible(true);
 						JOptionPane.showMessageDialog(f, "Account has been created.");
@@ -2851,6 +3206,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.orange);
 				changeDisplayP.setBackground(Color.orange);
 				userRecipesP.setBackground(Color.orange);
+				friendsP.setBackground(Color.orange);
 				break;
 			case "1":
 				homeP.setBackground(Color.red);
@@ -2861,6 +3217,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.red);
 				changeDisplayP.setBackground(Color.red);
 				userRecipesP.setBackground(Color.red);
+				friendsP.setBackground(Color.red);
 				break;
 			case "2":
 				homeP.setBackground(Color.blue);
@@ -2871,6 +3228,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.blue);
 				changeDisplayP.setBackground(Color.blue);
 				userRecipesP.setBackground(Color.blue);
+				friendsP.setBackground(Color.blue);
 				break;
 			case "3":
 				homeP.setBackground(Color.yellow);
@@ -2881,6 +3239,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.yellow);
 				changeDisplayP.setBackground(Color.yellow);
 				userRecipesP.setBackground(Color.yellow);
+				friendsP.setBackground(Color.yellow);
 				break;
 			case "4":
 				homeP.setBackground(Color.green);
@@ -2891,6 +3250,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.green);
 				changeDisplayP.setBackground(Color.green);
 				userRecipesP.setBackground(Color.green);
+				friendsP.setBackground(Color.green);
 				break;
 			case "5":
 				homeP.setBackground(Color.magenta);
@@ -2901,6 +3261,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.magenta);
 				changeDisplayP.setBackground(Color.magenta);
 				userRecipesP.setBackground(Color.magenta);
+				friendsP.setBackground(Color.magenta);
 				break;
 			case "6":
 				homeP.setBackground(Color.pink);
@@ -2911,6 +3272,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.pink);
 				changeDisplayP.setBackground(Color.pink);
 				userRecipesP.setBackground(Color.pink);
+				friendsP.setBackground(Color.pink);
 				break;
 			case "7":
 				homeP.setBackground(Color.gray);
@@ -2921,6 +3283,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.gray);
 				changeDisplayP.setBackground(Color.gray);
 				userRecipesP.setBackground(Color.gray);
+				friendsP.setBackground(Color.gray);
 				break;
 			case "8":
 				homeP.setBackground(Color.white);
@@ -2931,6 +3294,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.white);
 				changeDisplayP.setBackground(Color.white);
 				userRecipesP.setBackground(Color.white);
+				friendsP.setBackground(Color.white);
 				break;
 			case "9":
 				homeP.setBackground(Color.black);
@@ -2941,6 +3305,7 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setBackground(Color.black);
 				changeDisplayP.setBackground(Color.black);
 				userRecipesP.setBackground(Color.black);
+				friendsP.setBackground(Color.black);
 				break;
 			}
 			displayColorLog.set(currUser, e.getActionCommand());
@@ -3127,6 +3492,7 @@ public class main extends JFrame implements ActionListener {
 		// Menu Selections
 		if (e.getSource() == home) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(true);
 				selectP.setVisible(false);
 				displayP.setVisible(false);
@@ -3142,10 +3508,19 @@ public class main extends JFrame implements ActionListener {
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
+				friendsRecipesP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 			}
 		}
 		if (e.getSource() == search) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				selectP.setVisible(true);
 				displayP.setVisible(false);
@@ -3161,10 +3536,19 @@ public class main extends JFrame implements ActionListener {
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
+				friendsRecipesP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 			}
 		}
 		if (e.getSource() == userRecipesMI) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				favoritesP.setVisible(false);
 				selectP.setVisible(false);
@@ -3180,6 +3564,14 @@ public class main extends JFrame implements ActionListener {
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsRecipesP.setVisible(false);
+				friendsDisplayP.setVisible(true);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 				if (userRecipes.size() >= 1) {
 					totalUserRecipes = userRecipes.size();
 					String[] combinedRecipes = userRecipes.get(0).split(",");
@@ -3235,10 +3627,12 @@ public class main extends JFrame implements ActionListener {
 				}
 			}
 		}
-		if (e.getSource() == favorites) {
+
+		if (e.getSource() == friends) {
 			if (mbDisplay) {
+				friendsP.setVisible(true);
 				homeP.setVisible(false);
-				favoritesP.setVisible(true);
+				favoritesP.setVisible(false);
 				selectP.setVisible(false);
 				displayP.setVisible(false);
 				customizeP.setVisible(false);
@@ -3252,6 +3646,60 @@ public class main extends JFrame implements ActionListener {
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
+				friendsDisplayP.setVisible(true);
+				friendsRecipesP.setVisible(false);
+				if (userFriends.size() >= 1) {
+					String[] tempFriend = userFriends.get(0).split(",");
+					friendsProfile.setIcon(new ImageIcon("src/images/Profile" + tempFriend[1] + ".png"));
+					friendsName.setText(tempFriend[0]);
+					friendsFav.setBackground(Color.green);
+					friendsCustom.setBackground(Color.green);
+				}
+				if (userFriends.size() > 1) {
+					nextFriend.setBackground(Color.green);
+				} else if (userFriends.size() == 0) {
+					nextFriend.setBackground(Color.gray);
+					friendsFav.setBackground(Color.gray);
+					friendsCustom.setBackground(Color.gray);
+				}
+				currFriend = 0;
+				nextFriend.setVisible(true);
+				previousFriend.setVisible(true);
+			}
+		}
+
+		if (e.getSource() == favorites) {
+			if (mbDisplay) {
+				friendsP.setVisible(false);
+				homeP.setVisible(false);
+				favoritesP.setVisible(true);
+				selectP.setVisible(false);
+				displayP.setVisible(false);
+				customizeP.setVisible(false);
+				changePasswordP.setVisible(false);
+				changeDisplayP.setVisible(false);
+				userRecipesP.setVisible(false);
+				userRecipesDisplayP.setVisible(true);
+				userCreateRecipeP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
+				createRecipe.setVisible(true);
+				submitRecipe.setVisible(false);
+				removeRecipe.setVisible(true);
+				nextUserRecipe.setVisible(true);
+				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsRecipesP.setVisible(false);
+				friendsDisplayP.setVisible(true);
 				totalRecipesFav = favRecipes.size();
 				if (favRecipes.size() >= 1) {
 					String[] combinedRecipes = favRecipes.get(0).split(",");
@@ -3297,25 +3745,35 @@ public class main extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == customize) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				selectP.setVisible(false);
 				favoritesP.setVisible(false);
 				displayP.setVisible(false);
 				customizeP.setVisible(true);
 				changePasswordP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
 				userRecipesDisplayP.setVisible(true);
 				userCreateRecipeP.setVisible(false);
 				createRecipe.setVisible(true);
+				friendsRecipesP.setVisible(false);
 				submitRecipe.setVisible(false);
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
 			}
 		}
 		if (e.getSource() == changePassword) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				selectP.setVisible(false);
 				favoritesP.setVisible(false);
@@ -3326,15 +3784,24 @@ public class main extends JFrame implements ActionListener {
 				userRecipesP.setVisible(false);
 				userRecipesDisplayP.setVisible(true);
 				userCreateRecipeP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 				createRecipe.setVisible(true);
 				submitRecipe.setVisible(false);
 				removeRecipe.setVisible(true);
+				friendsRecipesP.setVisible(false);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
 			}
 		}
 		if (e.getSource() == changeDisplayColor) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				selectP.setVisible(false);
 				favoritesP.setVisible(false);
@@ -3344,16 +3811,25 @@ public class main extends JFrame implements ActionListener {
 				changeDisplayP.setVisible(true);
 				userRecipesP.setVisible(false);
 				userRecipesDisplayP.setVisible(true);
+				friendsRecipesP.setVisible(false);
 				userCreateRecipeP.setVisible(false);
 				createRecipe.setVisible(true);
 				submitRecipe.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
 			}
 		}
 		if (e.getSource() == logout) {
 			if (mbDisplay) {
+				friendsP.setVisible(false);
 				homeP.setVisible(false);
 				favoritesP.setVisible(false);
 				selectP.setVisible(false);
@@ -3362,18 +3838,74 @@ public class main extends JFrame implements ActionListener {
 				changePasswordP.setVisible(false);
 				changeDisplayP.setVisible(false);
 				userRecipesP.setVisible(false);
+				nextFC.setVisible(false);
+				previousFC.setVisible(false);
+				nextFF.setVisible(false);
+				previousFF.setVisible(false);
 				userRecipesDisplayP.setVisible(true);
 				userCreateRecipeP.setVisible(false);
 				createRecipe.setVisible(true);
 				submitRecipe.setVisible(false);
 				removeRecipe.setVisible(true);
 				nextUserRecipe.setVisible(true);
+				friendsRecipesP.setVisible(false);
 				previousUserRecipe.setVisible(true);
+				friendsAddP.setVisible(false);
+				friendsRemoveP.setVisible(false);
+				friendsDisplayP.setVisible(true);
 				loginP.setVisible(true);
 				username.setText("");
 				password.setText("");
 				mbDisplay = false;
 				welcome.setText("");
+				while(displayNameLog.size() != 0) {
+					displayNameLog.remove(0);
+				}
+				while(userLog.size() != 0) {
+					userLog.remove(0);
+				}
+				while(passLog.size() != 0) {
+					passLog.remove(0);
+				}
+				while(profilePicLog.size() != 0) {
+					profilePicLog.remove(0);
+				}
+				while(displayColorLog.size() != 0) {
+					displayColorLog.remove(0);
+				}
+				while(question1Log.size() != 0) {
+					question1Log.remove(0);
+				}
+				while(question2Log.size() != 0) {
+					question2Log.remove(0);
+				}
+				while(question3Log.size() != 0) {
+					question3Log.remove(0);
+				}
+				while(answer1Log.size() != 0) {
+					answer1Log.remove(0);
+				}
+				while(answer2Log.size() != 0) {
+					answer2Log.remove(0);
+				}
+				while(answer3Log.size() != 0) {
+					answer3Log.remove(0);
+				}
+				while(userIngredients.size() != 0) {
+					userIngredients.remove(0);
+				}
+				while(validRecipes.size() != 0) {
+					validRecipes.remove(0);
+				}
+				while(favRecipes.size() != 0) {
+					favRecipes.remove(0);
+				}
+				while(userRecipes.size() != 0) {
+					userRecipes.remove(0);
+				}
+				while(userFriends.size() != 0) {
+					userFriends.remove(0);
+				}
 			}
 		}
 		if (e.getSource() == homeSearch) {
@@ -3438,8 +3970,7 @@ public class main extends JFrame implements ActionListener {
 					l2.setText("No time was entered; displaying all recipes.");
 				else if (text.contains(" ")) {
 					l2.setText("Time entered invalid; please check for whitespaces.");
-				}
-				else {
+				} else {
 					time = Integer.parseInt(text);
 					l2.setText("Displaying recipes that can be made in " + time + " minutes or less.");
 				}
@@ -3657,6 +4188,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.orange);
 					changeDisplayP.setBackground(Color.orange);
 					userRecipesP.setBackground(Color.orange);
+					friendsP.setBackground(Color.orange);
 					break;
 				case "1":
 					homeP.setBackground(Color.red);
@@ -3667,6 +4199,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.red);
 					changeDisplayP.setBackground(Color.red);
 					userRecipesP.setBackground(Color.red);
+					friendsP.setBackground(Color.red);
 					break;
 				case "2":
 					homeP.setBackground(Color.blue);
@@ -3677,6 +4210,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.blue);
 					changeDisplayP.setBackground(Color.blue);
 					userRecipesP.setBackground(Color.blue);
+					friendsP.setBackground(Color.blue);
 					break;
 				case "3":
 					homeP.setBackground(Color.yellow);
@@ -3687,6 +4221,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.yellow);
 					changeDisplayP.setBackground(Color.yellow);
 					userRecipesP.setBackground(Color.yellow);
+					friendsP.setBackground(Color.yellow);
 					break;
 				case "4":
 					homeP.setBackground(Color.green);
@@ -3697,6 +4232,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.green);
 					changeDisplayP.setBackground(Color.green);
 					userRecipesP.setBackground(Color.green);
+					friendsP.setBackground(Color.green);
 					break;
 				case "5":
 					homeP.setBackground(Color.magenta);
@@ -3707,6 +4243,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.magenta);
 					changeDisplayP.setBackground(Color.magenta);
 					userRecipesP.setBackground(Color.magenta);
+					friendsP.setBackground(Color.magenta);
 					break;
 				case "6":
 					homeP.setBackground(Color.pink);
@@ -3717,6 +4254,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.pink);
 					changeDisplayP.setBackground(Color.pink);
 					userRecipesP.setBackground(Color.pink);
+					friendsP.setBackground(Color.pink);
 					break;
 				case "7":
 					homeP.setBackground(Color.gray);
@@ -3727,6 +4265,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.gray);
 					changeDisplayP.setBackground(Color.gray);
 					userRecipesP.setBackground(Color.gray);
+					friendsP.setBackground(Color.gray);
 					break;
 				case "8":
 					homeP.setBackground(Color.white);
@@ -3737,6 +4276,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.white);
 					changeDisplayP.setBackground(Color.white);
 					userRecipesP.setBackground(Color.white);
+					friendsP.setBackground(Color.white);
 					break;
 				case "9":
 					homeP.setBackground(Color.black);
@@ -3747,6 +4287,7 @@ public class main extends JFrame implements ActionListener {
 					changePasswordP.setBackground(Color.black);
 					changeDisplayP.setBackground(Color.black);
 					userRecipesP.setBackground(Color.black);
+					friendsP.setBackground(Color.black);
 					break;
 				}
 				recipeTitle.setText("");
@@ -3782,6 +4323,41 @@ public class main extends JFrame implements ActionListener {
 					br.close();
 				} catch (Exception e2) {
 					e2.printStackTrace();
+				}
+				try {
+					BufferedReader br = new BufferedReader(
+							new FileReader(displayNameLog.get(currUser) + "Friends.txt"));
+					String contentLine = br.readLine();
+					while (contentLine != null) {
+						userFriends.add(contentLine);
+						contentLine = br.readLine();
+					}
+					br.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+				if (userFriends.size() >= 1) {
+					int i = 0;
+					while (userFriends.size() > i) {
+						String[] tempUpdate = userFriends.get(i).split(",");
+						int k = 0;
+						while(!tempUpdate[2].equals(userLog.get(k))) {
+							k++;
+						}
+						String updatedFriend = displayNameLog.get(k) + "," + profilePicLog.get(k) + "," + userLog.get(k);
+						userFriends.set(i, updatedFriend);
+						i++;
+					}
+					try {
+						BufferedWriter bw = new BufferedWriter(new FileWriter(displayNameLog.get(currUser) + "Friends.txt"));
+						for(int j = 0; j < userFriends.size(); j++) {
+							bw.write(userFriends.get(j));
+							bw.newLine();
+						}
+						bw.close();
+					} catch(IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			} else {
 				JOptionPane.showMessageDialog(f, "Username or password is incorrect.");
